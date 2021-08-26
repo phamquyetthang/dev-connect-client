@@ -6,6 +6,7 @@ import i18n from './i18n';
 import theme from './lib/theme';
 import { store } from './rootStore';
 import GlobalStyle from './globalStyle';
+import RootRouter from './page/router';
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
       <BrowserRouter>
         <Provider store={store}>
           <ThemeProvider theme={theme}>
-            <h1>Hello </h1>
+            <RootRouter />
             <GlobalStyle />
           </ThemeProvider>
         </Provider>
