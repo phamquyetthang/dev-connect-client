@@ -9,4 +9,5 @@ export type IAppState = {
   loading: boolean;
   spinLoading: boolean;
   snackBar: ISnackBar[];
+  theme: 'dark' | 'light';
 };

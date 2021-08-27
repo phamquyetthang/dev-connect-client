@@ -1,10 +1,11 @@
-import { color } from 'src/lib/theme/mixins';
+import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 export const GlobalContainerWrapper = styled.div`
   display: block;
   position: relative;
   margin: 0;
   padding: 0;
+  /* background-color: ${color('background1')}; */
 `;
 
 export const MainLoading = styled.div`
@@ -17,7 +18,7 @@ export const MainLoading = styled.div`
   z-index: 200;
   justify-content: center;
   align-items: center;
-  background-color: ${color('bgModal')};
+  background-color: rgba(0, 0, 0, 0.5);
 
   .loader {
     border: 12px solid #f3f3f3;

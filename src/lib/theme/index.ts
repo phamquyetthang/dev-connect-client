@@ -1,12 +1,18 @@
-const palettes = {
-  bgModal: 'rgba(0, 0, 0, 0.5)',
-  text1: '#fff',
-  text2: '#fff',
-  error: 'pink',
+const commonColor = {
+  error: '#bf1650',
 };
-const theme = {
-  palettes,
+export const lightTheme = {
+  ...commonColor,
+  background1: '#FFFFFF',
+  background2: '#E6EBF5',
+  text1: '#000',
 };
-export type ThemeType = typeof theme;
-export type ColorType = keyof typeof palettes;
-export default theme;
+export type ThemeType = typeof lightTheme;
+export type ColorType = keyof typeof lightTheme;
+
+export const darkTheme: ThemeType = {
+  ...commonColor,
+  background1: '#262E35',
+  background2: '#303841',
+  text1: '#e1e9f1',
+};

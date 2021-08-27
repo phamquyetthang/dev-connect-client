@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
+import { color } from './lib/theme/mixin';
 
 const GlobalStyle = createGlobalStyle`
+body{
+    background-color: ${color('background1')};
+}
     .flex {
         display: flex;
     }

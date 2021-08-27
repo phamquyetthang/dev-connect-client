@@ -1,4 +1,4 @@
-import { color } from 'src/lib/theme/mixins';
+import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 
 export const InputContain = styled.div`

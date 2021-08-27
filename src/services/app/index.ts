@@ -7,6 +7,7 @@ const initialState: IAppState = {
   loading: false,
   spinLoading: false,
   snackBar: [],
+  theme: 'light',
 };
 
 const appSlice = createSlice({
@@ -35,6 +36,9 @@ const appSlice = createSlice({
     clearSnackBar: (state: IAppState) => {
       state.snackBar = [];
     },
+    onDarkMode: (state: IAppState, { payload }: PayloadAction<boolean>) => {
+      state.theme = payload ? 'dark' : 'light';
+    },
   },
 });
 
@@ -44,6 +48,7 @@ export const {
   addSnackBar,
   closeSnackBar,
   clearSnackBar,
+  onDarkMode,
 } = appSlice.actions;
 
 export default appSlice.reducer;
