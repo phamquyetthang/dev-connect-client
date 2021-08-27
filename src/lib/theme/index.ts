@@ -1,4 +1,5 @@
 const palettes = {
+  bgModal: 'rgba(0, 0, 0, 0.5)',
   text1: '#fff',
   text2: '#fff',
   error: 'pink',
