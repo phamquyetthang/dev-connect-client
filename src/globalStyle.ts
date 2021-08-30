@@ -2,9 +2,14 @@ import { createGlobalStyle } from 'styled-components';
 import { color } from './lib/theme/mixin';
 
 const GlobalStyle = createGlobalStyle`
-body{
-    background-color: ${color('background1')};
-}
+
+    body{
+        background-color: ${color('background1')};
+        font-family: sans-serif;
+        text-align: center;
+        overflow: hidden;
+    }
+
     .flex {
         display: flex;
     }

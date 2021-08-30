@@ -1,5 +1,8 @@
-const Hello = {
-  hello: 'xin chào',
+import authTranslate from "./auth";
+
+const VN = {
+  name: 'vn',
+  authTranslate,
 };
 
-export default Hello;
+export default VN;

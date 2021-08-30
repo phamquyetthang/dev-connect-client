@@ -7,7 +7,7 @@ const initialState: IAppState = {
   loading: false,
   spinLoading: false,
   snackBar: [],
-  theme: 'light',
+  theme: 'dark',
 };
 
 const appSlice = createSlice({
