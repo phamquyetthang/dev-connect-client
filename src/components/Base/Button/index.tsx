@@ -7,6 +7,7 @@ interface IProps {
   disable?: boolean;
   className?: string;
   color?: string;
+  loading?: boolean;
 }
 const Button: FunctionComponent<IProps> = ({
   title,
@@ -15,6 +16,7 @@ const Button: FunctionComponent<IProps> = ({
   disable = false,
   className,
   color,
+  loading,
 }) => {
   const classStyle = useMemo(() => {
     let class_name = '';
@@ -30,7 +32,7 @@ const Button: FunctionComponent<IProps> = ({
     <ButtonWrapper
       onClick={onClick}
       type={type}
-      className={`${classStyle} ${className}`}
+      className={`${classStyle} ${className}${loading ? ' btn-loading' : ''}`}
       disabled={disable}
     >
       <span>{title}</span>

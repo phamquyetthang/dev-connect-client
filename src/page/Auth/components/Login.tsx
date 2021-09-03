@@ -16,9 +16,12 @@ import { AuthTransLateKeyType } from 'src/lib/translations/vn/auth';
 
 interface IProps {
   handleLogin: () => void;
-  control: Control;
+  control: Control<any>;
   errors: FieldErrors;
   reset: UseFormReset<FieldValues>;
+  errorApi: string;
+  isDisableSubmit: boolean;
+  loading: boolean;
 }
 
 const LoginFrom: FunctionComponent<IProps> = ({
@@ -26,6 +29,9 @@ const LoginFrom: FunctionComponent<IProps> = ({
   control,
   errors,
   reset,
+  errorApi,
+  isDisableSubmit,
+  loading,
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -78,10 +84,14 @@ const LoginFrom: FunctionComponent<IProps> = ({
         title={word('loginTitle')}
         onClick={() => null}
         type="submit"
-        // disable={true}
+        disable={isDisableSubmit|| loading}
+        loading={loading}
       />
       <hr />
       <Button title={word('signUpTitle')} onClick={goToSignUp} color={'gray'} />
+      {!!errorApi && (
+        <span className="errorText">Đăng nhập thất bại : {errorApi}</span>
+      )}
     </form>
   );
 };

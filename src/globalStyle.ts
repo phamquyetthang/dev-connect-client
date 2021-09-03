@@ -10,6 +10,12 @@ const GlobalStyle = createGlobalStyle`
         overflow: hidden;
     }
 
+    .errorText{
+        color: ${color('error')};
+        font-size: 14px;
+        font-style: italic;
+        text-align: center;
+    }
     .flex {
         display: flex;
     }

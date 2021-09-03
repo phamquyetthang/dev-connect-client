@@ -15,9 +15,12 @@ import { AuthTransLateKeyType } from 'src/lib/translations/vn/auth';
 
 interface IProps {
   handleSignUp: () => void;
-  control: Control;
+  control: Control<any>;
   errors: FieldErrors;
   reset: UseFormReset<FieldValues>;
+  isDisableSubmit: boolean;
+  errorApi: string;
+  loading: boolean;
 }
 
 const SignUpFrom: FunctionComponent<IProps> = ({
@@ -25,6 +28,9 @@ const SignUpFrom: FunctionComponent<IProps> = ({
   control,
   errors,
   reset,
+  isDisableSubmit,
+  errorApi,
+  loading,
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -39,6 +45,24 @@ const SignUpFrom: FunctionComponent<IProps> = ({
   return (
     <form onSubmit={handleSignUp}>
       <h1>{word('signUpTitle')}</h1>
+      <InputField
+        name="first_name"
+        control={control}
+        placeholder="First Name"
+        error={errors?.first_name?.message}
+        rules={{
+          required: { value: true, message: word('requiredFeild') },
+        }}
+      />
+      <InputField
+        name="last_name"
+        control={control}
+        placeholder="Last Name"
+        error={errors?.last_name?.message}
+        rules={{
+          required: { value: true, message: word('requiredFeild') },
+        }}
+      />
       <InputField
         name="email"
         control={control}
@@ -56,16 +80,8 @@ const SignUpFrom: FunctionComponent<IProps> = ({
         name="password"
         control={control}
         placeholder="Password"
+        type="password"
         error={errors?.password?.message}
-        rules={{
-          required: { value: true, message: word('requiredFeild') },
-        }}
-      />
-      <InputField
-        name="password_re"
-        control={control}
-        placeholder="Refill Password"
-        error={errors?.password_re?.message}
         rules={{
           required: { value: true, message: word('requiredFeild') },
         }}
@@ -74,10 +90,14 @@ const SignUpFrom: FunctionComponent<IProps> = ({
         title={word('signUpTitle')}
         onClick={() => null}
         type="submit"
-        disable={true}
+        loading={loading}
+        disable={isDisableSubmit || loading}
       />
       <hr />
       <Button title={word('loginTitle')} onClick={goToLogin} color={'gray'} />
+      {!!errorApi && (
+        <span className="errorText">Đăng ký thất bại : {errorApi}</span>
+      )}
     </form>
   );
 };

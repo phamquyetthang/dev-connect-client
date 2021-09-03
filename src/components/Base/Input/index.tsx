@@ -16,7 +16,7 @@ const InputField: FunctionComponent<IProps> = memo(
     name,
     control,
     rules,
-    defaultValue,
+    defaultValue = "",
     error,
     placeholder,
     className,
@@ -30,7 +30,13 @@ const InputField: FunctionComponent<IProps> = memo(
         rules={rules}
         render={({ field }) => (
           <InputContain className={className}>
-            <InputWrapper {...field} placeholder={placeholder} type={type} />
+            <InputWrapper
+              {...field}
+              // name={field.name}
+              placeholder={placeholder}
+              // onChange={field.onChange}
+              type={type}
+            />
             {error && <i>{error}</i>}
           </InputContain>
         )}
