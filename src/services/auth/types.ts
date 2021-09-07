@@ -2,6 +2,7 @@ export type IAuthState = {
   loading: boolean;
   error: string;
   token: string;
+  isAuth : boolean;
 };
 
 export interface ISignInRep {

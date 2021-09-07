@@ -5,5 +5,11 @@ const ROUTER_NAME = {
     signUp: '/auth/signUp',
     forgot: '/auth/forgot',
   },
+  welcome: {
+    path: '/welcome'
+  },
+  wiki: {
+    create: 'wiki/create'
+  }
 };
 export default ROUTER_NAME;

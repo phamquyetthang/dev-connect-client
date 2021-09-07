@@ -1,10 +1,10 @@
 import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 
-export const InputContain = styled.div`
+export const TextAreaContain = styled.div`
   text-align: start;
 
-  label{
+  label {
     color: ${color('text1')};
     margin-left: 4px;
   }
@@ -15,13 +15,14 @@ export const InputContain = styled.div`
     font-size: 80%;
   }
 
-  height: 80px;
+  height: 100%;
 `;
 
-export const InputWrapper = styled.input`
+export const TextAreaWrapper = styled.textarea`
   display: block;
   box-sizing: border-box;
   width: 100%;
+  height: 100px;
   border-radius: 4px;
   border: 1px solid white;
   padding: 10px 14px;

@@ -1,7 +1,7 @@
 import { FunctionComponent, memo } from 'react';
 import { Controller } from 'react-hook-form';
-import { InputContain, InputWrapper } from './styled';
 import { IFromProps } from '../@types/formTypes';
+import { TextAreaContain, TextAreaWrapper } from './styled';
 
 interface IComponentProps {
   error?: string;
@@ -12,7 +12,7 @@ interface IComponentProps {
 }
 type IProps = IFromProps & IComponentProps;
 
-const InputField: FunctionComponent<IProps> = memo(
+const TextArea: FunctionComponent<IProps> = memo(
   ({
     name,
     control,
@@ -21,7 +21,6 @@ const InputField: FunctionComponent<IProps> = memo(
     error,
     placeholder,
     className,
-    type,
     title,
   }) => {
     return (
@@ -31,21 +30,20 @@ const InputField: FunctionComponent<IProps> = memo(
         defaultValue={defaultValue}
         rules={rules}
         render={({ field }) => (
-          <InputContain className={className}>
+          <TextAreaContain className={className}>
             {!!title && <label>{title}</label>}
-            <InputWrapper
+            <TextAreaWrapper
               {...field}
               // name={field.name}
               placeholder={placeholder}
               // onChange={field.onChange}
-              type={type}
             />
             {error && <i>{error}</i>}
-          </InputContain>
+          </TextAreaContain>
         )}
       />
     );
   }
 );
 
-export default InputField;
+export default TextArea;

@@ -6,6 +6,7 @@ const initialState: IAuthState = {
   loading: false,
   error: '',
   token: '',
+  isAuth: false,
 };
 
 export const signInService = createAsyncThunk(
@@ -80,6 +81,7 @@ const authSlice = createSlice({
         signInService.fulfilled,
         (state: IAuthState, { payload }: PayloadAction<string>) => {
           state.token = payload;
+          state.isAuth = true;
           state.error = '';
           state.loading = false;
         }
@@ -88,6 +90,7 @@ const authSlice = createSlice({
         signInService.rejected,
         (state: IAuthState, { payload }: PayloadAction<any>) => {
           state.error = payload;
+          state.isAuth = false;
           state.loading = false;
         }
       )
@@ -98,6 +101,7 @@ const authSlice = createSlice({
         signUpService.fulfilled,
         (state: IAuthState, { payload }: PayloadAction<string>) => {
           state.token = payload;
+          state.isAuth = true;
           state.error = '';
           state.loading = false;
         }
@@ -107,6 +111,7 @@ const authSlice = createSlice({
         (state: IAuthState, { payload }: PayloadAction<any>) => {
           state.error = payload;
           state.loading = false;
+          state.isAuth = false;
         }
       )
       .addCase(forgotService.pending, (state: IAuthState) => {

@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { ReactComponent as VNIcon } from 'src/assets/icons/vietnam.svg';
 import { ReactComponent as ENIcon } from 'src/assets/icons/uk.svg';
 import { ChangeLangueWrapper } from './style';
+import { useAppDispatch } from 'src/hooks/useAppDispatch';
+import { changeLanguage } from 'src/services/app';
 
 interface IProps {
   className?: string;
@@ -11,6 +13,7 @@ interface IProps {
 
 const ChangeLangue: FunctionComponent<IProps> = memo(({ className }) => {
   const { t, i18n } = useTranslation();
+  const dispatch = useAppDispatch();
   const [isShow, setIsShow] = useState<boolean>(false);
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -24,8 +27,9 @@ const ChangeLangue: FunctionComponent<IProps> = memo(({ className }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
-  const onChange = (lang: string) => {
+  const onChange = (lang: 'vn' | 'en') => {
     i18n.changeLanguage(lang);
+    dispatch(changeLanguage(lang));
     setIsShow(false);
   };
   return (

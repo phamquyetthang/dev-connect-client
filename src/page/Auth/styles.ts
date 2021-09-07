@@ -22,6 +22,7 @@ export const AuthWrapper = styled.article`
     min-width: 300px;
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
     background-color: ${color('background2')};
     padding: 3em;
     border-radius: 16px;
@@ -45,6 +46,12 @@ export const AuthWrapper = styled.article`
     hr {
       width: 100%;
       margin: 32px 0;
+    }
+
+    button{
+      width: 50%;
+      align-self: center;
+      border-radius: 24px;
     }
   }
 `;

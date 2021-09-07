@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
         font-family: sans-serif;
         text-align: center;
         overflow: hidden;
+        padding: 0;
+        margin: 0;
     }
 
     .errorText{
