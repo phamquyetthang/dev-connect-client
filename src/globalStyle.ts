@@ -2,9 +2,20 @@ import { createGlobalStyle } from 'styled-components';
 import { color } from './lib/theme/mixin';
 
 const GlobalStyle = createGlobalStyle`
-body{
-    background-color: ${color('background1')};
-}
+
+    body{
+        background-color: ${color('background1')};
+        font-family: sans-serif;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .errorText{
+        color: ${color('error')};
+        font-size: 14px;
+        font-style: italic;
+        text-align: center;
+    }
     .flex {
         display: flex;
     }
