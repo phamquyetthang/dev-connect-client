@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { color } from './lib/theme/mixin';
 
 const GlobalStyle = createGlobalStyle`
@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
         font-family: sans-serif;
         text-align: center;
         overflow: hidden;
+        padding: 0;
+        margin: 0;
     }
 
     .errorText{
@@ -18,6 +20,12 @@ const GlobalStyle = createGlobalStyle`
     }
     .flex {
         display: flex;
+    }
+
+    .flex-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .m1{
@@ -37,6 +45,10 @@ const GlobalStyle = createGlobalStyle`
     .mt1 {
         margin-top: 8px;
     }
+`;
+
+export const ContainerWrapper = styled.article`
+  margin: 0 6em;
 `;
 
 export default GlobalStyle;

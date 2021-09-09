@@ -1,10 +1,11 @@
 import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 export const GlobalContainerWrapper = styled.div`
-  display: block;
+  display: grid;
   position: relative;
   margin: 0;
   padding: 0;
+  grid-template-columns: 57px 1fr;
   /* background-color: ${color('background1')}; */
 `;
 

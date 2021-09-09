@@ -1,11 +1,12 @@
 import { isEmpty } from 'lodash';
 import { useCallback } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import ChangeLangue from 'src/components/Common/ChangeLangue';
 import ChangeTheme from 'src/components/Common/ChangeTheme';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import ROUTER_NAME from 'src/lib/constants/router';
 import {
   clearError,
   forgotService,
@@ -41,8 +42,9 @@ const AuthScreen = () => {
 
   const { error: err, loading } = useAppSelector((state) => state.auth);
 
+  const history = useHistory();
+
   const isDisableSubmit = useCallback(() => {
-    debugger
     let isDirtyForm = dirtyFields.email;
 
     if (type === 'signUp') {
@@ -61,7 +63,10 @@ const AuthScreen = () => {
   };
   const onLogin = (data: any) => {
     dispatch(
-      signInService({ ...data, callback: () => alert('Đăng nhập thành công') })
+      signInService({
+        ...data,
+        callback: () => history.push(ROUTER_NAME.welcome.path),
+      })
     );
   };
 

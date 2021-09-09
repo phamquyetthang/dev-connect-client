@@ -6,6 +6,7 @@ const initialState: IAuthState = {
   loading: false,
   error: '',
   token: '',
+  isAuth: false,
 };
 
 export const signInService = createAsyncThunk(
@@ -70,6 +71,10 @@ const authSlice = createSlice({
     clearError: (state: IAuthState) => {
       state.error = '';
     },
+    logout: (state: IAuthState) => {
+      state.token = '';
+      state.isAuth = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -80,6 +85,7 @@ const authSlice = createSlice({
         signInService.fulfilled,
         (state: IAuthState, { payload }: PayloadAction<string>) => {
           state.token = payload;
+          state.isAuth = true;
           state.error = '';
           state.loading = false;
         }
@@ -88,6 +94,7 @@ const authSlice = createSlice({
         signInService.rejected,
         (state: IAuthState, { payload }: PayloadAction<any>) => {
           state.error = payload;
+          state.isAuth = false;
           state.loading = false;
         }
       )
@@ -98,6 +105,7 @@ const authSlice = createSlice({
         signUpService.fulfilled,
         (state: IAuthState, { payload }: PayloadAction<string>) => {
           state.token = payload;
+          state.isAuth = true;
           state.error = '';
           state.loading = false;
         }
@@ -107,18 +115,16 @@ const authSlice = createSlice({
         (state: IAuthState, { payload }: PayloadAction<any>) => {
           state.error = payload;
           state.loading = false;
+          state.isAuth = false;
         }
       )
       .addCase(forgotService.pending, (state: IAuthState) => {
         state.loading = true;
       })
-      .addCase(
-        forgotService.fulfilled,
-        (state: IAuthState) => {
-          state.error = '';
-          state.loading = false;
-        }
-      )
+      .addCase(forgotService.fulfilled, (state: IAuthState) => {
+        state.error = '';
+        state.loading = false;
+      })
       .addCase(
         forgotService.rejected,
         (state: IAuthState, { payload }: PayloadAction<any>) => {
@@ -129,6 +135,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setLoading, setToken, clearError } = authSlice.actions;
+export const { setLoading, setToken, clearError, logout } = authSlice.actions;
 
 export default authSlice.reducer;

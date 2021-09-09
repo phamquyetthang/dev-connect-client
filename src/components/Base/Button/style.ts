@@ -11,6 +11,11 @@ export const ButtonWrapper = styled.button`
   color: ${color('textButton')};
   cursor: pointer;
 
+  span {
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
   &.disable {
     opacity: 0.5;
   }
