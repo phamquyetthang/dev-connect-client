@@ -71,6 +71,10 @@ const authSlice = createSlice({
     clearError: (state: IAuthState) => {
       state.error = '';
     },
+    logout: (state: IAuthState) => {
+      state.token = '';
+      state.isAuth = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -117,13 +121,10 @@ const authSlice = createSlice({
       .addCase(forgotService.pending, (state: IAuthState) => {
         state.loading = true;
       })
-      .addCase(
-        forgotService.fulfilled,
-        (state: IAuthState) => {
-          state.error = '';
-          state.loading = false;
-        }
-      )
+      .addCase(forgotService.fulfilled, (state: IAuthState) => {
+        state.error = '';
+        state.loading = false;
+      })
       .addCase(
         forgotService.rejected,
         (state: IAuthState, { payload }: PayloadAction<any>) => {
@@ -134,6 +135,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setLoading, setToken, clearError } = authSlice.actions;
+export const { setLoading, setToken, clearError, logout } = authSlice.actions;
 
 export default authSlice.reducer;

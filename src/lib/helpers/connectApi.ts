@@ -25,7 +25,7 @@ export const postService = async (
     if (response.status >= 200 && response.status <= 210) {
       return response.data;
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       const res = error.response.data.message;
       throw res;
@@ -57,7 +57,7 @@ export const getService = async (url: string, params?: any) => {
     if (response.status >= 200 && response.status <= 210) {
       return response.data;
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       const res = error.response.data.message;
       throw res;
@@ -88,7 +88,7 @@ export const putService = async (url: string, body: any) => {
     if (response.status >= 200 && response.status <= 210) {
       return response.data;
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       const errorMessage = error.response.data.error.split(':');
       const res = {
@@ -119,7 +119,7 @@ export const deleteService = async (url: string, body: any) => {
     if (response.status >= 200 && response.status <= 210) {
       return response.data;
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       const errorMessage = error.response.data.error.split(':');
       const res = {

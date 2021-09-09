@@ -5,6 +5,7 @@ const commonTranslate: CommonTranslateType = {
   create: 'create',
   done: 'Done',
   editProfile: 'Edit profile',
+  logout: "Logout"
 };
 
 export default commonTranslate;

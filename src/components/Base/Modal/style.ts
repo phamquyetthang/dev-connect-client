@@ -23,6 +23,7 @@ export const ModalWrapper = styled.div`
 
     &__header {
       text-transform: uppercase;
+      color: ${color('text1')};
     }
 
     &__body {

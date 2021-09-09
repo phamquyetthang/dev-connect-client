@@ -50,13 +50,6 @@ const CreateProject: FunctionComponent<IProps> = ({
           placeholder={welcomeWord('des')}
           title={welcomeWord('des')}
         />
-
-        <InputField
-          control={control}
-          name="member"
-          placeholder={welcomeWord('addMember')}
-          title={welcomeWord('addMember')}
-        />
         <TextArea
           control={control}
           name="readme"

@@ -3,6 +3,7 @@ const commonTranslate = {
   done: "Hoàn tất",
   create: "Tạo",
   editProfile: 'Sửa thông tin',
+  logout: 'Đăng xuất',
 };
 
 export type CommonTranslateType = typeof commonTranslate;
