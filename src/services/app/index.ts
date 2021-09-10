@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import uniqueId from 'lodash/uniqueId';
 import { ISnack } from 'src/lib/constants';
+import { ThemesName } from 'src/lib/theme/types';
 import { IAppState } from './types';
 
 const initialState: IAppState = {
   loading: false,
   spinLoading: false,
   snackBar: [],
-  theme: 'dark',
+  theme: 'light',
   language: 'vn',
 };
 
@@ -45,6 +46,9 @@ const appSlice = createSlice({
       { payload }: PayloadAction<'vn' | 'en'>
     ) => {
       state.language = payload;
+    },
+    changeTheme: (state: IAppState, { payload }: PayloadAction<ThemesName>) => {
+      state.theme = payload;
     },
   },
 });

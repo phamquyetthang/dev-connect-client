@@ -1,8 +1,9 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
-import Button from 'src/components/Base/Button';
+import CopyField from 'src/components/Base/CopyField';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import ROUTER_NAME from 'src/lib/constants/router';
 import { CommonTranslateKeyType } from 'src/lib/translations/vn/common';
 import { logout } from 'src/services/auth';
@@ -11,8 +12,9 @@ import ChangeTheme from '../ChangeTheme';
 import { HeaderBarWrapper } from './style';
 
 const HeaderBar = memo(() => {
-  const [isShowAvtModal, setIsShowAvtModal] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
+  const [isShowAvtModal, setIsShowAvtModal] = useState<boolean>(false);
+  const userInfo = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { t } = useTranslation();
@@ -60,13 +62,17 @@ const HeaderBar = memo(() => {
       >
         <div className="header_status">
           <img src="https://i.pravatar.cc/50" alt="avt" />
-          <h4>Họ và tên</h4>
+          <h4>{`${userInfo.first_name} ${userInfo.last_name}`}</h4>
           <i>status</i>
         </div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <Button title={commonWord('logout')} onClick={onLogout} />
+        <CopyField value={userInfo.email} className="copy_email" />
+        <div className="header_set">
+          <button>{commonWord('editProfile')}</button>
+          <button>{commonWord('editProfile')}</button>
+          <button>{commonWord('preferences')}</button>
+        </div>
+
+        <button onClick={onLogout}>{commonWord('logout')}</button>
       </div>
     </HeaderBarWrapper>
   );

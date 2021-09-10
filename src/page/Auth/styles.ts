@@ -26,6 +26,7 @@ export const AuthWrapper = styled.article`
     background-color: ${color('background2')};
     padding: 3em;
     border-radius: 16px;
+    box-shadow: 0 2px 6px 2px ${color('shadow')};
 
     .auth_other {
       display: flex;

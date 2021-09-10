@@ -9,7 +9,7 @@ export const HeaderBarWrapper = styled.header`
   padding: 0 1em;
   height: 56px;
   border-bottom: 1px solid ${color('borderInput')};
-  background-color: ${color('background2')};
+  background-color: ${color('header')};
   position: sticky;
   left: 0;
   right: 0;
@@ -23,6 +23,7 @@ export const HeaderBarWrapper = styled.header`
       border-radius: 50%;
       width: 40px;
       margin-left: 1em;
+      cursor: pointer;
     }
   }
 
@@ -30,13 +31,13 @@ export const HeaderBarWrapper = styled.header`
     display: none;
     flex-direction: column;
     position: absolute;
-    padding: 1em;
     right: 8px;
     top: 60px;
     width: 280px;
     border-radius: 8px;
-    box-shadow: 0 0 0 1px rgba(29, 28, 29, 0.12),
-      0 4px 12px 0 rgba(0, 0, 0, 0.12);
+    background-color: ${color('background2')};
+    border: 1px solid ${color('border')};
+    box-shadow: inset -1px -1px 0px ${color('shadow')};
 
     &.show {
       display: flex;
@@ -50,6 +51,8 @@ export const HeaderBarWrapper = styled.header`
       grid-template-columns: 40px 1fr;
       column-gap: 12px;
       text-align: start;
+      color: ${color('text1')};
+      margin: 1em;
       img {
         grid-area: avt;
         width: 40px;
@@ -64,5 +67,26 @@ export const HeaderBarWrapper = styled.header`
         grid-area: status;
       }
     }
+    .copy_email {
+      margin: 0 1em 1em;
+    }
+    .header_set {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid ${color('border')};
+      border-bottom: 1px solid ${color('border')};
+    }
+
+    button{
+      border: hidden;
+      background-color: inherit;
+      margin: 8px 1em;
+      padding: 0;
+      align-self: flex-start;
+      cursor: pointer;
+      font-size: 105%;
+      color: ${color('textBtn1')};
+    }
+
   }
 `;
