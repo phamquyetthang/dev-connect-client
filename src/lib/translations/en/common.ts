@@ -7,7 +7,8 @@ const commonTranslate: CommonTranslateType = {
   editStatus: 'Edit status',
   editProfile: 'Edit profile',
   preferences: 'Preferences',
-  logout: "Logout"
+  logout: "Logout",
+  dashboard: "Dashboard",
 };
 
 export default commonTranslate;

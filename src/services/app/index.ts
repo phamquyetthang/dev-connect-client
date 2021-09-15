@@ -5,6 +5,7 @@ import { ThemesName } from 'src/lib/theme/types';
 import { IAppState } from './types';
 
 const initialState: IAppState = {
+  projectId: '',
   loading: false,
   spinLoading: false,
   snackBar: [],
@@ -50,6 +51,9 @@ const appSlice = createSlice({
     changeTheme: (state: IAppState, { payload }: PayloadAction<ThemesName>) => {
       state.theme = payload;
     },
+    setProjectId: (state: IAppState, { payload }: PayloadAction<string>) => {
+      state.projectId = payload;
+    },
   },
 });
 
@@ -61,6 +65,7 @@ export const {
   clearSnackBar,
   onDarkMode,
   changeLanguage,
+  setProjectId,
 } = appSlice.actions;
 
 export default appSlice.reducer;

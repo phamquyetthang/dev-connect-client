@@ -8,6 +8,12 @@ const ROUTER_NAME = {
   welcome: {
     path: '/welcome'
   },
+  dashboard: {
+    path: '/dashboard',
+  },
+  unit: {
+    path: '/units'
+  },
   wiki: {
     create: 'wiki/create'
   }

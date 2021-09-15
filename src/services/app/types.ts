@@ -8,6 +8,7 @@ export type ISnackBar = {
 };
 
 export type IAppState = {
+  projectId: string;
   loading: boolean;
   spinLoading: boolean;
   snackBar: ISnackBar[];

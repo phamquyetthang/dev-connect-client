@@ -10,9 +10,6 @@ export const HeaderBarWrapper = styled.header`
   height: 56px;
   border-bottom: 1px solid ${color('borderInput')};
   background-color: ${color('header')};
-  position: sticky;
-  left: 0;
-  right: 0;
 
   .header_tool {
     display: flex;
@@ -37,7 +34,7 @@ export const HeaderBarWrapper = styled.header`
     border-radius: 8px;
     background-color: ${color('background2')};
     border: 1px solid ${color('border')};
-    box-shadow: inset -1px -1px 0px ${color('shadow')};
+    box-shadow: 0px 2px 6px 2px ${color('hoverShadow')};
 
     &.show {
       display: flex;
@@ -84,8 +81,7 @@ export const HeaderBarWrapper = styled.header`
       padding: 0;
       align-self: flex-start;
       cursor: pointer;
-      font-size: 105%;
-      color: ${color('textBtn1')};
+      color: ${color('text1')};
     }
 
   }

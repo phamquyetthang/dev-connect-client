@@ -28,6 +28,14 @@ const GlobalStyle = createGlobalStyle`
         align-items: center;
     }
 
+    .row{
+        display: flex;
+        flex-direction: row;
+        select{
+            width: 100px;
+        }
+    }
+
     .m1{
         margin: 8px;
     }

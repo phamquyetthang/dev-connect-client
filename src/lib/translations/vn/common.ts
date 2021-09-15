@@ -6,6 +6,7 @@ const commonTranslate = {
   editProfile: 'Sửa thông tin',
   preferences: 'Tùy chọn',
   logout: 'Đăng xuất',
+  dashboard: 'Chung',
 };
 
 export type CommonTranslateType = typeof commonTranslate;

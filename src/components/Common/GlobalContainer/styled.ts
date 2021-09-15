@@ -1,12 +1,25 @@
-import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 export const GlobalContainerWrapper = styled.div`
   display: grid;
   position: relative;
   margin: 0;
   padding: 0;
-  grid-template-columns: 57px 1fr;
-  /* background-color: ${color('background1')}; */
+  height: 100vh;
+  grid-template-areas:
+    'header header header'
+    'sidebar container container'
+    'sidebar container container';
+  header {
+    grid-area: header;
+  }
+  nav {
+    grid-area: sidebar;
+  }
+  .container {
+    grid-area: container;
+    height: calc(100vh - 56px);
+    width: calc(100vw - 56px);
+  }
 `;
 
 export const MainLoading = styled.div`

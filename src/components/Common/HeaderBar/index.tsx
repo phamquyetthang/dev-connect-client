@@ -67,7 +67,7 @@ const HeaderBar = memo(() => {
         </div>
         <CopyField value={userInfo.email} className="copy_email" />
         <div className="header_set">
-          <button>{commonWord('editProfile')}</button>
+          <button>{commonWord('editStatus')}</button>
           <button>{commonWord('editProfile')}</button>
           <button>{commonWord('preferences')}</button>
         </div>

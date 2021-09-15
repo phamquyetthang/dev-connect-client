@@ -8,8 +8,9 @@ import { getUserInfoService } from 'src/services/user';
 import { ProjectListWrapper } from './style';
 interface IProps {
   data: IProjectsListRes[];
+  clickProject: (id: string) => void;
 }
-const ProjectList: FunctionComponent<IProps> = ({ data }) => {
+const ProjectList: FunctionComponent<IProps> = ({ data, clickProject }) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getUserInfoService());
@@ -18,7 +19,7 @@ const ProjectList: FunctionComponent<IProps> = ({ data }) => {
     <ContainerWrapper className="flex-center">
       <ProjectListWrapper>
         {data.map((item: IProjectsListRes) => (
-          <Box className="project" key={uniqueId('project_list_')}>
+          <Box className="project" key={uniqueId('project_list_')} onClickBox={() => clickProject(item._id)} >
             <h3>{item.name}</h3>
             <p>{item.description}</p>
             <p>{item.originator.name}</p>

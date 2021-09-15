@@ -1,22 +1,32 @@
 import isEmpty from 'lodash/isEmpty';
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { FunctionComponent } from 'react';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { GlobalContainerWrapper, MainLoading, SnackBar } from './styled';
 import SnackBarItem from 'src/components/Base/SnackBarItem';
 import Sidebar from '../Sidebar';
 import HeaderBar from '../HeaderBar';
+import { useLocation } from 'react-router';
+import ROUTER_NAME from 'src/lib/constants/router';
 
 interface IProps {
   children: ReactNode;
 }
 const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
   const { spinLoading, snackBar } = useAppSelector((state) => state.app);
+  const location = useLocation();
+  const withSidebar = useMemo(
+    () => location.pathname !== ROUTER_NAME.welcome.path,
+    [location]
+  );
   return (
     <GlobalContainerWrapper>
-      <Sidebar/>
       <HeaderBar />
-      {children}
+
+      {withSidebar && <Sidebar />}
+
+      <div className="container">{children}</div>
+
       {spinLoading && (
         <MainLoading>
           <div className="loader"></div>
