@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Controller } from 'react-hook-form';
 import Select, { OptionTypeBase } from 'react-select';
-import { color } from 'src/lib/theme/mixin';
-import styled from 'styled-components';
 import { IFromProps } from '../@types/formTypes';
+import { SelectFieldWrapper } from './style';
 
 interface IComponentProps {
   error?: string;
@@ -12,16 +11,9 @@ interface IComponentProps {
   type?: string;
   title?: string;
   options?: OptionTypeBase[];
+  isMulti?: boolean;
 }
 type IProps = IFromProps & IComponentProps;
-
-const SelectFieldWrapper = styled.div`
-  i {
-    color: ${color('error')};
-    padding-left: 4px;
-    font-size: 80%;
-  }
-`;
 
 const SelectField: FunctionComponent<IProps> = ({
   name,
@@ -30,14 +22,24 @@ const SelectField: FunctionComponent<IProps> = ({
   options,
   rules,
   error,
+  className,
+  title,
+  isMulti = false,
 }) => {
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { value, onChange } }) => (
-        <SelectFieldWrapper>
-          <Select value={value} onChange={onChange} options={options} placeholder={placeholder} />
+        <SelectFieldWrapper className={className}>
+          {!!title && <label>{title}</label>}
+          <Select
+            value={value}
+            onChange={onChange}
+            options={options}
+            placeholder={placeholder}
+            isMulti={isMulti}
+          />
           {error && <i>{error}</i>}
         </SelectFieldWrapper>
       )}

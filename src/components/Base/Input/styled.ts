@@ -7,6 +7,7 @@ export const InputContain = styled.div`
   label{
     color: ${color('text1')};
     margin-left: 4px;
+    font-size: 14px;
   }
 
   i {

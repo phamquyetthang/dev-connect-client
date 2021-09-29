@@ -19,6 +19,7 @@ export const GlobalContainerWrapper = styled.div`
     grid-area: container;
     height: calc(100vh - 56px);
     width: calc(100vw - 56px);
+    position: relative;
   }
 `;
 

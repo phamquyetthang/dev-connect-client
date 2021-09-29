@@ -6,3 +6,8 @@ export const SNACK_TYPE = {
   success: 'success',
 };
 export type ISnack = keyof typeof SNACK_TYPE;
+
+
+export const DATA_TYPES = {
+  
+}

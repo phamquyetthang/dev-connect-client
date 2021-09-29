@@ -31,9 +31,6 @@ const GlobalStyle = createGlobalStyle`
     .row{
         display: flex;
         flex-direction: row;
-        select{
-            width: 100px;
-        }
     }
 
     .m1{
@@ -52,6 +49,13 @@ const GlobalStyle = createGlobalStyle`
 
     .mt1 {
         margin-top: 8px;
+    }
+    button{
+        cursor: pointer;
+        
+        &:active{
+            opacity: 0.5;
+        }
     }
 `;
 
