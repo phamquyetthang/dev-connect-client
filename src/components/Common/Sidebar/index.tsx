@@ -34,7 +34,7 @@ const Sidebar = () => {
       <Link to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
         <ChatIcon />
       </Link>
-      <Link to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
+      <Link to={ROUTER_NAME.todo.path} className="sidebar-menu">
         <TodoIcon />
       </Link>
       <Link to={ROUTER_NAME.dashboard.path} className="sidebar-menu">

@@ -4,6 +4,7 @@ import { useAppSelector } from 'src/hooks/useAppSelector';
 import ROUTER_NAME from 'src/lib/constants/router';
 import AuthScreen from './Auth';
 import Dashboard from './Dashboard';
+import TodoScreen from './Todo';
 import UnitsScreen from './Units';
 import Welcome from './Welcome';
 
@@ -20,6 +21,7 @@ const RootRouter = () => {
             component={Dashboard}
           />
           <Route exact path={ROUTER_NAME.unit.path} component={UnitsScreen} />
+          <Route exact path={ROUTER_NAME.todo.path} component={TodoScreen} />
         </GlobalContainer>
       ) : (
         <Route>

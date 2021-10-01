@@ -16,6 +16,9 @@ const ROUTER_NAME = {
   },
   wiki: {
     create: 'wiki/create'
+  },
+  todo: {
+    path: '/todo'
   }
 };
 export default ROUTER_NAME;
