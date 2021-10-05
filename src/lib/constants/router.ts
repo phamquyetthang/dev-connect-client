@@ -1,4 +1,5 @@
 const ROUTER_NAME = {
+  root: '/',
   auth: {
     path: '/auth/:type',
     login: '/auth/login',

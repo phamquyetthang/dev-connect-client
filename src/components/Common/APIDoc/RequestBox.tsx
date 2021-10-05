@@ -4,58 +4,53 @@ import Select from 'react-select';
 import Button from 'src/components/Base/Button';
 import { ReactComponent as TrashIcon } from 'src/assets/icons/trash.svg';
 import { RequestBoxWrapper } from './style';
-import ReactJson from 'react-json-view';
+import ReactJson, { InteractionProps } from 'react-json-view';
 import {
   IRequestTypeOption,
   REQUEST_TYPE,
   REQUEST_TYPE_OPTIONS,
 } from 'src/lib/constants/options';
 import Switch from 'react-switch';
-
-interface IProps {
-  isEdit?: boolean;
-}
-interface IFromData {
+export interface IResFromData {
   name: string;
   type: string;
   isRequired: boolean;
   example: string;
 }
+interface IProps {
+  isEdit?: boolean;
+  formData: IResFromData[];
+  reqJson: object;
+  handleAddFrom: () => void;
+  requestType: REQUEST_TYPE;
+  handleChangeReqType: (value: REQUEST_TYPE) => void;
+  handleChangeJson: (value: object) => void;
+  removeForm: (index: number) => void;
+}
 
-const initFormData = {
-  name: '',
-  type: '',
-  isRequired: true,
-  example: '',
-};
-
-const RequestBox: FunctionComponent<IProps> = ({ isEdit = false }) => {
-  const [formData, setFormData] = useState<IFromData[]>([initFormData]);
-  const [requestType, setRequestType] = useState<REQUEST_TYPE>(
-    REQUEST_TYPE.JSON
-  );
+const RequestBox: FunctionComponent<IProps> = ({
+  isEdit = true,
+  formData,
+  reqJson,
+  handleAddFrom,
+  requestType,
+  handleChangeReqType,
+  handleChangeJson,
+  removeForm,
+}) => {
   const [jsonEditor, setJsonEditor] = useState<boolean>(true);
-  const [reqJson, setReqJson] = useState({});
 
   const addFrom = useCallback(() => {
-    setFormData((pre) => {
-      return [...pre, initFormData];
-    });
-  }, []);
+    handleAddFrom();
+  }, [handleAddFrom]);
 
   const changeRequestType = (e: IRequestTypeOption | null) => {
-    !!e && setRequestType(e.value);
+    !!e && handleChangeReqType(e.value);
   };
 
-  const removeForm = useCallback(
-    (index: number) => {
-      const oldForms = [...formData];
-      const leftArr = oldForms.slice(0, index);
-      const rightArr = oldForms.slice(index + 1);
-      setFormData(leftArr.concat(index < formData.length ? rightArr : []));
-    },
-    [formData]
-  );
+  const changeJson = (e: InteractionProps) => {
+    !!e && handleChangeJson(e.updated_src);
+  };
 
   return (
     <RequestBoxWrapper>
@@ -86,9 +81,9 @@ const RequestBox: FunctionComponent<IProps> = ({ isEdit = false }) => {
             style={{ padding: 16 }}
             src={reqJson}
             theme="monokai"
-            onAdd={(e) => setReqJson(e.updated_src)}
-            onDelete={(e) => setReqJson(e.updated_src)}
-            onEdit={(e) => setReqJson(e.updated_src)}
+            onAdd={changeJson}
+            onDelete={changeJson}
+            onEdit={changeJson}
             displayObjectSize={true}
             enableClipboard={true}
           />
@@ -135,7 +130,7 @@ const RequestBox: FunctionComponent<IProps> = ({ isEdit = false }) => {
                 placeholder="Chú thích"
                 className="rq-form-data__item__field"
               />
-              {index !== 0 && (
+              {index !== 0 && isEdit && (
                 <button onClick={() => removeForm(index)}>
                   <TrashIcon />
                 </button>

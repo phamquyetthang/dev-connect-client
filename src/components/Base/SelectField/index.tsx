@@ -12,6 +12,7 @@ interface IComponentProps {
   title?: string;
   options?: OptionTypeBase[];
   isMulti?: boolean;
+  closeMenuOnSelect?: boolean;
 }
 type IProps = IFromProps & IComponentProps;
 
@@ -25,6 +26,7 @@ const SelectField: FunctionComponent<IProps> = ({
   className,
   title,
   isMulti = false,
+  closeMenuOnSelect=false
 }) => {
   return (
     <Controller
@@ -39,6 +41,7 @@ const SelectField: FunctionComponent<IProps> = ({
             options={options}
             placeholder={placeholder}
             isMulti={isMulti}
+            closeMenuOnSelect={closeMenuOnSelect}
           />
           {error && <i>{error}</i>}
         </SelectFieldWrapper>

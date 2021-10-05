@@ -35,6 +35,7 @@ export const HeaderBarWrapper = styled.header`
     background-color: ${color('background2')};
     border: 1px solid ${color('border')};
     box-shadow: 0px 2px 6px 2px ${color('hoverShadow')};
+    z-index: 1000;
 
     &.show {
       display: flex;

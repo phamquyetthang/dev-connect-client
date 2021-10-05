@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { ChangeEvent, FunctionComponent, memo } from 'react';
 import { Controller } from 'react-hook-form';
 import { InputContain, InputWrapper } from './styled';
 import { IFromProps } from '../@types/formTypes';
@@ -49,3 +49,33 @@ const InputField: FunctionComponent<IProps> = memo(
 );
 
 export default InputField;
+
+type IInputNormalProps = IComponentProps & {
+  value: string;
+  name?: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+export const InputNormal: FunctionComponent<IInputNormalProps> = ({
+  value,
+  className,
+  title,
+  type,
+  placeholder,
+  error,
+  name,
+  onChange,
+}) => {
+  return (
+    <InputContain className={className}>
+      {!!title && <label>{title}</label>}
+      <InputWrapper
+        value={value}
+        placeholder={placeholder}
+        type={type}
+        name={name}
+        onChange={onChange}
+      />
+      {error && <i>{error}</i>}
+    </InputContain>
+  );
+};

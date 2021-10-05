@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { uniqueId } from 'lodash';
 import {
@@ -7,63 +7,51 @@ import {
 } from 'src/lib/constants/options';
 import { ReactComponent as TrashIcon } from 'src/assets/icons/trash.svg';
 import { RequestBoxWrapper } from './style';
-import ReactJson from 'react-json-view';
+import ReactJson, { InteractionProps } from 'react-json-view';
 import Button from 'src/components/Base/Button';
 
-interface IFromData {
+export interface IFromData {
   name: string;
   type: string;
   isRequired: boolean;
   example: string;
 }
-
-const initFormData = {
-  name: '',
-  type: '',
-  isRequired: true,
-  example: '',
-};
-
-const ResponseBox = () => {
-  const [typeDisplay, setTypeDisplay] = useState<IResponseTypeOption>(
-    RESPONSE_TYPE_OPTIONS[1]
-  );
-  const [formData, setFormData] = useState<IFromData[]>([initFormData]);
-
-  const [req, setReq] = useState({});
-
+interface IProps {
+  handleAddFrom: () => void;
+  removeForm: (index: number) => void;
+  formData: IFromData[];
+  resJson: object;
+  handleChangeJson: (value: object) => void;
+  handleChangeTypeDisplay: (value: IResponseTypeOption) => void;
+  typeResDisplay:IResponseTypeOption;
+}
+const ResponseBox: FunctionComponent<IProps> = ({
+  handleAddFrom,
+  removeForm,
+  formData,
+  resJson,
+  handleChangeJson,
+  handleChangeTypeDisplay,
+  typeResDisplay,
+}) => {
   const changeTypeDisplay = (e: IResponseTypeOption | null) => {
-    e && setTypeDisplay(e);
+    e && handleChangeTypeDisplay(e);
   };
-
-  const addFrom = useCallback(() => {
-    setFormData((pre) => {
-      return [...pre, initFormData];
-    });
-  }, []);
-
-  const removeForm = useCallback(
-    (index: number) => {
-      const oldForms = [...formData];
-      const leftArr = oldForms.slice(0, index);
-      const rightArr = oldForms.slice(index + 1);
-      setFormData(leftArr.concat(index < formData.length ? rightArr : []));
-    },
-    [formData]
-  );
-
+  const changeJson = (e: InteractionProps) => {
+    !!e && handleChangeJson(e.updated_src);
+  };
   const renderForm = () => {
-    switch (typeDisplay?.value) {
+    switch (typeResDisplay?.value) {
       case 'json':
         return (
           <div className="json-edit">
             <ReactJson
               style={{ padding: 16 }}
-              src={req}
+              src={resJson}
               theme="monokai"
-              onAdd={(e) => setReq(e.updated_src)}
-              onDelete={(e) => setReq(e.updated_src)}
-              onEdit={(e) => setReq(e.updated_src)}
+              onAdd={changeJson}
+              onDelete={changeJson}
+              onEdit={changeJson}
               displayObjectSize={true}
               enableClipboard={true}
             />
@@ -121,7 +109,7 @@ const ResponseBox = () => {
                 )}
                 <Button
                   title="Thêm"
-                  onClick={addFrom}
+                  onClick={handleAddFrom}
                   className="rq-form-data__add_btn"
                 />
               </div>
@@ -139,7 +127,7 @@ const ResponseBox = () => {
           options={RESPONSE_TYPE_OPTIONS}
           className="rq-select-type"
           onChange={changeTypeDisplay}
-          defaultValue={typeDisplay}
+          defaultValue={typeResDisplay}
         />
       </div>
       {renderForm()}

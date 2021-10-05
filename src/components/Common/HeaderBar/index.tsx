@@ -40,6 +40,7 @@ const HeaderBar = memo(() => {
   }, [handleClickOutSide]);
 
   const onLogout = () => {
+    alert('1')
     dispatch(logout());
     history.push(ROUTER_NAME.auth.login);
   };

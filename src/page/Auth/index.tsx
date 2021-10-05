@@ -91,6 +91,7 @@ const AuthScreen = () => {
         <ChangeLangue />
         <DarkModeButton />
       </div>
+      {JSON.stringify(err)}
       {type === 'login' && (
         <LoginFrom
           control={control}

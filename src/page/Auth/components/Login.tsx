@@ -89,9 +89,9 @@ const LoginFrom: FunctionComponent<IProps> = ({
       />
       <hr />
       <Button title={word('signUpTitle')} onClick={goToSignUp} color={'gray'} />
-      {!!errorApi && (
+      {/* {!!errorApi && (
         <span className="errorText">Đăng nhập thất bại : {errorApi}</span>
-      )}
+      )} */}
     </form>
   );
 };
