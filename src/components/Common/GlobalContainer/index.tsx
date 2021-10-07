@@ -10,12 +10,14 @@ import { useHistory, useLocation } from 'react-router';
 import ROUTER_NAME from 'src/lib/constants/router';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { getInfoService } from 'src/services/project';
+import Modal from 'src/components/Base/Modal';
+import { clearAppErr } from 'src/services/app';
 
 interface IProps {
   children: ReactNode;
 }
 const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
-  const { spinLoading, snackBar, projectId } = useAppSelector(
+  const { spinLoading, snackBar, projectId, error } = useAppSelector(
     (state) => state.app
   );
   const location = useLocation();
@@ -29,9 +31,21 @@ const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
   useEffect(() => {
     if (!projectId && withSidebar) {
       history.push(ROUTER_NAME.welcome.path);
+    } else {
+      dispatch(getInfoService({ id: projectId }));
     }
-    dispatch(getInfoService({ id: projectId }));
   }, [dispatch, history, projectId, withSidebar]);
+
+  const closeErrorModal = () => {
+    if (error.isBack) {
+      history.goBack();
+    }
+    if (error.navigate) {
+      history.push(error.navigate);
+    }
+    dispatch(clearAppErr());
+  };
+
   return (
     <GlobalContainerWrapper>
       <HeaderBar />
@@ -57,6 +71,14 @@ const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
           ))}
         </SnackBar>
       )}
+      <Modal
+        isShow={error.error}
+        title={error.title}
+        closeBtn="OK"
+        onClose={closeErrorModal}
+      >
+        {error.content}
+      </Modal>
     </GlobalContainerWrapper>
   );
 };

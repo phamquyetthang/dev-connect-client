@@ -22,10 +22,9 @@ const Dashboard = () => {
   };
   return (
     <div>
-      <h1>{JSON.stringify(projectInfo)}</h1>
       <ul>
         {projectInfo?.members?.map((item) => (
-          <li key={item.member_id}>{item.name}</li>
+          <li key={item.member_id}><h3>{item.name}</h3></li>
         ))}
       </ul>
       <div>

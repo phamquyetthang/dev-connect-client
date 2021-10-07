@@ -11,6 +11,12 @@ const initialState: IAppState = {
   snackBar: [],
   theme: 'light',
   language: 'vn',
+  error: {
+    error: false,
+    title: '',
+    content: '',
+    isBack: false,
+  },
 };
 
 const appSlice = createSlice({
@@ -54,6 +60,33 @@ const appSlice = createSlice({
     setProjectId: (state: IAppState, { payload }: PayloadAction<string>) => {
       state.projectId = payload;
     },
+    createAppErr: (
+      state: IAppState,
+      {
+        payload,
+      }: PayloadAction<{
+        title: string;
+        content?: string;
+        isBack?: boolean;
+        navigate?: string;
+      }>
+    ) => {
+      state.error = {
+        error: true,
+        title: payload.title,
+        content: payload.content || payload.title,
+        isBack: payload.isBack || false,
+        navigate: payload.navigate || '',
+      };
+    },
+    clearAppErr: (state: IAppState) => {
+      state.error = {
+        error: false,
+        title: '',
+        content: '',
+        isBack: false,
+      };
+    },
   },
 });
 
@@ -66,6 +99,8 @@ export const {
   onDarkMode,
   changeLanguage,
   setProjectId,
+  createAppErr,
+  clearAppErr,
 } = appSlice.actions;
 
 export default appSlice.reducer;

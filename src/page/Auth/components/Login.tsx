@@ -84,14 +84,14 @@ const LoginFrom: FunctionComponent<IProps> = ({
         title={word('loginTitle')}
         onClick={() => null}
         type="submit"
-        disable={isDisableSubmit|| loading}
+        disable={isDisableSubmit || loading}
         loading={loading}
       />
       <hr />
       <Button title={word('signUpTitle')} onClick={goToSignUp} color={'gray'} />
-      {/* {!!errorApi && (
+      {!!errorApi && (
         <span className="errorText">Đăng nhập thất bại : {errorApi}</span>
-      )} */}
+      )}
     </form>
   );
 };

@@ -7,6 +7,14 @@ export type ISnackBar = {
   message: string;
 };
 
+export interface IAppError {
+  error: boolean;
+  title: string;
+  content: string;
+  isBack?: boolean;
+  navigate?: string;
+}
+
 export type IAppState = {
   projectId: string;
   loading: boolean;
@@ -14,4 +22,5 @@ export type IAppState = {
   snackBar: ISnackBar[];
   theme: ThemesName;
   language: 'vn' | 'en';
+  error: IAppError;
 };

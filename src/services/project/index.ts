@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { loading } from '../app';
+import ROUTER_NAME from 'src/lib/constants/router';
+import { loading, createAppErr, setProjectId } from '../app';
 import { getInfoProjectApi } from './api';
 import { IProjectInfoRes, IProjectState } from './types';
 
@@ -15,6 +16,13 @@ export const getInfoService = createAsyncThunk(
       const response = await getInfoProjectApi(id);
       return response as IProjectInfoRes;
     } catch (error) {
+      thunkAPI.dispatch(setProjectId(''));
+      thunkAPI.dispatch(
+        createAppErr({
+          title: error as string,
+          navigate: ROUTER_NAME.welcome.path,
+        })
+      );
       return thunkAPI.rejectWithValue(error);
     } finally {
       thunkAPI.dispatch(loading(false));
