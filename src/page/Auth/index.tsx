@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import ChangeLangue from 'src/components/Common/ChangeLangue';
-import ChangeTheme from 'src/components/Common/ChangeTheme';
+import DarkModeButton from 'src/components/Common/DarkMode';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import ROUTER_NAME from 'src/lib/constants/router';
@@ -89,7 +89,7 @@ const AuthScreen = () => {
     <AuthWrapper>
       <div className="auth_change">
         <ChangeLangue />
-        <ChangeTheme />
+        <DarkModeButton />
       </div>
       {type === 'login' && (
         <LoginFrom

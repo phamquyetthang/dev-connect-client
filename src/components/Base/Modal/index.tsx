@@ -7,9 +7,9 @@ interface IProps {
   title: string;
   children: ReactNode;
   closeBtn: string;
-  submitBtn: string;
+  submitBtn?: string;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit?: () => void;
 }
 
 const Modal: FunctionComponent<IProps> = ({
@@ -38,7 +38,9 @@ const Modal: FunctionComponent<IProps> = ({
         <div className="modal__body">{children}</div>
         <div className="modal__footer">
           <Button title={closeBtn} onClick={onClose} />
-          <Button title={submitBtn} onClick={onSubmit} />
+          {submitBtn && onSubmit ? (
+            <Button title={submitBtn} onClick={onSubmit} />
+          ) : null}
         </div>
       </div>
     </ModalWrapper>

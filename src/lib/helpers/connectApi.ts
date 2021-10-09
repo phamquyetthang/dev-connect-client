@@ -29,9 +29,12 @@ export const postService = async (
     if (error.response) {
       const res = error.response.data.message;
       throw res;
-    } else {
-      throw error;
     }
+    if (error.message) {
+      throw error.message.toString();
+    }
+
+    throw JSON.stringify(error);
   }
 };
 export const getService = async (url: string, params?: any) => {
@@ -61,9 +64,11 @@ export const getService = async (url: string, params?: any) => {
     if (error.response) {
       const res = error.response.data.message;
       throw res;
-    } else {
-      throw error;
     }
+    if (error.message) {
+      throw error.message.toString();
+    }
+    throw JSON.stringify(error);
   }
 };
 export const putService = async (url: string, body: any) => {
@@ -90,16 +95,10 @@ export const putService = async (url: string, body: any) => {
     }
   } catch (error: any) {
     if (error.response) {
-      const errorMessage = error.response.data.error.split(':');
-      const res = {
-        status: error.response.status,
-        errorMessage: errorMessage[errorMessage.length - 1],
-        data: error.response.data,
-      };
+      const res = error.response.data.message;
       throw res;
-    } else {
-      throw error;
     }
+    throw JSON.stringify(error);
   }
 };
 export const deleteService = async (url: string, body: any) => {
@@ -121,15 +120,9 @@ export const deleteService = async (url: string, body: any) => {
     }
   } catch (error: any) {
     if (error.response) {
-      const errorMessage = error.response.data.error.split(':');
-      const res = {
-        status: error.response.status,
-        errorMessage: errorMessage[errorMessage.length - 1],
-        data: error.response.data,
-      };
+      const res = error.response.data.message;
       throw res;
-    } else {
-      throw error;
     }
+    throw JSON.stringify(error);
   }
 };

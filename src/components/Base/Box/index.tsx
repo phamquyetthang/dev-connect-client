@@ -10,7 +10,7 @@ const Box: FunctionComponent<IProps> = memo(
   ({ children, onClickBox, disable = false, className }) => {
     return (
       <BoxWrapper
-        {...(disable && { onClick: onClickBox })}
+        {...(!disable && { onClick: onClickBox })}
         className={className}
       >
         {children}

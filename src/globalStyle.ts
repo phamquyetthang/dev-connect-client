@@ -28,6 +28,11 @@ const GlobalStyle = createGlobalStyle`
         align-items: center;
     }
 
+    .row{
+        display: flex;
+        flex-direction: row;
+    }
+
     .m1{
         margin: 8px;
     }
@@ -44,6 +49,13 @@ const GlobalStyle = createGlobalStyle`
 
     .mt1 {
         margin-top: 8px;
+    }
+    button{
+        cursor: pointer;
+        
+        &:active{
+            opacity: 0.5;
+        }
     }
 `;
 

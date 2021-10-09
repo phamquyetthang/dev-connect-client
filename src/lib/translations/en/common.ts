@@ -4,8 +4,11 @@ const commonTranslate: CommonTranslateType = {
   close: 'close',
   create: 'create',
   done: 'Done',
+  editStatus: 'Edit status',
   editProfile: 'Edit profile',
-  logout: "Logout"
+  preferences: 'Preferences',
+  logout: "Logout",
+  dashboard: "Dashboard",
 };
 
 export default commonTranslate;

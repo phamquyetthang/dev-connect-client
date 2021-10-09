@@ -6,10 +6,14 @@ export const ButtonWrapper = styled.button`
   border-radius: 8px;
   outline: none;
   border: hidden;
-  background-color: ${color('backgroundButton')};
+  background-color: ${color('button1')};
   font-size: 14px;
-  color: ${color('textButton')};
+  color: ${color('textBtn1')};
   cursor: pointer;
+
+  &:active{
+    opacity: 0.5;
+  }
 
   span {
     text-transform: uppercase;
@@ -21,8 +25,8 @@ export const ButtonWrapper = styled.button`
   }
 
   &.gray {
-    background-color: ${color('background3')};
-    color: ${color('text2')};
+    background-color: ${color('button2')};
+    color: ${color('textBtn2')};
   }
 
   &.btn-loading {

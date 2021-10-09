@@ -1,10 +1,22 @@
-import { getService, postService } from 'src/lib/helpers/connectApi';
-import { ICreateProjectReq, IProjectsListRes } from './types';
-
+import {
+  getService,
+  postService,
+  putService,
+} from 'src/lib/helpers/connectApi';
+import { ICreateProjectReq, IProjectInfoRes, IProjectsListRes } from './types';
+const endpoint = '/project';
 export const createProjectApi = (req: ICreateProjectReq) => {
-  return postService('/project', req);
+  return postService(endpoint, req);
 };
 
 export function getProjectsApi(): Promise<IProjectsListRes[]> {
-  return getService('/project');
+  return getService(endpoint);
+}
+
+export function getInfoProjectApi(id: string): Promise<IProjectInfoRes> {
+  return getService(`${endpoint}/${id}`);
+}
+
+export function addMember(email: string, projectId: string) {
+  return putService(endpoint + '/addMember', { email, projectId });
 }

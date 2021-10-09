@@ -84,7 +84,7 @@ const LoginFrom: FunctionComponent<IProps> = ({
         title={word('loginTitle')}
         onClick={() => null}
         type="submit"
-        disable={isDisableSubmit|| loading}
+        disable={isDisableSubmit || loading}
         loading={loading}
       />
       <hr />

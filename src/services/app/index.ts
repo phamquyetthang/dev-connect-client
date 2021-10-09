@@ -1,14 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import uniqueId from 'lodash/uniqueId';
 import { ISnack } from 'src/lib/constants';
+import { ThemesName } from 'src/lib/theme/types';
 import { IAppState } from './types';
 
 const initialState: IAppState = {
+  projectId: '',
   loading: false,
   spinLoading: false,
   snackBar: [],
-  theme: 'dark',
+  theme: 'light',
   language: 'vn',
+  error: {
+    error: false,
+    title: '',
+    content: '',
+    isBack: false,
+  },
 };
 
 const appSlice = createSlice({
@@ -46,6 +54,39 @@ const appSlice = createSlice({
     ) => {
       state.language = payload;
     },
+    changeTheme: (state: IAppState, { payload }: PayloadAction<ThemesName>) => {
+      state.theme = payload;
+    },
+    setProjectId: (state: IAppState, { payload }: PayloadAction<string>) => {
+      state.projectId = payload;
+    },
+    createAppErr: (
+      state: IAppState,
+      {
+        payload,
+      }: PayloadAction<{
+        title: string;
+        content?: string;
+        isBack?: boolean;
+        navigate?: string;
+      }>
+    ) => {
+      state.error = {
+        error: true,
+        title: payload.title,
+        content: payload.content || payload.title,
+        isBack: payload.isBack || false,
+        navigate: payload.navigate || '',
+      };
+    },
+    clearAppErr: (state: IAppState) => {
+      state.error = {
+        error: false,
+        title: '',
+        content: '',
+        isBack: false,
+      };
+    },
   },
 });
 
@@ -57,6 +98,9 @@ export const {
   clearSnackBar,
   onDarkMode,
   changeLanguage,
+  setProjectId,
+  createAppErr,
+  clearAppErr,
 } = appSlice.actions;
 
 export default appSlice.reducer;
