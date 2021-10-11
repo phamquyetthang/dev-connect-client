@@ -17,6 +17,11 @@ export function getInfoProjectApi(id: string): Promise<IProjectInfoRes> {
   return getService(`${endpoint}/${id}`);
 }
 
+export function getProjectMemberApi(id: string){
+  return getService(`${endpoint}/members/${id}`)
+}
+
 export function addMember(email: string, projectId: string) {
   return putService(endpoint + '/addMember', { email, projectId });
 }
+

@@ -9,6 +9,7 @@ const commonTranslate: CommonTranslateType = {
   preferences: 'Preferences',
   logout: "Logout",
   dashboard: "Dashboard",
+  filter: "Filter",
 };
 
 export default commonTranslate;

@@ -1,14 +1,16 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import uniqueId from 'lodash/uniqueId';
 import { ISnack } from 'src/lib/constants';
 import { ThemesName } from 'src/lib/theme/types';
-import { IAppState } from './types';
-
+import { IAppState, IProjectApp } from './types';
+import { getProjectsApi } from '../project/api';
 const initialState: IAppState = {
   projectId: '',
+  projectName: '',
   loading: false,
   spinLoading: false,
   snackBar: [],
+  projects: [],
   theme: 'light',
   language: 'vn',
   error: {
@@ -18,6 +20,23 @@ const initialState: IAppState = {
     isBack: false,
   },
 };
+
+export const getListProjectsThunk = createAsyncThunk(
+  'app/getListProjects',
+  async (_, thunkAPI) => {
+    try {
+      const data = await getProjectsApi();
+      const listProject: IProjectApp[] =
+        data.map((item) => ({
+          name: item.name,
+          id: item._id,
+        })) || [];
+      return listProject;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 const appSlice = createSlice({
   name: 'app',
@@ -59,6 +78,8 @@ const appSlice = createSlice({
     },
     setProjectId: (state: IAppState, { payload }: PayloadAction<string>) => {
       state.projectId = payload;
+      state.projectName =
+        state.projects.find((item) => item.id === payload)?.name || '';
     },
     createAppErr: (
       state: IAppState,
@@ -87,6 +108,27 @@ const appSlice = createSlice({
         isBack: false,
       };
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getListProjectsThunk.pending, (state: IAppState) => {
+        state.spinLoading = true;
+      })
+      .addCase(
+        getListProjectsThunk.fulfilled,
+        (state: IAppState, { payload }) => {
+          state.spinLoading = false;
+          state.projects = payload || [];
+        }
+      )
+      .addCase(getListProjectsThunk.rejected, (state: IAppState, { error }) => {
+        state.spinLoading = false;
+        state.error = {
+          error: true,
+          title: error.name || '',
+          content: error.message || '',
+        };
+      });
   },
 });
 

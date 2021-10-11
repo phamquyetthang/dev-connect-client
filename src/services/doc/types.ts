@@ -33,6 +33,7 @@ export default interface IDoc {
   extension: string[];
 }
 
-export type ICreateDocReq = IDoc & {
+export type ICreateDocReq = {
+  formData: IDoc;
   projectId: string;
 };

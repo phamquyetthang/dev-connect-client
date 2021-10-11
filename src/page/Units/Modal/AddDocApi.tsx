@@ -8,6 +8,7 @@ import RequestBox, {
 } from 'src/components/Common/APIDoc/RequestBox';
 import ResponseBox from 'src/components/Common/APIDoc/ResponseBox';
 import useMemberOptions from 'src/hooks/project/useMemberOptions';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import {
   IResponseTypeOption,
   METHOD_OPTIONS,
@@ -45,7 +46,7 @@ interface IProps {
 // };
 const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
   const { control, handleSubmit } = useForm({});
-
+  const projectId = useAppSelector((state) => state.app.projectId);
   const [reqFormData, setReqFormData] = useState<IResFromData[]>([
     initFormData,
   ]);
@@ -111,7 +112,15 @@ const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
   const onAddDoc = async (data: any) => {
     try {
       createDocApi({
-        ...data,
+        formData: {
+          ...data,
+          method: data.method.value,
+          requestType: requestType,
+          responseBody: reqFormData,
+          responseType: typeResDisplay,
+          requestBody: resFormData,
+        },
+        projectId: projectId,
       });
     } catch (error) {}
   };
@@ -145,7 +154,6 @@ const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
             name="endpoint"
             placeholder="HOST"
             title="HOST"
-
           />
           <InputField
             control={control}

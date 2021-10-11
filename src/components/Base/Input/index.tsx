@@ -66,7 +66,7 @@ export const InputNormal: FunctionComponent<IInputNormalProps> = ({
   onChange,
 }) => {
   return (
-    <InputContain className={className}>
+    <div className={className}>
       {!!title && <label>{title}</label>}
       <InputWrapper
         value={value}
@@ -76,6 +76,26 @@ export const InputNormal: FunctionComponent<IInputNormalProps> = ({
         onChange={onChange}
       />
       {error && <i>{error}</i>}
-    </InputContain>
+    </div>
+  );
+};
+
+export const InputBasic: FunctionComponent<IInputNormalProps> = ({
+  value,
+  className,
+  type,
+  placeholder,
+  name,
+  onChange,
+}) => {
+  return (
+    <InputWrapper
+      value={value}
+      placeholder={placeholder}
+      type={type}
+      name={name}
+      className={className}
+      onChange={onChange}
+    />
   );
 };

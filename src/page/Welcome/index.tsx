@@ -6,7 +6,7 @@ import Button from 'src/components/Base/Button';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import ROUTER_NAME from 'src/lib/constants/router';
 import { WelcomeTranslateKeyType } from 'src/lib/translations/vn/welcome';
-import { setProjectId } from 'src/services/app';
+import { getListProjectsThunk, setProjectId } from 'src/services/app';
 import { createProjectApi, getProjectsApi } from 'src/services/project/api';
 import { IProjectsListRes } from 'src/services/project/types';
 import CreateProject from './components/CreateProject';
@@ -41,8 +41,9 @@ const Welcome = () => {
     } catch (error) {}
   };
   useEffect(() => {
+    dispatch(getListProjectsThunk());
     getList();
-  }, []);
+  }, [dispatch]);
 
   const gotoDashboard = (id: string) => {
     dispatch(setProjectId(id));

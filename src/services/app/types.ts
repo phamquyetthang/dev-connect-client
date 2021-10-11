@@ -15,12 +15,19 @@ export interface IAppError {
   navigate?: string;
 }
 
+export interface IProjectApp{
+  name: string;
+  id: string;
+}
+
 export type IAppState = {
   projectId: string;
+  projectName: string;
   loading: boolean;
   spinLoading: boolean;
   snackBar: ISnackBar[];
   theme: ThemesName;
   language: 'vn' | 'en';
+  projects: Array<IProjectApp>;
   error: IAppError;
 };

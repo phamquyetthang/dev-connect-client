@@ -26,7 +26,7 @@ export const ChangeLangueWrapper = styled.div`
     border: 1px solid ${color('borderInput')};
     border-radius: 8px;
     overflow: hidden;
-
+    z-index: 1000;
     .lang_option {
       cursor: pointer;
       text-align: start;

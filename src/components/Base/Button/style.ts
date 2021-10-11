@@ -11,8 +11,19 @@ export const ButtonWrapper = styled.button`
   color: ${color('textBtn1')};
   cursor: pointer;
 
-  &:active{
-    opacity: 0.5;
+  &.btn-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    svg {
+      width: 14px;
+      height: 14px;
+      fill: ${color('textBtn1')};
+    }
+  }
+
+  &:active {
+    opacity: 0.8;
   }
 
   span {

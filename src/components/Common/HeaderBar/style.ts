@@ -11,6 +11,28 @@ export const HeaderBarWrapper = styled.header`
   border-bottom: 1px solid ${color('borderInput')};
   background-color: ${color('header')};
 
+  .header__logo {
+    .header_project_name {
+      border: hidden;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    .header__projects{
+      display: grid;
+      row-gap: 8px;
+      button{
+        background-color: inherit;
+        border: hidden;
+        text-align: start;
+        margin-left: 2px;
+      }
+      button:hover{
+        margin-left: 0px;
+        border-left: 2px solid pink;
+      }
+    }
+  }
+
   .header_tool {
     display: flex;
     flex-direction: row;
@@ -75,7 +97,7 @@ export const HeaderBarWrapper = styled.header`
       border-bottom: 1px solid ${color('border')};
     }
 
-    button{
+    button {
       border: hidden;
       background-color: inherit;
       margin: 8px 1em;
@@ -84,6 +106,5 @@ export const HeaderBarWrapper = styled.header`
       cursor: pointer;
       color: ${color('text1')};
     }
-
   }
 `;

@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, ReactNode, useMemo } from 'react';
 import { ButtonWrapper } from './style';
 interface IProps {
   title: string;
@@ -8,6 +8,7 @@ interface IProps {
   className?: string;
   color?: string;
   loading?: boolean;
+  leftIcon?: ReactNode;
 }
 const Button: FunctionComponent<IProps> = ({
   title,
@@ -17,6 +18,7 @@ const Button: FunctionComponent<IProps> = ({
   className,
   color,
   loading,
+  leftIcon,
 }) => {
   const classStyle = useMemo(() => {
     let class_name = '';
@@ -32,9 +34,10 @@ const Button: FunctionComponent<IProps> = ({
     <ButtonWrapper
       onClick={onClick}
       type={type}
-      className={`${classStyle} ${className}${loading ? ' btn-loading' : ''}`}
+      className={`${classStyle} ${className}${loading ? ' btn-loading' : ''}${leftIcon ? ' btn-icon' : ''}`}
       disabled={disable}
     >
+      {leftIcon || null}
       <span>{title}</span>
     </ButtonWrapper>
   );
