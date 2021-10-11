@@ -6,11 +6,13 @@ export const AddDocApiWrapper = styled.form`
   .createDoc {
     &__header {
       display: grid;
-      grid-template-columns: 120px 200px 1fr;
+      grid-template-columns: 160px 200px 1fr;
       column-gap: 1em;
     }
   }
-
+  .select_member{
+    margin-bottom: 12px;
+  }
   .json-edit{
     text-align: start;
   }

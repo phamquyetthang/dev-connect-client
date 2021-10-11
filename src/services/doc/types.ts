@@ -34,6 +34,6 @@ export default interface IDoc {
 }
 
 export type ICreateDocReq = {
-  formData: IDoc;
+  docData: IDoc;
   projectId: string;
 };

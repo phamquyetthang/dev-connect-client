@@ -4,10 +4,12 @@ import FullPageModal from 'src/components/Base/FullPageModal';
 import InputField from 'src/components/Base/Input';
 import SelectField from 'src/components/Base/SelectField';
 import RequestBox, {
+  IChangeInputData,
   IResFromData,
 } from 'src/components/Common/APIDoc/RequestBox';
 import ResponseBox from 'src/components/Common/APIDoc/ResponseBox';
 import useMemberOptions from 'src/hooks/project/useMemberOptions';
+import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import {
   IResponseTypeOption,
@@ -16,6 +18,8 @@ import {
   RESPONSE_TYPE_OPTIONS,
   // SELECT_OPTION,
 } from 'src/lib/constants/options';
+import { DocTranslateKeyType } from 'src/lib/translations/vn/doc';
+import { addSnackBar, createAppErr, spinLoading } from 'src/services/app';
 import { createDocApi } from 'src/services/doc/api';
 
 import { AddDocApiWrapper } from './style';
@@ -30,22 +34,19 @@ const initFormData = {
 interface IProps {
   isShow: boolean;
   handleDismiss: () => void;
+  words: (title: DocTranslateKeyType) => string;
 }
 
-// interface IState {
-//   title: string;
-//   method: SELECT_OPTION;
-//   endpoint: string;
-//   member: SELECT_OPTION[];
-// }
-// const initState : IState= {
-//   title: '',
-//   method: { value: '', label: '' },
-//   endpoint: '',
-//   member: [],
-// };
-const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
-  const { control, handleSubmit } = useForm({});
+const AddDocApi: FunctionComponent<IProps> = ({
+  isShow,
+  handleDismiss,
+  words,
+}) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { isDirty, isValid },
+  } = useForm({});
   const projectId = useAppSelector((state) => state.app.projectId);
   const [reqFormData, setReqFormData] = useState<IResFromData[]>([
     initFormData,
@@ -63,8 +64,11 @@ const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
   );
   const [reqJson, setReqJson] = useState({});
   const [resJson, setResJson] = useState({});
+  const [jsonEditor, setJsonEditor] = useState<boolean>(true);
+  const [freeText, setFreeText] = useState<string>('');
 
   const memberOptions = useMemberOptions();
+  const dispatch = useAppDispatch();
 
   const handleAddForm = (isRes: boolean = false) => {
     if (isRes) {
@@ -109,27 +113,67 @@ const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
     [reqFormData, resFormData]
   );
 
-  const onAddDoc = async (data: any) => {
-    try {
-      createDocApi({
-        formData: {
-          ...data,
-          method: data.method.value,
-          requestType: requestType,
-          responseBody: reqFormData,
-          responseType: typeResDisplay,
-          requestBody: resFormData,
-        },
-        projectId: projectId,
+  const onChangeFormData = (isRes: boolean, data: IChangeInputData) => {
+    if (isRes) {
+      const newData = [...resFormData];
+      newData[data.index] = {
+        ...newData[data.index],
+        [data.key]: data.value,
+      };
+      setResFormData(newData);
+    } else {
+      const newData = [...reqFormData];
+      newData[data.index] = {
+        ...newData[data.index],
+        [data.key]: data.value,
+      };
+      setReqFormData(newData);
+    }
+  };
+
+  const onAddDoc = (data: any) => {
+    dispatch(spinLoading(true));
+    createDocApi({
+      docData: {
+        ...data,
+        method: data.method.value,
+        requestType: requestType,
+        responseBody: jsonEditor ? reqJson : reqFormData,
+        responseType: typeResDisplay.value,
+        requestBody:
+          typeResDisplay.value === 'json'
+            ? resJson
+            : typeResDisplay.value === 'text'
+            ? freeText
+            : resFormData,
+      },
+      projectId: projectId,
+    })
+      .then(() => {
+        dispatch(
+          addSnackBar({ type: 'success', message: words('createSuccess') })
+        );
+        handleDismiss();
+      })
+      .catch((error) => {
+        dispatch(
+          createAppErr({
+            title: words('createFail'),
+            content: JSON.stringify(error),
+          })
+        );
+      })
+      .finally(() => {
+        dispatch(spinLoading(false));
       });
-    } catch (error) {}
   };
 
   return (
     <FullPageModal
       isShow={isShow}
-      title="Them api"
-      btnTitle="Hoàn thành"
+      title={words('createApi')}
+      btnTitle={words('createBtn')}
+      disableSubmit={!isDirty || !isValid}
       handleDismiss={handleDismiss}
       handleClickSubmit={handleSubmit(onAddDoc)}
     >
@@ -137,8 +181,9 @@ const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
         <InputField
           control={control}
           name="title"
-          placeholder="Tiêu đề"
-          title="Tiêu đề"
+          placeholder={words('title')}
+          title={words('title')}
+          rules={{ required: true }}
         />
         <div className="createDoc__header">
           <SelectField
@@ -148,35 +193,40 @@ const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
             className="select_method"
             title="METHOD"
             options={METHOD_OPTIONS}
+            rules={{ required: true }}
           />
           <InputField
             control={control}
             name="endpoint"
             placeholder="HOST"
             title="HOST"
+            rules={{ required: true }}
           />
           <InputField
             control={control}
             name="endpoint"
             placeholder="Endpoint"
             title="Endpoint"
+            rules={{ required: true }}
           />
         </div>
         <SelectField
           control={control}
           name="members"
-          placeholder="Members"
-          className="select_method"
-          title="Thành viên"
+          placeholder={words('members')}
+          className="select_member"
+          title={words('members')}
           options={memberOptions}
+          rules={{ required: true }}
           closeMenuOnSelect={false}
           isMulti
         />
         <InputField
           control={control}
-          placeholder="Mô tả"
+          placeholder={words('description')}
           name="description"
-          title="Mô tả"
+          title={words('description')}
+          rules={{ required: true }}
         />
         <RequestBox
           formData={reqFormData}
@@ -186,6 +236,9 @@ const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
           reqJson={reqJson}
           handleChangeJson={handleChangeReqJson}
           removeForm={removeForm}
+          onChangeFormData={(_) => onChangeFormData(false, _)}
+          jsonEditor={jsonEditor}
+          changeEdit={() => setJsonEditor(!jsonEditor)}
         />
         <ResponseBox
           handleAddFrom={() => handleAddForm(true)}
@@ -195,6 +248,9 @@ const AddDocApi: FunctionComponent<IProps> = ({ isShow, handleDismiss }) => {
           handleChangeJson={handleChangeResJson}
           typeResDisplay={typeResDisplay}
           handleChangeTypeDisplay={changeTypeResDisplay}
+          onChangeFormData={(_) => onChangeFormData(true, _)}
+          freeText={freeText}
+          changeFreeText={(value) => setFreeText(value)}
         />
       </AddDocApiWrapper>
     </FullPageModal>

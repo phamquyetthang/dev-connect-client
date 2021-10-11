@@ -5,7 +5,7 @@ export const PopupExtendWrapper = styled.div`
   position: relative;
   .popupElement {
     position: absolute;
-    z-index: 100;
+    z-index: 50;
     padding: 12px;
     background-color: ${color('background2')};
     border: 1px solid ${color('border')};
