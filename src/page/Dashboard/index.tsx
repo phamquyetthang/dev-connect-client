@@ -24,7 +24,9 @@ const Dashboard = () => {
     <div>
       <ul>
         {projectInfo?.members?.map((item) => (
-          <li key={item.member_id}><h3>{item.name}</h3></li>
+          <li key={item.member_id}>
+            <h3>{item.name}</h3>
+          </li>
         ))}
       </ul>
       <div>

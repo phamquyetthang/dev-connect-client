@@ -31,11 +31,11 @@ export const CopyFieldWrapper = styled.div`
 
   .copy-btn:active {
     svg {
-      opacity: 0.5;
+      opacity: 0.8;
     }
   }
 
   &:active {
-    opacity: 0.5;
+    opacity: 0.8;
   }
 `;

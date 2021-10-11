@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
         cursor: pointer;
         
         &:active{
-            opacity: 0.5;
+            opacity: 0.8;
         }
     }
 `;
