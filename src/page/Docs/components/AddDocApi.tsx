@@ -11,11 +11,13 @@ import ResponseBox from 'src/components/Common/APIDoc/ResponseBox';
 import useMemberOptions from 'src/hooks/project/useMemberOptions';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import { METHOD_API } from 'src/lib/constants';
 import {
   IResponseTypeOption,
   METHOD_OPTIONS,
   REQUEST_TYPE,
   RESPONSE_TYPE_OPTIONS,
+  SELECT_OPTION,
   // SELECT_OPTION,
 } from 'src/lib/constants/options';
 import { DocTranslateKeyType } from 'src/lib/translations/vn/doc';
@@ -37,6 +39,14 @@ interface IProps {
   words: (title: DocTranslateKeyType) => string;
 }
 
+interface IApiBasicInfo {
+  title: string;
+  method: SELECT_OPTION;
+  host: string;
+  endpoint: string;
+  description: string;
+  members: SELECT_OPTION[];
+}
 const AddDocApi: FunctionComponent<IProps> = ({
   isShow,
   handleDismiss,
@@ -46,7 +56,7 @@ const AddDocApi: FunctionComponent<IProps> = ({
     control,
     handleSubmit,
     formState: { isDirty, isValid },
-  } = useForm({});
+  } = useForm<IApiBasicInfo>({});
   const projectId = useAppSelector((state) => state.app.projectId);
   const [reqFormData, setReqFormData] = useState<IResFromData[]>([
     initFormData,
@@ -131,12 +141,20 @@ const AddDocApi: FunctionComponent<IProps> = ({
     }
   };
 
-  const onAddDoc = (data: any) => {
+  const onAddDoc = (data: IApiBasicInfo) => {
     dispatch(spinLoading(true));
+    const members = data.members.map((item: SELECT_OPTION) => ({
+      id_member: item.value,
+      name: item.label,
+    }));
     createDocApi({
       docData: {
-        ...data,
-        method: data.method.value,
+        title: data.title,
+        method: data.method.value as METHOD_API,
+        host: data.host,
+        endpoint: data.endpoint,
+        description: data.description,
+        members,
         requestType: requestType,
         responseBody: jsonEditor ? reqJson : reqFormData,
         responseType: typeResDisplay.value,
@@ -197,7 +215,7 @@ const AddDocApi: FunctionComponent<IProps> = ({
           />
           <InputField
             control={control}
-            name="endpoint"
+            name="host"
             placeholder="HOST"
             title="HOST"
             rules={{ required: true }}

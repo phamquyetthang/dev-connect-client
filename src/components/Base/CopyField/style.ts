@@ -6,10 +6,12 @@ export const CopyFieldWrapper = styled.div`
   height: 100%;
   cursor: pointer;
   color: ${color('text1')};
+  min-width: 100px;
+
   .copy-btn {
     position: absolute;
     top: 4px;
-    right: 8px;
+    right: 4px;
     margin: 0 !important;
     svg {
       width: 16px;
@@ -27,6 +29,7 @@ export const CopyFieldWrapper = styled.div`
     text-align: start;
     padding: 4px;
     font-style: italic;
+    min-height: 16px;
   }
 
   .copy-btn:active {
@@ -37,5 +40,10 @@ export const CopyFieldWrapper = styled.div`
 
   &:active {
     opacity: 0.8;
+  }
+
+  button{
+    background-color: inherit;
+    border: hidden;
   }
 `;

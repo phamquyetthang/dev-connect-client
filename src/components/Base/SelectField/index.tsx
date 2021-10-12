@@ -26,7 +26,7 @@ const SelectField: FunctionComponent<IProps> = ({
   className,
   title,
   isMulti = false,
-  closeMenuOnSelect=false
+  closeMenuOnSelect = true,
 }) => {
   return (
     <Controller
@@ -42,6 +42,7 @@ const SelectField: FunctionComponent<IProps> = ({
             placeholder={placeholder}
             isMulti={isMulti}
             closeMenuOnSelect={closeMenuOnSelect}
+            styles={{ option: (styles) => ({ ...styles, color: '#000' }) }}
           />
           {error && <i>{error}</i>}
         </SelectFieldWrapper>

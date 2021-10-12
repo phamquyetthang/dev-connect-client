@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import APIBox from 'src/components/Common/APIBox';
 import HeaderTool from 'src/components/Common/HeaderTool';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
@@ -7,12 +8,14 @@ import { DocTranslateKeyType } from 'src/lib/translations/vn/doc';
 import { createAppErr } from 'src/services/app';
 import { getListDocsApi } from 'src/services/doc/api';
 import AddDocApi from './components/AddDocApi';
+import IDoc from '../../services/doc/types'
+import { DocsScreenWrapper } from './style';
 
 const DocsScreen = () => {
   const projectId = useAppSelector((state) => state.app.projectId);
   const dispatch = useAppDispatch();
   const [isShowAdd, setIsShowAdd] = useState<boolean>(false);
-  const [listDocs, setListDocs] = useState([]);
+  const [listDocs, setListDocs] = useState<IDoc[]>([]);
   const {t} = useTranslation();
   const words = useCallback(
     (title: DocTranslateKeyType) => t(`docTranslate.${title}`),
@@ -36,13 +39,16 @@ const DocsScreen = () => {
   }, [getListDocs]);
 
   return (
-    <div>
+    <DocsScreenWrapper>
       <HeaderTool handleAddNew={() => setIsShowAdd(true)} />
+      <div className="docScreen__list_doc">
       {listDocs.map((item) => (
-        <div>{JSON.stringify(item)}</div>
+        <APIBox docData={item} key={item._id} />
       ))}
+      </div>
+   
       <AddDocApi isShow={isShowAdd} handleDismiss={() => setIsShowAdd(false)}  words={words} />
-    </div>
+    </DocsScreenWrapper>
   );
 };
 
