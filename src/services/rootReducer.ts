@@ -8,7 +8,7 @@ import persistReducer from 'redux-persist/es/persistReducer';
 const appPersistConfig = {
   key: 'app',
   storage,
-  whitelist: ['projectId', 'theme', 'language'],
+  whitelist: ['projectId', 'projectName', 'theme', 'language'],
 };
 const authPersistConfig = {
   key: 'auth',

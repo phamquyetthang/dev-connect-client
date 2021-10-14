@@ -5,7 +5,7 @@ export const APIBoxWrapper = styled.div`
   padding: 8px;
   border-radius: 4px;
   background-color: ${color('background2')};
-  box-shadow: 0 2px 6px 2px ${color('shadow')};
+  box-shadow: inset -1px -1px 0px ${color('shadow')};
   color: ${color('text1')};
   display: grid;
   grid-template-columns: 1fr 150px 200px repeat(3, 32px);
@@ -13,6 +13,10 @@ export const APIBoxWrapper = styled.div`
   justify-items: center;
   border-left: 6px solid;
   column-gap: 24px;
+
+  &:hover {
+    box-shadow: 0px 2px 6px 2px ${color('hoverShadow')};
+  }
 
   .ApiBox__basic {
     justify-self: stretch;

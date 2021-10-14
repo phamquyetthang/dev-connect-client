@@ -10,7 +10,13 @@ const docTranslate = {
   required: 'Bắt buộc',
   note: 'Chú thích',
   createSuccess: 'Thêm Doc API thành công!',
-  createFail: 'Tạo doc API thất bại!'
+  createFail: 'Tạo doc API thất bại!',
+  tasks: 'công việc',
+  code: 'Code',
+  history: 'Lịch sử',
+  lab: 'Kiểm thử',
+  document: 'Tài liệu',
+  notification: 'Thông báo',
 };
 
 export type DocTranslateType = typeof docTranslate;

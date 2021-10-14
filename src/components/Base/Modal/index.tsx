@@ -34,7 +34,7 @@ const Modal: FunctionComponent<IProps> = ({
   return (
     <ModalWrapper className={isShow ? ' show' : ''} onClick={clickOutSide}>
       <div className="modal" ref={ref}>
-        <h3 className="modal__header">{title}</h3>
+        <p className="modal__header">{title}</p>
         <div className="modal__body">{children}</div>
         <div className="modal__footer">
           <Button title={closeBtn} onClick={onClose} />

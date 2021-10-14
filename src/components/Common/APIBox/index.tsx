@@ -10,19 +10,20 @@ import ProgressBar from 'src/components/Base/Progress';
 import ListAvt from 'src/components/Base/ListAvt';
 interface IProps {
   docData: IDoc;
+  onClickBox?: () => void;
 }
-const APIBox: FunctionComponent<IProps> = memo(({ docData }) => {
+const APIBox: FunctionComponent<IProps> = memo(({ docData, onClickBox }) => {
   const { title, method, host, endpoint, members } = docData;
   const styleClass = useMemo(() => {
     return method;
   }, [method]);
 
   return (
-    <APIBoxWrapper className={styleClass}>
+    <APIBoxWrapper className={styleClass} onClick={onClickBox}>
       <div className="ApiBox__basic">
         <span>{title}</span>
         <div className="ApiBox__basic__url">
-          <span  className="ApiBox__basic__url_method">{method}</span>
+          <span className="ApiBox__basic__url_method">{method}</span>
           <CopyField value={host} />
           <CopyField value={endpoint} />
         </div>

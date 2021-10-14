@@ -1,3 +1,4 @@
+import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 export const GlobalContainerWrapper = styled.div`
   display: grid;
@@ -97,10 +98,23 @@ export const SnackBar = styled.div`
 
     &.info {
       background-color: #b5ffd9;
+      color: #000;
+      svg {
+        fill: #000;
+        border-color: #000;
+      }
     }
 
     &.success {
       background-color: #3db2ff;
+    }
+  }
+`;
+
+export const ErrorModalWrapper = styled.div`
+  .modal {
+    .modal__header {
+      background-color: ${color('error')};
     }
   }
 `;

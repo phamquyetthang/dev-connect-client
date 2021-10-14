@@ -34,7 +34,7 @@ export const darkTheme: ThemeType = {
   textBtn1: '#fff',
   textBtn2: '#fff',
   borderInput: 'inherit',
-  border: 'inherit',
+  border: '#516391',
   hoverHeader: '#13161A',
 };
 

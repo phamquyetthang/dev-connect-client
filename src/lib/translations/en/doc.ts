@@ -12,7 +12,13 @@ const docTranslate: DocTranslateType = {
   required: 'Requiredc',
   note: 'Note',
   createSuccess: 'Create success!',
-  createFail: 'Create fail!'
+  createFail: 'Create fail!',
+  tasks: 'Tasks',
+  code: 'Code',
+  history: 'History',
+  notification: 'Notifications',
+  document: 'Document',
+  lab: 'Test zone',
 };
 
 export default docTranslate;

@@ -8,19 +8,25 @@ import { DocTranslateKeyType } from 'src/lib/translations/vn/doc';
 import { createAppErr } from 'src/services/app';
 import { getListDocsApi } from 'src/services/doc/api';
 import AddDocApi from './components/AddDocApi';
-import IDoc from '../../services/doc/types'
+import IDoc from '../../services/doc/types';
 import { DocsScreenWrapper } from './style';
+import DetailApiModal from './components/DetailApiModal';
 
 const DocsScreen = () => {
   const projectId = useAppSelector((state) => state.app.projectId);
   const dispatch = useAppDispatch();
+
   const [isShowAdd, setIsShowAdd] = useState<boolean>(false);
   const [listDocs, setListDocs] = useState<IDoc[]>([]);
-  const {t} = useTranslation();
+  const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
+  const [detailDoc, setDetailDoc] = useState<IDoc>();
+
+  const { t } = useTranslation();
   const words = useCallback(
     (title: DocTranslateKeyType) => t(`docTranslate.${title}`),
     [t]
   );
+
   const getListDocs = useCallback(async () => {
     try {
       const data = await getListDocsApi(projectId);
@@ -38,16 +44,38 @@ const DocsScreen = () => {
     getListDocs();
   }, [getListDocs]);
 
+  const onOpenDetail = (id: string) => {
+    if (detailDoc?._id !== id) {
+      setDetailDoc(listDocs.find((item) => item._id === id));
+    }
+    setIsShowDetail(true);
+  };
+
   return (
     <DocsScreenWrapper>
       <HeaderTool handleAddNew={() => setIsShowAdd(true)} />
       <div className="docScreen__list_doc">
-      {listDocs.map((item) => (
-        <APIBox docData={item} key={item._id} />
-      ))}
+        {listDocs.map((item) => (
+          <APIBox
+            docData={item}
+            key={item._id}
+            onClickBox={() => onOpenDetail(item._id)}
+          />
+        ))}
       </div>
-   
-      <AddDocApi isShow={isShowAdd} handleDismiss={() => setIsShowAdd(false)}  words={words} />
+      {detailDoc && (
+        <DetailApiModal
+          isShow={isShowDetail}
+          data={detailDoc}
+          onClose={() => setIsShowDetail(false)}
+          words={words}
+        />
+      )}
+      <AddDocApi
+        isShow={isShowAdd}
+        handleDismiss={() => setIsShowAdd(false)}
+        words={words}
+      />
     </DocsScreenWrapper>
   );
 };

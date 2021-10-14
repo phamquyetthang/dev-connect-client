@@ -6,7 +6,6 @@ export const SidebarWrapper = styled.nav`
   width: 56px;
   background-color: ${color('header')};
   flex-direction: column;
-  padding-top: 2em;
 
   .sidebar-menu {
     color: ${color('textBtn1')};
@@ -21,13 +20,16 @@ export const SidebarWrapper = styled.nav`
       width: 20px;
       height: 20px;
     }
-    span{
+    span {
       font-size: 12px;
       margin-top: 6px;
     }
 
-    &:hover{
+    &:hover {
       background-color: ${color('hoverHeader')};
+    }
+    &.active{
+      background-color: ${color('background2')};
     }
   }
 `;

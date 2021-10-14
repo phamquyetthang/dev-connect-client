@@ -1,20 +1,14 @@
 import { uniqueId } from 'lodash';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 import Box from 'src/components/Base/Box';
 import { ContainerWrapper } from 'src/globalStyle';
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { IProjectsListRes } from 'src/services/project/types';
-import { getUserInfoService } from 'src/services/user';
 import { ProjectListWrapper } from './style';
 interface IProps {
   data: IProjectsListRes[];
   clickProject: (id: string) => void;
 }
 const ProjectList: FunctionComponent<IProps> = ({ data, clickProject }) => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getUserInfoService());
-  }, [dispatch]);
   return (
     <ContainerWrapper className="flex-center">
       <ProjectListWrapper>
