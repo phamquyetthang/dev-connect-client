@@ -19,6 +19,7 @@ export default interface IDoc {
   _id: string;
   title: string;
   method: METHOD_API;
+  host: string;
   endpoint: string;
   requestType: REQUEST_TYPE;
   requestBody: object;
@@ -34,6 +35,6 @@ export default interface IDoc {
 }
 
 export type ICreateDocReq = {
-  formData: IDoc;
+  docData: Omit<IDoc, '_id' | 'status' | 'extension'>;
   projectId: string;
 };

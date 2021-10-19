@@ -5,13 +5,19 @@ import appReducer from './app';
 import authReducer from './auth';
 import projectReducer from './project';
 import persistReducer from 'redux-persist/es/persistReducer';
+const appPersistConfig = {
+  key: 'app',
+  storage,
+  whitelist: ['projectId', 'projectName', 'theme', 'language'],
+};
 const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['token', 'isAuth'],
 };
+
 const rootReducer = combineReducers({
-  app: appReducer,
+  app: persistReducer(appPersistConfig, appReducer),
   auth: persistReducer(authPersistConfig, authReducer),
   user: useReducer,
   project: projectReducer,

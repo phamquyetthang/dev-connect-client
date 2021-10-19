@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
 import ROUTER_NAME from 'src/lib/constants/router';
@@ -21,25 +21,24 @@ const Sidebar = () => {
   );
   return (
     <SidebarWrapper>
-      <Link to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
+      <NavLink to={ROUTER_NAME.dashboard.path} className="sidebar-menu" >
         <HomeIcon />
-        {/* <span>{commonWord('dashboard')}</span> */}
-      </Link>
-      <Link to={ROUTER_NAME.unit.path} className="sidebar-menu">
+      </NavLink>
+      <NavLink to={ROUTER_NAME.unit.path} className="sidebar-menu">
         <ConnectIcon />
-      </Link>
-      <Link to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
+      </NavLink>
+      <NavLink to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
         <ListIcon />
-      </Link>
-      <Link to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
+      </NavLink>
+      <NavLink to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
         <ChatIcon />
-      </Link>
-      <Link to={ROUTER_NAME.todo.path} className="sidebar-menu">
+      </NavLink>
+      <NavLink to={ROUTER_NAME.todo.path} className="sidebar-menu">
         <TodoIcon />
-      </Link>
-      <Link to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
+      </NavLink>
+      <NavLink to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
         <DocIcon />
-      </Link>
+      </NavLink>
     </SidebarWrapper>
   );
 };

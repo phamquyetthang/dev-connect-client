@@ -7,7 +7,7 @@ export const FullPageModalWrapper = styled.div`
   flex: 1;
   width: 100%;
   height: 100%;
-  z-index: 1000;
+  z-index: 20;
   top: 0;
   display: none;
 

@@ -8,15 +8,29 @@ interface IProps {
   children?: ReactNode;
   handleClickSubmit?: () => void;
   handleDismiss?: () => void;
+  disableSubmit?: boolean;
 }
 const HeaderPage: FunctionComponent<IProps> = memo(
-  ({ title, btnTitle, children, handleClickSubmit, handleDismiss }) => {
+  ({
+    title,
+    btnTitle,
+    children,
+    handleClickSubmit,
+    handleDismiss,
+    disableSubmit,
+  }) => {
     const renderRightElement = () => {
       if (children) {
         return children;
       }
       if (!!btnTitle && !!handleClickSubmit) {
-        return <Button title={btnTitle} onClick={handleClickSubmit} />;
+        return (
+          <Button
+            title={btnTitle}
+            onClick={handleClickSubmit}
+            disable={disableSubmit}
+          />
+        );
       }
     };
 

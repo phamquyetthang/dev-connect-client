@@ -18,5 +18,5 @@ export type IFromProps<
   >;
   shouldUnregister?: boolean;
   defaultValue?: UnpackNestedValue<FieldPathValue<TFieldValues, TName>>;
-  control?: Control<TFieldValues>;
+  control?: Control<TFieldValues | any>;
 };

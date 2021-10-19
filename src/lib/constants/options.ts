@@ -1,4 +1,4 @@
-import { METHOD_API } from '.';
+import { DATA_TYPES, METHOD_API } from '.';
 
 export type SELECT_OPTION = {
   value: string;
@@ -52,28 +52,8 @@ export const RESPONSE_TYPE_OPTIONS: IResponseTypeOption[] = [
 
 export const METHOD_OPTIONS: SELECT_OPTION[] = [
   {
-    value: METHOD_API.CONNECT,
-    label: METHOD_API.CONNECT,
-  },
-  {
-    value: METHOD_API.DELETE,
-    label: METHOD_API.DELETE,
-  },
-  {
     value: METHOD_API.GET,
     label: METHOD_API.GET,
-  },
-  {
-    value: METHOD_API.HEAD,
-    label: METHOD_API.HEAD,
-  },
-  {
-    value: METHOD_API.OPTIONS,
-    label: METHOD_API.OPTIONS,
-  },
-  {
-    value: METHOD_API.PATCH,
-    label: METHOD_API.PATCH,
   },
   {
     value: METHOD_API.POST,
@@ -84,7 +64,36 @@ export const METHOD_OPTIONS: SELECT_OPTION[] = [
     label: METHOD_API.PUT,
   },
   {
+    value: METHOD_API.DELETE,
+    label: METHOD_API.DELETE,
+  },
+  {
+    value: METHOD_API.PATCH,
+    label: METHOD_API.PATCH,
+  },
+  {
+    value: METHOD_API.CONNECT,
+    label: METHOD_API.CONNECT,
+  },
+
+  {
+    value: METHOD_API.HEAD,
+    label: METHOD_API.HEAD,
+  },
+  {
+    value: METHOD_API.OPTIONS,
+    label: METHOD_API.OPTIONS,
+  },
+
+  {
     value: METHOD_API.TRACE,
     label: METHOD_API.TRACE,
   },
 ];
+
+export const DATA_TYPES_OPTION: SELECT_OPTION[] = Object.values(DATA_TYPES).map(
+  (item) => ({
+    label: item,
+    value: item,
+  })
+);

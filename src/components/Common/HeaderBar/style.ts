@@ -17,16 +17,17 @@ export const HeaderBarWrapper = styled.header`
       padding: 8px;
       border-radius: 4px;
     }
-    .header__projects{
+    .header__projects {
       display: grid;
       row-gap: 8px;
-      button{
+      button {
         background-color: inherit;
         border: hidden;
         text-align: start;
         margin-left: 2px;
+        color: ${color('text1')};
       }
-      button:hover{
+      button:hover {
         margin-left: 0px;
         border-left: 2px solid pink;
       }

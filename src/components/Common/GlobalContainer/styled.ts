@@ -1,3 +1,4 @@
+import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 export const GlobalContainerWrapper = styled.div`
   display: grid;
@@ -36,11 +37,11 @@ export const MainLoading = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 
   .loader {
-    border: 12px solid #f3f3f3;
-    border-top: 12px solid #7269ef;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #7269ef;
     border-radius: 50%;
-    width: 72px;
-    height: 72px;
+    width: 36px;
+    height: 35px;
     animation: spin 2s linear infinite;
   }
 
@@ -97,10 +98,23 @@ export const SnackBar = styled.div`
 
     &.info {
       background-color: #b5ffd9;
+      color: #000;
+      svg {
+        fill: #000;
+        border-color: #000;
+      }
     }
 
     &.success {
       background-color: #3db2ff;
+    }
+  }
+`;
+
+export const ErrorModalWrapper = styled.div`
+  .modal {
+    .modal__header {
+      background-color: ${color('error')};
     }
   }
 `;

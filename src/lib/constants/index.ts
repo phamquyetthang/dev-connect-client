@@ -9,7 +9,13 @@ export type ISnack = keyof typeof SNACK_TYPE;
 
 
 export const DATA_TYPES = {
-  
+  int: 'int',
+  string: 'string',
+  boolean: 'boolean',
+  file: 'file',
+  date: 'date',
+  millisecond: 'millisecond',
+  base64: 'base64'
 }
 
 export enum METHOD_API {

@@ -2,6 +2,9 @@ const commonColor = {
   error: '#bf1650',
   shadow: 'rgba(0, 0, 0, 0.06)',
   hoverShadow: 'rgba(0, 0, 0, 0.12)',
+  warning: '#ffb830',
+  info: '#b5ffd9',
+  success: '#3db2ff',
 };
 export const lightTheme = {
   ...commonColor,
@@ -15,7 +18,7 @@ export const lightTheme = {
   textBtn2: '#24292f',
   borderInput: '#d0d7de',
   border: '#d0d7de',
-  hoverHeader: '#13161A'
+  hoverHeader: '#13161A',
 };
 export type ThemeType = typeof lightTheme;
 export type ColorType = keyof typeof lightTheme;
@@ -31,8 +34,8 @@ export const darkTheme: ThemeType = {
   textBtn1: '#fff',
   textBtn2: '#fff',
   borderInput: 'inherit',
-  border: 'inherit',
-  hoverHeader: '#13161A'
+  border: '#516391',
+  hoverHeader: '#13161A',
 };
 
 export const draculaTheme: ThemeType = {
@@ -47,7 +50,7 @@ export const draculaTheme: ThemeType = {
   textBtn2: '#fff',
   borderInput: 'inherit',
   border: '#ec5990',
-  hoverHeader: '#13161A'
+  hoverHeader: '#13161A',
 };
 
 export const capuchinoTheme: ThemeType = {
@@ -62,7 +65,7 @@ export const capuchinoTheme: ThemeType = {
   textBtn2: '#fff',
   borderInput: 'inherit',
   border: '#39B6FF',
-  hoverHeader: '#13161A'
+  hoverHeader: '#13161A',
 };
 
 export const matchaTheme: ThemeType = {
@@ -77,7 +80,7 @@ export const matchaTheme: ThemeType = {
   textBtn2: '#fff',
   borderInput: 'inherit',
   border: '#39B6FF',
-  hoverHeader: '#13161A'
+  hoverHeader: '#13161A',
 };
 
 export const grayTheme: ThemeType = {
@@ -92,9 +95,8 @@ export const grayTheme: ThemeType = {
   textBtn2: '#fff',
   borderInput: 'inherit',
   border: '#39B6FF',
-  hoverHeader: '#13161A'
+  hoverHeader: '#13161A',
 };
-
 
 export const blueBeeTheme: ThemeType = {
   ...commonColor,
@@ -108,5 +110,5 @@ export const blueBeeTheme: ThemeType = {
   textBtn2: '#fff',
   borderInput: 'inherit',
   border: '#39B6FF',
-  hoverHeader: '#13161A'
+  hoverHeader: '#13161A',
 };

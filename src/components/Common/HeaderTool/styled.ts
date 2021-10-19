@@ -39,7 +39,7 @@ export const HeaderToolWrapper = styled.div`
       align-items: center;
       padding: 8px 12px;
       height: 35px;
-      margin-left: -80px;
+      margin-left: -90px;
       border: hidden;
       border-radius: 4px;
       background-color: ${color('button2')};
