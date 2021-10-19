@@ -40,7 +40,8 @@ const DetailApiModal: FunctionComponent<IProps> = ({
           <CopyField value={data.endpoint} />
         </div>
         <VerticalTab
-          tabs={[
+          tabs={[{ key: 1, tab: <h1>hello</h1> }]}
+          menu={[
             { key: 1, label: words('description'), icon: <VectorIcon /> },
             { key: 2, label: words('code'), icon: <CodeIcon /> },
             { key: 3, label: words('lab'), icon: <LabIcon /> },

@@ -23,6 +23,11 @@ export const VerticalTabWrapper = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+
+      &.active {
+        background-color: ${color('header')};
+      }
 
       &__label {
         display: none;
