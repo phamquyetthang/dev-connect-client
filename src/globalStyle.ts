@@ -57,6 +57,43 @@ const GlobalStyle = createGlobalStyle`
             opacity: 0.8;
         }
     }
+      /* width */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: grey;
+    }
+    .cs-avt {
+  width: 50px;
+  height: 50px;
+  background-color: #454a74;
+  color: #6f65c1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;
+  line-height: 1;
+}
+.cs-avt-status {
+  position: absolute;
+  background-color: #06d6a0;
+  right: 2px;
+  bottom: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
 `;
 
 export const ContainerWrapper = styled.article`

@@ -3,6 +3,7 @@ import GlobalContainer from 'src/components/Common/GlobalContainer';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import ROUTER_NAME from 'src/lib/constants/router';
 import AuthScreen from './Auth';
+import Conversation from './Conversation';
 import Dashboard from './Dashboard';
 import DocsScreen from './Docs';
 import TodoScreen from './Todo';
@@ -21,6 +22,7 @@ const RootRouter = () => {
             component={Dashboard}
           />
           <Route exact path={ROUTER_NAME.unit.path} component={DocsScreen} />
+          <Route exact path={ROUTER_NAME.chat.path} component={Conversation} />
           <Route exact path={ROUTER_NAME.todo.path} component={TodoScreen} />
         </GlobalContainer>
       ) : (
