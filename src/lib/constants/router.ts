@@ -15,6 +15,9 @@ const ROUTER_NAME = {
   unit: {
     path: '/units'
   },
+  chat: {
+    path: '/chatroom'
+  },
   wiki: {
     create: 'wiki/create'
   },

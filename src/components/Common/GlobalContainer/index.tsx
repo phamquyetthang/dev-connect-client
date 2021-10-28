@@ -90,7 +90,6 @@ const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
             onSubmit: () => closeErrorModal(true),
           })}
         >
-          asd
           {error.content}
         </Modal>
       </ErrorModalWrapper>
