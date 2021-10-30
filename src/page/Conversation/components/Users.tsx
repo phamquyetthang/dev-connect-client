@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
-// import { ReactComponent as SearchIcon } from 'src/assets/icons/search.svg';
+import { uniqueId } from 'lodash';
+import { FunctionComponent } from 'react';
+import { ReactComponent as SearchIcon } from 'src/assets/icons/search.svg';
 import Skeleton from 'react-loading-skeleton';
 import { IConversationInfo } from 'src/services/chat/types';
 import { UserChatListWrapper } from '../style';
@@ -8,18 +9,28 @@ interface IProps {
   conversationId: string;
   handleUser: (i: any) => void;
 }
-const UsersList: FunctionComponent<IProps> = ({ users, conversationId, handleUser }) => {
+const UsersList: FunctionComponent<IProps> = ({
+  users,
+  conversationId,
+  handleUser,
+}) => {
   return (
     <UserChatListWrapper>
       <h3>CS Chat</h3>
       <div className="cs-search-bar">
-        <i className="fi-rr-search"></i>
+        <SearchIcon />
         <input type="text" placeholder="Type to search" />
       </div>
       <div className="cs-list-user">
         {users ? (
           users?.map((i) => (
-            <div className={`cs-one-user${i.id === conversationId ? ' selected' : ''}`} onClick={() => handleUser(i)}>
+            <div
+              className={`cs-one-user${
+                i.id === conversationId ? ' selected' : ''
+              }`}
+              onClick={() => handleUser(i)}
+              key={uniqueId('contact_')}
+            >
               <div className="cs-avt">
                 <span>{i.name?.slice(0, 1)}</span>
                 <span className="cs-avt-status"></span>
