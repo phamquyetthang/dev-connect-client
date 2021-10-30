@@ -11,6 +11,11 @@ export const ConversationsWrapper = styled.div`
     right: 8px;
     bottom: 5.2em;
   }
+  svg{
+    fill: #a6b0cf;
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 export const UserChatListWrapper = styled.div`
@@ -104,12 +109,12 @@ export const ChatContainerWrapper = styled.div`
     .cs-chat-icons-tool {
       display: flex;
       align-items: center;
-      i {
+      svg, i {
         margin: 0 1em;
         cursor: pointer;
       }
-      i:hover {
-        color: white;
+      svg:hover {
+        fill: white;
       }
     }
   }
@@ -156,6 +161,7 @@ export const ChatContainerWrapper = styled.div`
     .cs-hidden-avt {
       // display: none;
       background-color: initial;
+      height: auto;
       span {
         display: none;
       }
@@ -200,6 +206,9 @@ export const ChatContainerWrapper = styled.div`
         border: hidden;
 
         i {
+          margin: 0;
+        }
+        svg{
           margin: 0;
         }
       }
