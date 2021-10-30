@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 import { getMyChatsApi } from 'src/services/chat/api';
 import { IConversationInfo } from 'src/services/chat/types';
 import Conversations from './components/Conversations';
@@ -12,33 +13,34 @@ const Conversation = () => {
     name: '',
     lastMess: '',
   });
-
-  //   useEffect(() => {
-  //     const objDiv = document.getElementById(
-  //       'chat-box-contain'
-  //     ) as HTMLDivElement;
-  //     objDiv.scrollTop = objDiv.scrollHeight;
-  //   }, []);
+  const projectId = useAppSelector((state) => state.project.info?._id) || '';
 
   const handleUser = (conversation: IConversationInfo) => {
     setConversation(conversation);
   };
 
-  const getMyListChat = () => {
-    getMyChatsApi().then((res) => {
+  const getMyListChat = useCallback(() => {
+    getMyChatsApi(projectId).then((res) => {
       setListChat(res);
       if (!conversation.id) {
         setConversation(res[0]);
       }
     });
-  };
+  }, [conversation.id, projectId]);
+
   useEffect(() => {
-    getMyListChat();
-  }, []);
+    if (projectId) {
+      getMyListChat();
+    }
+  }, [getMyListChat, projectId]);
 
   return (
     <ConversationsWrapper id="cs-chatroom">
-      <UsersList users={listChat || []} handleUser={handleUser} conversationId={conversation.id} />
+      <UsersList
+        users={listChat || []}
+        handleUser={handleUser}
+        conversationId={conversation.id}
+      />
       <Conversations conversation={conversation} />
     </ConversationsWrapper>
   );

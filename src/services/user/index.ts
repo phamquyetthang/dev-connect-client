@@ -42,6 +42,8 @@ const userSlice = createSlice({
           state.first_name = payload.first_name;
           state.last_name = payload.last_name;
           state.email = payload.email;
+          state._id = payload._id;
+          
         }
       )
       .addCase(getUserInfoService.rejected, (state: IUserState) => {

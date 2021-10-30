@@ -1,30 +1,38 @@
+import { uniqueId } from 'lodash';
 import {
   ChangeEvent,
   FunctionComponent,
   KeyboardEvent,
+  useCallback,
   useEffect,
   useState,
 } from 'react';
 import { useDispatch } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
 import EmojiPicker from 'src/components/Base/EmojiPicker';
+import { useAppSelector } from 'src/hooks/useAppSelector';
+import { formatTimeMess } from 'src/lib/helpers';
 import { createAppErr } from 'src/services/app';
 import { getChatContentApi, sendMessApi } from 'src/services/chat/api';
-import { IConversationInfo } from 'src/services/chat/types';
+import { IConversationInfo, IMessage } from 'src/services/chat/types';
+import { ReactComponent as SearchIcon } from 'src/assets/icons/search.svg';
+import { ReactComponent as DotsIcon } from 'src/assets/icons/dots.svg';
+import { ReactComponent as UserIcon } from 'src/assets/icons/user.svg';
+import { ReactComponent as PictureIcon } from 'src/assets/icons/picture.svg';
+import { ReactComponent as ClipIcon } from 'src/assets/icons/clip.svg';
+import { ReactComponent as SendIcon } from 'src/assets/icons/paper-plane.svg';
+
 import { ChatContainerWrapper } from '../style';
 interface IProps {
   conversation: IConversationInfo;
 }
+type IMess = IMessage & { isShowAvt: boolean };
+
 const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
-  const [listMess, setListMess] = useState([]);
+  const [listMess, setListMess] = useState<IMess[]>([]);
   const [showEmoji, setShowEmoji] = useState(false);
   const [message, setMessage] = useState('');
-
-  //   useEffect(() => {
-  //     const socket = socketIOClient(ENDPOINT);
-  //     socket.on('connect', (res) => console.log('hello server', res));
-  //     socket.emit('message', 'message');
-  //   }, []);
+  const useId = useAppSelector((state) => state.user._id);
 
   const handleEmoji = () => {
     setShowEmoji(() => !showEmoji);
@@ -38,18 +46,47 @@ const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
   };
 
   const dispatch = useDispatch();
+  const checkShowAvtMessage = (messages: IMessage[]) => {
+    const listChats = messages.reduce<IMess[]>(
+      (previousValue, currentValue, currentIndex, array) => {
+        if (currentIndex) {
+          if (
+            currentValue?.from._id === array[currentIndex - 1]?.from._id &&
+            formatTimeMess(currentValue.date) ===
+              formatTimeMess(array[currentIndex - 1].date)
+          ) {
+            previousValue.push({ ...currentValue, isShowAvt: false });
+          } else {
+            previousValue.push({ ...currentValue, isShowAvt: true });
+          }
+        } else {
+          previousValue.push({ ...currentValue, isShowAvt: true });
+        }
+
+        return previousValue;
+      },
+      []
+    );
+    return listChats;
+  };
+
+  const getListChat = useCallback(() => {
+    getChatContentApi(conversation.id)
+      .then((res) => {
+        setListMess(checkShowAvtMessage(res.messages));
+      })
+      .catch((err) => dispatch(createAppErr({ title: err })));
+  }, [conversation.id, dispatch]);
 
   useEffect(() => {
     if (conversation.id) {
-      getChatContentApi(conversation.id)
-        .then((res) => setListMess(res.messages))
-        .catch((err) => dispatch(createAppErr({ title: err })));
+      getListChat();
     }
-  }, [conversation.id, dispatch]);
+  }, [conversation.id, getListChat]);
 
   const sendMess = () => {
     sendMessApi(conversation.id, message).then((res) => {
-      setListMess(res.messages);
+      setListMess(checkShowAvtMessage(res.messages));
       setMessage('');
     });
   };
@@ -78,29 +115,30 @@ const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
           <span className="cs-avt-status"></span>
         </div>
         <div className="cs-chat-icons-tool">
-          <i className="fi-rr-search"></i>
-          <i className="fi-rr-video-camera"></i>
-          <i className="fi-rr-user"></i>
-          <i className="fi-rr-menu-dots"></i>
+          <SearchIcon />
+          <UserIcon />
+          <DotsIcon />
         </div>
       </div>
-      {JSON.stringify(conversation)}
       <div className="cs-chat-box-contain " id="chat-box-contain">
         {!!listMess.length &&
-          listMess.map((i: any) => (
+          listMess.map((i: IMess) => (
             <div
-              // className={`cs-message
-              //  ${
-              //   i.from === conversation.id ? ' cs-m-end' : ''
-              // }`}
-              className="cs-message"
+              className={`cs-message
+               ${i.from._id === useId ? ' cs-m-end' : ''}`}
+              key={uniqueId('message_')}
             >
-              <div className={`cs-avt`}>
-                <span>CS</span>
+              <div className={`cs-avt ${i.isShowAvt ? '' : ' cs-hidden-avt'}`}>
+                <span>\ww</span>
               </div>
               <div>
                 <p style={{ whiteSpace: 'pre-line' }}>{i.text}</p>
-                <i>{i?.date}</i>
+                {!!i.isShowAvt && (
+                  <i>
+                    {i.from.first_name} {i.from.last_name}{' '}
+                    {formatTimeMess(i?.date)}
+                  </i>
+                )}
               </div>
             </div>
           ))}
@@ -113,17 +151,16 @@ const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
             value={message}
             onChange={handleType}
             onKeyPress={handleKeyEvent}
-            // onKeyDown={sendMess}
           />
         </div>
         <div className="cs-chat-icons-tool">
           <i style={{ fontStyle: 'normal' }} onClick={handleEmoji}>
             🙂
           </i>
-          <i className="fi-rr-picture"></i>
-          <i className="fi-rr-clip"></i>
+          <PictureIcon />
+          <ClipIcon />
           <button onClick={sendMess}>
-            <i className="fi-rr-paper-plane"></i>
+            <SendIcon />
           </button>
         </div>
       </div>
