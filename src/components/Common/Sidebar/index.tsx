@@ -30,7 +30,7 @@ const Sidebar = () => {
       <NavLink to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
         <ListIcon />
       </NavLink>
-      <NavLink to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
+      <NavLink to={ROUTER_NAME.chat.path} className="sidebar-menu">
         <ChatIcon />
       </NavLink>
       <NavLink to={ROUTER_NAME.todo.path} className="sidebar-menu">
