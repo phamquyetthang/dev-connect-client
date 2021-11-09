@@ -13,5 +13,17 @@ export const TodoItemWrapper = styled.div`
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+    border-left: 6px solid yellow;
+    &.success{
+      border-left-color: green;
+    }
+  }
+  .editView{
+    svg{
+      fill: gray;
+    }
+    .editStyle{
+      margin-right: 10px;
+    }
   }
 `;

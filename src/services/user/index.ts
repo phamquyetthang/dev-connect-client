@@ -33,11 +33,11 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getUserInfoService.pending, (state: IUserState) => {
+      .addCase(String(getUserInfoService.pending), (state: IUserState) => {
         state = initialState;
       })
       .addCase(
-        getUserInfoService.fulfilled,
+        String(getUserInfoService.fulfilled),
         (state: IUserState, { payload }: PayloadAction<IUserState>) => {
           state.first_name = payload.first_name;
           state.last_name = payload.last_name;
