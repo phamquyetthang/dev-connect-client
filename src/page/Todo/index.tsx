@@ -4,6 +4,8 @@ import { addSnackBar, createAppErr, spinLoading } from "src/services/app";
 import { getListTodoApi, switchTodoItem } from "src/services/todo/api";
 import { TodoItem } from "./components/TodoItem/TodoItem";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import HeaderTool from 'src/components/Common/HeaderTool';
+
 
 const TodoScreen = () => {
   const dispatch = useAppDispatch();
@@ -63,6 +65,7 @@ const TodoScreen = () => {
   }, []);
   return loading ? (
     <div>
+
       {listData.map((item: any, index) => (
         <TodoItem item={item} />
       ))}
@@ -82,6 +85,7 @@ const TodoScreen = () => {
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
+              <HeaderTool handleAddNew={() => null}  />
               {listData.map((item: any, index) => (
                 <Draggable
                   key={index}

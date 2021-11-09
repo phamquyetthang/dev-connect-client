@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const ButtonWrapper = styled.button`
   padding: 14px;
-  border-radius: 8px;
+  border-radius: 4px;
   outline: none;
   border: hidden;
   background-color: ${color('button1')};
