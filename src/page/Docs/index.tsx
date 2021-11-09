@@ -76,6 +76,7 @@ const DocsScreen = () => {
         handleDismiss={() => setIsShowAdd(false)}
         words={words}
       />
+      {/* phân trang */}
     </DocsScreenWrapper>
   );
 };
