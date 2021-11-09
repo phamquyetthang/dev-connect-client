@@ -30,6 +30,6 @@ export const InputWrapper = styled.input`
   font-size: 14px;
   outline: none;
   border: ${color('borderInput')} 1px solid;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 14px;
 `;
