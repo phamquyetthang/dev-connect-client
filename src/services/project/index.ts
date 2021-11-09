@@ -35,11 +35,11 @@ const projectSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getInfoService.pending, (state: IProjectState) => {
+      .addCase(String(getInfoService.pending), (state: IProjectState) => {
         state.loading = true;
       })
       .addCase(
-        getInfoService.fulfilled,
+       String(getInfoService.fulfilled),
         (state: IProjectState, { payload }: PayloadAction<IProjectInfoRes>) => {
           state.loading = false;
           state.error = '';
