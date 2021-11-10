@@ -1,6 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 import { ReactNode, useEffect, useMemo } from 'react';
 import { FunctionComponent } from 'react';
+import { io } from 'socket.io-client';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import {
   ErrorModalWrapper,
@@ -98,3 +99,4 @@ const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
 };
 
 export default GlobalContainer;
+export const socket = io(process.env.REACT_APP_API_HOST || '');

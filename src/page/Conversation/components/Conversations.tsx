@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { useDispatch } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
+import { socket } from 'src/components/Common/GlobalContainer';
 import EmojiPicker from 'src/components/Base/EmojiPicker';
 import { useAppSelector } from 'src/hooks/useAppSelector';
 import { formatTimeMess } from 'src/lib/helpers';
@@ -103,6 +104,12 @@ const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
       }
     }
   };
+  useEffect(() => {
+    socket.emit('connect_room', conversation.id);
+    socket.on('new_message', (res) => {
+      setListMess(checkShowAvtMessage(res.messages));
+    });
+  }, [conversation.id]);
 
   return (
     <ChatContainerWrapper>
