@@ -1,4 +1,9 @@
-import { getService, putService } from "src/lib/helpers/connectApi";
+import {
+  getService,
+  postService,
+  putService,
+} from "src/lib/helpers/connectApi";
+import { ITodoItem } from "./types";
 const endpoint = "/todo";
 
 export const getListTodoApi = () => {
@@ -16,5 +21,21 @@ export const updateStatusItem = (id: string, status: boolean) => {
   return putService(endpoint, {
     id,
     status,
+  });
+};
+
+export const updateTodoItem = (item: ITodoItem) => {
+  return putService(endpoint, {
+    id: item?._id,
+    status: item?.status,
+    title: item?.title,
+    description: item?.description,
+  });
+};
+
+export const createTodoItem = (item: ITodoItem) => {
+  return postService(`${endpoint}`, {
+    title: item?.title,
+    description: item?.description,
   });
 };

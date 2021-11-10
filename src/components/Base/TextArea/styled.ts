@@ -32,4 +32,6 @@ export const TextAreaWrapper = styled.textarea`
   border: ${color('borderInput')} 1px solid;
   border-radius: 8px;
   padding: 14px;
+  background-color: ${color('background2')};
+  color: ${color('text1')};
 `;

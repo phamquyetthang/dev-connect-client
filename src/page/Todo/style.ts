@@ -1,9 +1,10 @@
 import styled from "styled-components";
-
-export const EditModalWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    .input{
-        /* background-color: ; */
-    }
+export const TodoListWrapper = styled.div`
+  .todoList {
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+  }
+  .modal {
+    border-radius: 4px;
+  }
 `;

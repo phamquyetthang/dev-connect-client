@@ -1,7 +1,7 @@
-import { FunctionComponent, memo } from 'react';
-import { Controller } from 'react-hook-form';
-import { IFromProps } from '../@types/formTypes';
-import { TextAreaContain, TextAreaWrapper } from './styled';
+import { ChangeEvent, FunctionComponent, memo } from "react";
+import { Controller } from "react-hook-form";
+import { IFromProps } from "../@types/formTypes";
+import { TextAreaContain, TextAreaWrapper } from "./styled";
 
 interface IComponentProps {
   error?: string;
@@ -17,7 +17,7 @@ const TextArea: FunctionComponent<IProps> = memo(
     name,
     control,
     rules,
-    defaultValue = '',
+    defaultValue = "",
     error,
     placeholder,
     className,
@@ -47,3 +47,24 @@ const TextArea: FunctionComponent<IProps> = memo(
 );
 
 export default TextArea;
+
+type INomalProps = {
+  name?: string;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  value: string;
+};
+export const TextAreaNomal: FunctionComponent<IComponentProps & INomalProps> =
+  ({ className, title, placeholder, error, onChange, name, value }) => {
+    return (
+      <TextAreaContain className={className}>
+        {!!title && <label>{title}</label>}
+        <TextAreaWrapper
+          value={value}
+          name={name}
+          placeholder={placeholder}
+          onChange={onChange}
+        />
+        {error && <i>{error}</i>}
+      </TextAreaContain>
+    );
+  };

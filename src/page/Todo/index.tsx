@@ -8,8 +8,10 @@ import HeaderTool from "src/components/Common/HeaderTool";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useAppTheme from "src/hooks/useAppTheme";
-import { AddItemModal } from "./AddItemModal";
 import { ITodoItem } from "src/services/todo/types";
+import { TodoListWrapper } from "./style";
+import { EditItemModal } from "./components/Modal/EditItemModal";
+import { CreateItemModal } from "./components/Modal/CreateItemModal";
 
 const TodoScreen = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +19,7 @@ const TodoScreen = () => {
   const [listData, setListData] = useState<Array<ITodoItem>>([]);
   const theme = useAppTheme();
   const [editModalData, setEditModalData] = useState<false | ITodoItem>(false);
+  const [createModalData, setCreateModalData] = useState<boolean>(false);
 
   const getData = async () => {
     try {
@@ -64,14 +67,9 @@ const TodoScreen = () => {
     getData();
   }, []);
   return (
-    <div>
-      <HeaderTool handleAddNew={() => null} />
+    <TodoListWrapper>
+      <HeaderTool handleAddNew={() => setCreateModalData(true)} />
       {loading ? (
-        // <div>
-        //   {
-        //     listData.map()
-        //   }
-        // <div>
         <SkeletonTheme
           baseColor={theme["background2"]}
           highlightColor={theme["background1"]}
@@ -91,7 +89,11 @@ const TodoScreen = () => {
         >
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className="todoList"
+              >
                 {listData.map((item: ITodoItem, index) => (
                   <Draggable
                     key={index}
@@ -116,13 +118,17 @@ const TodoScreen = () => {
         </DragDropContext>
       )}
       {editModalData && (
-        <AddItemModal
+        <EditItemModal
           isShow={!!editModalData}
           onClose={() => setEditModalData(false)}
           data={editModalData}
         />
       )}
-    </div>
+      <CreateItemModal
+        isShow={createModalData}
+        onClose={() => setCreateModalData(false)}
+      />
+    </TodoListWrapper>
   );
 };
 
