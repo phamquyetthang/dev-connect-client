@@ -1,5 +1,5 @@
-import { color } from 'src/lib/theme/mixin';
-import styled from 'styled-components';
+import { color } from "src/lib/theme/mixin";
+import styled from "styled-components";
 
 export const ModalWrapper = styled.div`
   display: none;
@@ -17,7 +17,7 @@ export const ModalWrapper = styled.div`
   }
 
   .modal {
-    background-color: ${color('background2')};
+    background-color: ${color("background1")};
     border-radius: 8px;
     min-width: 300px;
     text-align: start;
@@ -26,9 +26,9 @@ export const ModalWrapper = styled.div`
       padding: 16px;
       margin: 0;
       text-transform: uppercase;
-      color: ${color('text1')};
+      color: ${color("text1")};
       font-size: 16px;
-      background-color: ${color('header')};
+      background-color: ${color("header")};
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
     }
@@ -36,14 +36,14 @@ export const ModalWrapper = styled.div`
     &__body {
       margin-bottom: 1em;
       padding: 12px;
-      color: ${color('text1')};
+      color: ${color("text1")};
     }
 
     &__footer {
       display: flex;
       justify-content: flex-end;
-      border-top: 1px solid ${color('borderInput')};
-      padding-top: 1em;
+      padding: 1em;
+      border-top: 1px solid ${color("borderInput")};
       button {
         margin-left: 1em;
       }

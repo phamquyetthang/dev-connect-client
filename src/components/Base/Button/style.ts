@@ -2,12 +2,12 @@ import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 
 export const ButtonWrapper = styled.button`
-  padding: 14px;
+  padding: 8px 12px;
   border-radius: 4px;
   outline: none;
   border: hidden;
   background-color: ${color('button1')};
-  font-size: 14px;
+  font-size: 12px;
   color: ${color('textBtn1')};
   cursor: pointer;
 
