@@ -25,13 +25,12 @@ export const InputWrapper = styled.input`
   width: 100%;
   border-radius: 4px;
   border: 1px solid white;
-  padding: 10px 14px;
   margin-bottom: 4px;
   font-size: 14px;
   outline: none;
   border: ${color('borderInput')} 1px solid;
   border-radius: 4px;
-  padding: 14px;
+  padding: 12px;
   background-color: ${color('background2')};
   color: ${color('text1')};
 `;

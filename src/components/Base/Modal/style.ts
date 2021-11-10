@@ -31,6 +31,7 @@ export const ModalWrapper = styled.div`
       background-color: ${color("header")};
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
+      border-bottom: 1px solid ${color("borderInput")};
     }
 
     &__body {

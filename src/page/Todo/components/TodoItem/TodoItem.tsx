@@ -42,7 +42,7 @@ export const TodoItem: FunctionComponent<IProps> = ({ item, onEdit }) => {
         <span>{formatTimeMess(todoItem.createdAt)}</span>
         <span>{formatTimeMess(todoItem.updatedAt)}</span>
         <div className="editView">
-          <EditIcon className="editStyle" onClick={()=>onEdit(item)} />
+          <EditIcon className="editStyle" onClick={() => onEdit(item)} />
           <TrashIcon />
         </div>
       </Box>

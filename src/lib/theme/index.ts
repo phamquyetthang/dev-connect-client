@@ -8,7 +8,7 @@ const commonColor = {
 };
 export const lightTheme = {
   ...commonColor,
-  header: '#24292f',
+  header: '#fff',
   background1: '#FFFFFF',
   background2: '#f6f8fa',
   button1: '#2da44e',
