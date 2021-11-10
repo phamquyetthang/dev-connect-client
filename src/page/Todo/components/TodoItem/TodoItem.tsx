@@ -8,12 +8,14 @@ import { ReactComponent as TrashIcon } from "src/assets/icons/trash.svg";
 
 import { formatTimeMess } from "./../../../../lib/helpers/index";
 import { updateStatusItem } from "./../../../../services/todo/api";
+import { ITodoItem } from "src/services/todo/types";
 
 interface IProps {
-  item: any;
+  item: ITodoItem;
+  onEdit: (item: ITodoItem) => void;
 }
 
-export const TodoItem: FunctionComponent<IProps> = ({ item }) => {
+export const TodoItem: FunctionComponent<IProps> = ({ item, onEdit }) => {
   const [todoItem, setTodoItem] = useState(item);
   const changeStatus = (status: boolean) => {
     setTodoItem({
@@ -40,7 +42,7 @@ export const TodoItem: FunctionComponent<IProps> = ({ item }) => {
         <span>{formatTimeMess(todoItem.createdAt)}</span>
         <span>{formatTimeMess(todoItem.updatedAt)}</span>
         <div className="editView">
-          <EditIcon className="editStyle" />
+          <EditIcon className="editStyle" onClick={()=>onEdit(item)} />
           <TrashIcon />
         </div>
       </Box>

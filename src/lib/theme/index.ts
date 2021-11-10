@@ -28,7 +28,7 @@ export const darkTheme: ThemeType = {
   header: '#191D3A',
   background1: '#262E35',
   background2: '#303841',
-  button1: '#3db2ff',
+  button1: '#b2bec3',
   button2: '#36414A',
   text1: '#e1e9f1',
   textBtn1: '#fff',

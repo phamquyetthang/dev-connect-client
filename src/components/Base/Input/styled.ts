@@ -32,4 +32,6 @@ export const InputWrapper = styled.input`
   border: ${color('borderInput')} 1px solid;
   border-radius: 4px;
   padding: 14px;
+  background-color: ${color('background2')};
+  color: ${color('text1')};
 `;
