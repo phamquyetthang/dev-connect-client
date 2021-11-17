@@ -86,7 +86,7 @@ const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
   }, [conversation.id, getListChat]);
 
   const sendMess = () => {
-    sendMessApi(conversation.id, message).then((res) => {
+    sendMessApi(conversation.id, message.trim()).then((res) => {
       setListMess(checkShowAvtMessage(res.messages));
       setMessage('');
     });

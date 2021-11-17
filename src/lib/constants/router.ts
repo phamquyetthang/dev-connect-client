@@ -7,22 +7,25 @@ const ROUTER_NAME = {
     forgot: '/auth/forgot',
   },
   welcome: {
-    path: '/welcome'
+    path: '/welcome',
   },
   dashboard: {
     path: '/dashboard',
   },
   unit: {
-    path: '/units'
+    path: '/units',
+  },
+  task: {
+    path: '/tasks',
   },
   chat: {
-    path: '/chatroom'
+    path: '/chatroom',
   },
   wiki: {
-    create: 'wiki/create'
+    create: 'wiki/create',
   },
   todo: {
-    path: '/todo'
-  }
+    path: '/todo',
+  },
 };
 export default ROUTER_NAME;

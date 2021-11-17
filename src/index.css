@@ -1,0 +1,7 @@
+.home{
+    background-color: red;
+}
+
+.home.content{
+    background-color: blue;
+}

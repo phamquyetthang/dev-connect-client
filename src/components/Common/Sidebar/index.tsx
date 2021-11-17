@@ -27,7 +27,7 @@ const Sidebar = () => {
       <NavLink to={ROUTER_NAME.unit.path} className="sidebar-menu">
         <ConnectIcon />
       </NavLink>
-      <NavLink to={ROUTER_NAME.dashboard.path} className="sidebar-menu">
+      <NavLink to={ROUTER_NAME.task.path} className="sidebar-menu">
         <ListIcon />
       </NavLink>
       <NavLink to={ROUTER_NAME.chat.path} className="sidebar-menu">

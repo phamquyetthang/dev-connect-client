@@ -2,6 +2,8 @@ import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 
 export const SidebarWrapper = styled.nav`
+  grid-area: sidebar;
+  height: calc(100vh - 58px);
   display: flex;
   width: 56px;
   background-color: ${color('header')};
@@ -28,7 +30,7 @@ export const SidebarWrapper = styled.nav`
     &:hover {
       background-color: ${color('hoverHeader')};
     }
-    &.active{
+    &.active {
       background-color: ${color('background2')};
     }
   }

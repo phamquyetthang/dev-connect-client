@@ -11,13 +11,14 @@ export const ModalWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: center;
+  z-index: 200;
 
   &.show {
     display: flex;
   }
 
   .modal {
-    background-color: ${color("background1")};
+    background-color: ${color("background2")};
     border-radius: 8px;
     min-width: 300px;
     text-align: start;

@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch } from "src/hooks/useAppDispatch";
-import { addSnackBar, createAppErr, spinLoading } from "src/services/app";
-import { getListTodoApi, switchTodoItem } from "src/services/todo/api";
-import { TodoItem } from "./components/TodoItem/TodoItem";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import HeaderTool from "src/components/Common/HeaderTool";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import useAppTheme from "src/hooks/useAppTheme";
-import { ITodoItem } from "src/services/todo/types";
-import { TodoListWrapper } from "./style";
-import { EditItemModal } from "./components/Modal/EditItemModal";
-import { CreateItemModal } from "./components/Modal/CreateItemModal";
+import { useEffect, useState } from 'react';
+import { useAppDispatch } from 'src/hooks/useAppDispatch';
+import { addSnackBar, createAppErr, spinLoading } from 'src/services/app';
+import { getListTodoApi, switchTodoItem } from 'src/services/todo/api';
+import { TodoItem } from './components/TodoItem/TodoItem';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import HeaderTool from 'src/components/Common/HeaderTool';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import useAppTheme from 'src/hooks/useAppTheme';
+import { ITodoItem } from 'src/services/todo/types';
+import { TodoListWrapper } from './style';
+import { EditItemModal } from './components/Modal/EditItemModal';
+import { CreateItemModal } from './components/Modal/CreateItemModal';
 
 const TodoScreen = () => {
   const dispatch = useAppDispatch();
@@ -42,15 +42,15 @@ const TodoScreen = () => {
       setListData(res);
       dispatch(
         addSnackBar({
-          type: "success",
-          message: "success",
+          type: 'success',
+          message: 'success',
         })
       );
     } catch (error) {
       dispatch(
         addSnackBar({
-          type: "error",
-          message: "error",
+          type: 'error',
+          message: 'error',
         })
       );
     } finally {
@@ -71,8 +71,8 @@ const TodoScreen = () => {
       <HeaderTool handleAddNew={() => setCreateModalData(true)} />
       {loading ? (
         <SkeletonTheme
-          baseColor={theme["background2"]}
-          highlightColor={theme["background1"]}
+          baseColor={theme['background2']}
+          highlightColor={theme['background1']}
         >
           <Skeleton count={listData.length} height={60} className="mt1" />
         </SkeletonTheme>
