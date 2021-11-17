@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch } from "src/hooks/useAppDispatch";
-import { addSnackBar, createAppErr, spinLoading } from "src/services/app";
-import { getListTodoApi, switchTodoItem } from "src/services/todo/api";
-import { TodoItem } from "./components/TodoItem/TodoItem";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useCallback, useEffect, useState } from 'react';
+import { useAppDispatch } from 'src/hooks/useAppDispatch';
+import { addSnackBar, createAppErr, spinLoading } from 'src/services/app';
+import { getListTodoApi, switchTodoItem } from 'src/services/todo/api';
+import { TodoItem } from './components/TodoItem/TodoItem';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import HeaderTool from 'src/components/Common/HeaderTool';
-
 
 const TodoScreen = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +21,7 @@ const TodoScreen = () => {
       updatedAt: Date;
     }>
   >([]);
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
       const data = await getListTodoApi();
       setListData(data);
@@ -33,7 +32,7 @@ const TodoScreen = () => {
         })
       );
     }
-  };
+  }, [dispatch]);
 
   const changeItemNumber = async (id: string, newNumber: number) => {
     try {
@@ -43,15 +42,15 @@ const TodoScreen = () => {
       setListData(res);
       dispatch(
         addSnackBar({
-          type: "success",
-          message: "success",
+          type: 'success',
+          message: 'success',
         })
       );
     } catch (error) {
       dispatch(
         addSnackBar({
-          type: "error",
-          message: "error",
+          type: 'error',
+          message: 'error',
         })
       );
     } finally {
@@ -62,10 +61,9 @@ const TodoScreen = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
   return loading ? (
     <div>
-
       {listData.map((item: any, index) => (
         <TodoItem item={item} />
       ))}
@@ -85,7 +83,7 @@ const TodoScreen = () => {
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              <HeaderTool handleAddNew={() => null}  />
+              <HeaderTool handleAddNew={() => null} />
               {listData.map((item: any, index) => (
                 <Draggable
                   key={index}

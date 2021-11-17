@@ -11,6 +11,7 @@ import AddDocApi from './components/AddDocApi';
 import IDoc from '../../services/doc/types';
 import { DocsScreenWrapper } from './style';
 import DetailApiModal from './components/DetailApiModal';
+import Pagination from 'src/components/Base/Pagination';
 
 const DocsScreen = () => {
   const projectId = useAppSelector((state) => state.app.projectId);
@@ -20,6 +21,9 @@ const DocsScreen = () => {
   const [listDocs, setListDocs] = useState<IDoc[]>([]);
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
   const [detailDoc, setDetailDoc] = useState<IDoc>();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(0);
+  const [searchKey, setSearchKey] = useState('');
 
   const { t } = useTranslation();
   const words = useCallback(
@@ -27,22 +31,26 @@ const DocsScreen = () => {
     [t]
   );
 
-  const getListDocs = useCallback(async () => {
-    try {
-      const data = await getListDocsApi(projectId);
-      setListDocs(data);
-    } catch (error) {
-      dispatch(
-        createAppErr({
-          title: error as string,
-        })
-      );
-    }
-  }, [dispatch, projectId]);
+  const getListDocs = useCallback(
+    async (page: number, search: string) => {
+      try {
+        const result = await getListDocsApi(projectId, page, search);
+        setListDocs(result.data);
+        setTotalPage(result.meta.totalPage);
+      } catch (error) {
+        dispatch(
+          createAppErr({
+            title: error as string,
+          })
+        );
+      }
+    },
+    [dispatch, projectId]
+  );
 
   useEffect(() => {
-    getListDocs();
-  }, [getListDocs]);
+    getListDocs(currentPage, searchKey);
+  }, [currentPage, getListDocs, searchKey]);
 
   const onOpenDetail = (id: string) => {
     if (detailDoc?._id !== id) {
@@ -53,7 +61,10 @@ const DocsScreen = () => {
 
   return (
     <DocsScreenWrapper>
-      <HeaderTool handleAddNew={() => setIsShowAdd(true)} />
+      <HeaderTool
+        handleAddNew={() => setIsShowAdd(true)}
+        onSearch={(searchKey) => setSearchKey(searchKey)}
+      />
       <div className="docScreen__list_doc">
         {listDocs.map((item) => (
           <APIBox
@@ -76,7 +87,11 @@ const DocsScreen = () => {
         handleDismiss={() => setIsShowAdd(false)}
         words={words}
       />
-      {/* phân trang */}
+      <Pagination
+        totalPage={totalPage}
+        current={currentPage}
+        onChangePage={(page) => setCurrentPage(page)}
+      />
     </DocsScreenWrapper>
   );
 };

@@ -10,17 +10,23 @@ export const GlobalContainerWrapper = styled.div`
     'header header header'
     'sidebar container container'
     'sidebar container container';
-  header {
+  /* header {
     grid-area: header;
-  }
-  nav {
+  } */
+  /* nav {
     grid-area: sidebar;
-  }
+    height: 100%;
+  } */
   .container {
     grid-area: container;
-    height: calc(100vh - 56px);
     width: calc(100vw - 56px);
     position: relative;
+    overflow-y: auto;
+  }
+
+  svg {
+    height: 14px;
+    width: 14px;
   }
 `;
 
