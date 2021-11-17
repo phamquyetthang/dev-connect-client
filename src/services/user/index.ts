@@ -18,8 +18,9 @@ export const getUserInfoService = createAsyncThunk(
   async (_, thunkAPI) => {
     thunkAPI.dispatch(loading(true));
     try {
-      const response = await getService('/user/info');
-      return response as IUserState;
+      const userInfo = await getService('/user/info');
+      const preferences = await getService('/user/preferences');
+      return { ...userInfo, preferences } as IUserState;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     } finally {
@@ -43,7 +44,7 @@ const userSlice = createSlice({
           state.last_name = payload.last_name;
           state.email = payload.email;
           state._id = payload._id;
-          
+          state.preferences = payload.preferences;
         }
       )
       .addCase(getUserInfoService.rejected, (state: IUserState) => {

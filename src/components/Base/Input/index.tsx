@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent, memo } from 'react';
+import { ChangeEvent, FunctionComponent, KeyboardEvent, memo } from 'react';
 import { Controller } from 'react-hook-form';
 import { InputContain, InputWrapper } from './styled';
 import { IFromProps } from '../@types/formTypes';
@@ -54,6 +54,7 @@ type IInputNormalProps = IComponentProps & {
   value: string;
   name?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
 export const InputNormal: FunctionComponent<IInputNormalProps> = ({
   value,
@@ -87,6 +88,7 @@ export const InputBasic: FunctionComponent<IInputNormalProps> = ({
   placeholder,
   name,
   onChange,
+  onKeyPress,
 }) => {
   return (
     <InputWrapper
@@ -96,6 +98,7 @@ export const InputBasic: FunctionComponent<IInputNormalProps> = ({
       name={name}
       className={className}
       onChange={onChange}
+      onKeyPress={onKeyPress}
     />
   );
 };

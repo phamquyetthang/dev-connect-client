@@ -56,7 +56,9 @@ const AddDocApi: FunctionComponent<IProps> = ({
     control,
     handleSubmit,
     formState: { isDirty, isValid },
-  } = useForm<IApiBasicInfo>({});
+  } = useForm<IApiBasicInfo>({
+    mode: 'onChange',
+  });
   const projectId = useAppSelector((state) => state.app.projectId);
   const [reqFormData, setReqFormData] = useState<IResFromData[]>([
     initFormData,

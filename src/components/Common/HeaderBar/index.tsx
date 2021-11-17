@@ -2,6 +2,11 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import CopyField from 'src/components/Base/CopyField';
+
+import Modal from 'src/components/Base/Modal';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import dark from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+
 import PopupExtend from 'src/components/Base/PopupExtend';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { useAppSelector } from 'src/hooks/useAppSelector';
@@ -18,6 +23,8 @@ const HeaderBar = memo(() => {
   const [isShowAvtModal, setIsShowAvtModal] = useState<boolean>(false);
   const [isShowChangeProject, setIsShowChangeProject] =
     useState<boolean>(false);
+  const [isShowSetting, setIsShowSetting] = useState(false);
+  const preferences = useAppSelector((state) => state.user.preferences);
   const userInfo = useAppSelector((state) => state.user);
   const { projectName, projects } = useAppSelector((state) => state.app);
   const dispatch = useAppDispatch();
@@ -99,11 +106,30 @@ const HeaderBar = memo(() => {
         <div className="header_set">
           <button>{commonWord('editStatus')}</button>
           <button>{commonWord('editProfile')}</button>
-          <button>{commonWord('preferences')}</button>
+          <button onClick={() => setIsShowSetting(true)}>
+            {commonWord('preferences')}
+          </button>
         </div>
 
         <button onClick={onLogout}>{commonWord('logout')}</button>
       </div>
+      <Modal
+        isShow={isShowSetting}
+        title="Preferences"
+        closeBtn="Close"
+        onClose={() => setIsShowSetting(false)}
+      >
+        <div className="setting-modal">
+          {JSON.stringify(preferences)}
+          <CopyField
+            value={preferences?.snippets[0].template || ''}
+            className="user_snippet_template"
+          />
+          <SyntaxHighlighter language="javascript" style={dark}>
+            {preferences?.snippets[0].template || ''}
+          </SyntaxHighlighter>
+        </div>
+      </Modal>
     </HeaderBarWrapper>
   );
 });

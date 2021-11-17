@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
         overflow: hidden;
         padding: 0;
         margin: 0;
+        color: ${color('text1')};
     }
 
     .errorText{

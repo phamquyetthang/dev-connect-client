@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { color } from 'src/lib/theme/mixin';
 
 export const HeaderBarWrapper = styled.header`
+  grid-area: header;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -58,7 +59,7 @@ export const HeaderBarWrapper = styled.header`
     background-color: ${color('background2')};
     border: 1px solid ${color('border')};
     box-shadow: 0px 2px 6px 2px ${color('hoverShadow')};
-    z-index: 1000;
+    z-index: 150;
 
     &.show {
       display: flex;
@@ -106,6 +107,12 @@ export const HeaderBarWrapper = styled.header`
       align-self: flex-start;
       cursor: pointer;
       color: ${color('text1')};
+    }
+  }
+
+  .setting-modal {
+    .user_snippet_template {
+      white-space: pre;
     }
   }
 `;

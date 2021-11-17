@@ -6,6 +6,7 @@ import AuthScreen from './Auth';
 import Conversation from './Conversation';
 import Dashboard from './Dashboard';
 import DocsScreen from './Docs';
+import TaskScreen from './Tasks';
 import TodoScreen from './Todo';
 import Welcome from './Welcome';
 
@@ -22,6 +23,7 @@ const RootRouter = () => {
             component={Dashboard}
           />
           <Route exact path={ROUTER_NAME.unit.path} component={DocsScreen} />
+          <Route exact path={ROUTER_NAME.task.path} component={TaskScreen} />
           <Route exact path={ROUTER_NAME.chat.path} component={Conversation} />
           <Route exact path={ROUTER_NAME.todo.path} component={TodoScreen} />
         </GlobalContainer>

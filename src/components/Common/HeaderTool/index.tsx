@@ -1,4 +1,10 @@
-import { ChangeEvent, FunctionComponent, useCallback, useState } from 'react';
+import {
+  ChangeEvent,
+  FunctionComponent,
+  KeyboardEvent,
+  useCallback,
+  useState,
+} from 'react';
 import { ReactComponent as SearchIcon } from 'src/assets/icons/search.svg';
 import { ReactComponent as FilterIcon } from 'src/assets/icons/filter.svg';
 import { ReactComponent as AddIcon } from 'src/assets/icons/plus.svg';
@@ -10,9 +16,10 @@ import { useTranslation } from 'react-i18next';
 
 interface IProps {
   handleAddNew: () => void;
+  onSearch?: (searchKey: string) => void;
 }
 
-const HeaderTool: FunctionComponent<IProps> = ({ handleAddNew }) => {
+const HeaderTool: FunctionComponent<IProps> = ({ handleAddNew, onSearch }) => {
   const { t } = useTranslation();
   const commonWord = useCallback(
     (title: CommonTranslateKeyType) => t(`commonTranslate.${title}`),
@@ -22,7 +29,11 @@ const HeaderTool: FunctionComponent<IProps> = ({ handleAddNew }) => {
   const onChangSearchKey = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchKey(e.target.value);
   };
-
+  const handleKeyEvent = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      !!onSearch && onSearch(searchKey);
+    }
+  };
   return (
     <HeaderToolWrapper>
       <div className="filter_bar">
@@ -31,6 +42,7 @@ const HeaderTool: FunctionComponent<IProps> = ({ handleAddNew }) => {
           value={searchKey}
           onChange={onChangSearchKey}
           className="filter_bar__search"
+          onKeyPress={handleKeyEvent}
         />
         <button className="filter_bar__filter">
           <FilterIcon />
