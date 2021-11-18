@@ -48,12 +48,12 @@ const TextArea: FunctionComponent<IProps> = memo(
 
 export default TextArea;
 
-type INomalProps = {
+type INormalProps = {
   name?: string;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   value: string;
 };
-export const TextAreaNomal: FunctionComponent<IComponentProps & INomalProps> =
+export const TextAreaNormal: FunctionComponent<IComponentProps & INormalProps> =
   ({ className, title, placeholder, error, onChange, name, value }) => {
     return (
       <TextAreaContain className={className}>

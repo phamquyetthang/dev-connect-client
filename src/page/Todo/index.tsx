@@ -1,21 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { addSnackBar, createAppErr, spinLoading } from 'src/services/app';
-import { getListTodoApi, switchTodoItem } from 'src/services/todo/api';
+import {
+  getListTodoApi,
+  switchTodoItem,
+  updateTodoItem,
+} from 'src/services/todo/api';
 import { TodoItem } from './components/TodoItem/TodoItem';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import HeaderTool from 'src/components/Common/HeaderTool';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import useAppTheme from 'src/hooks/useAppTheme';
-import { ITodoItem } from 'src/services/todo/types';
+import { IEditTodoReq, ITodoItem } from 'src/services/todo/types';
 import { TodoListWrapper } from './style';
 import { EditItemModal } from './components/Modal/EditItemModal';
 import { CreateItemModal } from './components/Modal/CreateItemModal';
+import { useAppSelector } from 'src/hooks/useAppSelector';
 
 const TodoScreen = () => {
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(false);
+  const loading = useAppSelector(state => state.app.spinLoading);
   const [listData, setListData] = useState<Array<ITodoItem>>([]);
   const theme = useAppTheme();
   const [editModalData, setEditModalData] = useState<false | ITodoItem>(false);
@@ -36,7 +41,6 @@ const TodoScreen = () => {
 
   const changeItemNumber = async (id: string, newNumber: number) => {
     try {
-      setLoading(true);
       dispatch(spinLoading(true));
       const res = await switchTodoItem(id, newNumber);
       setListData(res);
@@ -54,7 +58,6 @@ const TodoScreen = () => {
         })
       );
     } finally {
-      setLoading(false);
       dispatch(spinLoading(false));
     }
   };
@@ -66,6 +69,29 @@ const TodoScreen = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  const editTodoItem = async (item: IEditTodoReq) => {
+    try {
+      dispatch(spinLoading(true));
+      await updateTodoItem(item);
+      setEditModalData(false);
+      dispatch(
+        addSnackBar({
+          type: 'success',
+          message: 'Edit todo success',
+        })
+      );
+      getData();
+    } catch (error) {
+      addSnackBar({
+        type: 'error',
+        message: 'Edit todo error',
+      });
+    } finally {
+      dispatch(spinLoading(false));
+    }
+  };
+
   return (
     <TodoListWrapper>
       <HeaderTool handleAddNew={() => setCreateModalData(true)} />
@@ -88,7 +114,7 @@ const TodoScreen = () => {
           }}
         >
           <Droppable droppableId="droppable">
-            {(provided, snapshot) => (
+            {(provided, _) => (
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
@@ -100,7 +126,7 @@ const TodoScreen = () => {
                     draggableId={String(item._id)}
                     index={index}
                   >
-                    {(provided, snapshot) => (
+                    {(provided, _) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
@@ -122,6 +148,7 @@ const TodoScreen = () => {
           isShow={!!editModalData}
           onClose={() => setEditModalData(false)}
           data={editModalData}
+          onEditSubmit={editTodoItem}
         />
       )}
       <CreateItemModal

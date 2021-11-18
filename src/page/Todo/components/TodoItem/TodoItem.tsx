@@ -1,14 +1,14 @@
-import React, { FunctionComponent, useState } from "react";
-import Box from "src/components/Base/Box";
-import { TodoItemWrapper } from "./style";
-import { ReactComponent as StatusIcon } from "src/assets/icons/statusIcon.svg";
-import { ReactComponent as UncheckIcon } from "src/assets/icons/unCheckIcon.svg";
-import { ReactComponent as EditIcon } from "src/assets/icons/edit.svg";
-import { ReactComponent as TrashIcon } from "src/assets/icons/trash.svg";
+import React, { FunctionComponent, useState } from 'react';
+import Box from 'src/components/Base/Box';
+import { TodoItemWrapper } from './style';
+import { ReactComponent as StatusIcon } from 'src/assets/icons/statusIcon.svg';
+import { ReactComponent as UncheckIcon } from 'src/assets/icons/unCheckIcon.svg';
+import { ReactComponent as EditIcon } from 'src/assets/icons/edit.svg';
+import { ReactComponent as TrashIcon } from 'src/assets/icons/trash.svg';
 
-import { formatTimeMess } from "./../../../../lib/helpers/index";
-import { updateStatusItem } from "./../../../../services/todo/api";
-import { ITodoItem } from "src/services/todo/types";
+import { formatTimeMess } from './../../../../lib/helpers/index';
+import { updateStatusItem } from './../../../../services/todo/api';
+import { ITodoItem } from 'src/services/todo/types';
 
 interface IProps {
   item: ITodoItem;
@@ -28,22 +28,30 @@ export const TodoItem: FunctionComponent<IProps> = ({ item, onEdit }) => {
   };
   return (
     <TodoItemWrapper>
-      <Box className={`item ${todoItem.status && " success"}`}>
+      <Box className={`item ${todoItem.status && ' success'}`}>
         {todoItem.status ? (
-          <StatusIcon onClick={() => changeStatus(false)} />
+          <StatusIcon
+            onClick={() => changeStatus(false)}
+            style={{ fill: 'green' }}
+          />
         ) : (
           <UncheckIcon
             onClick={() => changeStatus(true)}
-            style={{ fill: "yellow" }}
+            style={{ fill: 'yellow' }}
           />
         )}
         <span>{todoItem.title}</span>
         <span>{todoItem.description}</span>
-        <span>{formatTimeMess(todoItem.createdAt)}</span>
-        <span>{formatTimeMess(todoItem.updatedAt)}</span>
+        <span>
+          {!!todoItem?.deadline && formatTimeMess(todoItem?.deadline)}
+        </span>
         <div className="editView">
-          <EditIcon className="editStyle" onClick={() => onEdit(item)} />
-          <TrashIcon />
+          <div>
+            <EditIcon onClick={() => onEdit(item)} />
+          </div>
+          <div>
+            <TrashIcon />
+          </div>
         </div>
       </Box>
     </TodoItemWrapper>

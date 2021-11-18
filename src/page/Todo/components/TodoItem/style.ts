@@ -1,40 +1,52 @@
-import styled from "styled-components";
+import { color } from 'src/lib/theme/mixin';
+import styled from 'styled-components';
 
 export const TodoItemWrapper = styled.div`
   display: flex;
-  margin: 6px;
-  svg {
-    width: 1.5em;
-    height: 1.5em;
-    fill: green;
-  }
+  margin: 12px;
   .item {
-    display: flex;
-    flex-direction: row;
     width: 100%;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 30px 100px 1fr 100px 80px;
+    column-gap: 20px;
     border-left: 6px solid yellow;
+    align-items: center;
+    padding: 8px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+    span {
+      text-align: start;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     &.success {
       border-left-color: green;
     }
-    span {
-      width: 10%;
-      text-align: left;
-      display: -webkit-box;
-      -webkit-line-clamp: 1; // <- you can change rows number
-      -webkit-box-orient: vertical;
-      vertical-align: bottom;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-  .editView {
-    svg {
-      fill: gray;
-    }
-    .editStyle {
-      margin-right: 10px;
+    .editView {
+      display: flex;
+      justify-content: space-between;
+      div {
+        svg {
+          fill: ${color('text1')};
+          width: 18px;
+          height: 18px;
+        }
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          fill: white;
+          background-color: ${color('background1')};
+        }
+      }
     }
   }
 `;

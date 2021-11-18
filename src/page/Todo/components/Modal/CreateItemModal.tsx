@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import ReactSwitch from "react-switch";
 import { InputNormal } from "src/components/Base/Input";
 import Modal from "src/components/Base/Modal";
-import { TextAreaNomal } from "src/components/Base/TextArea";
+import { TextAreaNormal } from "src/components/Base/TextArea";
 import { ITodoItem } from "src/services/todo/types";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -68,7 +68,7 @@ export const CreateItemModal: FunctionComponent<IProps> = ({
               })
             }
           />
-          <TextAreaNomal
+          <TextAreaNormal
             value={item?.description}
             title="description todo"
             className="input"

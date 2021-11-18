@@ -7,4 +7,13 @@ export interface ITodoItem {
   description: string;
   createdAt: Date;
   updatedAt: Date;
+  deadline?: Date;
+}
+
+export interface IEditTodoReq {
+  id: string;
+  status?: boolean;
+  title?: string;
+  description?: string;
+  deadline?: Date;
 }

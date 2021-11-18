@@ -2,9 +2,9 @@ import {
   getService,
   postService,
   putService,
-} from "src/lib/helpers/connectApi";
-import { ITodoItem } from "./types";
-const endpoint = "/todo";
+} from 'src/lib/helpers/connectApi';
+import { IEditTodoReq, ITodoItem } from './types';
+const endpoint = '/todo';
 
 export const getListTodoApi = () => {
   return getService(endpoint);
@@ -24,13 +24,8 @@ export const updateStatusItem = (id: string, status: boolean) => {
   });
 };
 
-export const updateTodoItem = (item: ITodoItem) => {
-  return putService(endpoint, {
-    id: item?._id,
-    status: item?.status,
-    title: item?.title,
-    description: item?.description,
-  });
+export const updateTodoItem = (item: IEditTodoReq) => {
+  return putService(endpoint, item);
 };
 
 export const createTodoItem = (item: ITodoItem) => {

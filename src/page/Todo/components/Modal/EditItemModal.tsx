@@ -1,38 +1,31 @@
-import React, { FunctionComponent, useState } from "react";
-import ReactSwitch from "react-switch";
-import { InputNormal } from "src/components/Base/Input";
-import Modal from "src/components/Base/Modal";
-import { TextAreaNomal } from "src/components/Base/TextArea";
-import { ITodoItem } from "src/services/todo/types";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { updateTodoItem } from "src/services/todo/api";
-import { EditModalWrapper } from "./style";
+import React, { FunctionComponent, useState } from 'react';
+import ReactSwitch from 'react-switch';
+import { InputNormal } from 'src/components/Base/Input';
+import Modal from 'src/components/Base/Modal';
+import { TextAreaNormal } from 'src/components/Base/TextArea';
+import { IEditTodoReq, ITodoItem } from 'src/services/todo/types';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { EditModalWrapper } from './style';
 interface IProps {
   isShow: boolean;
   onClose: () => void;
   data: ITodoItem;
+  onEditSubmit: (data: IEditTodoReq) => void;
 }
 export const EditItemModal: FunctionComponent<IProps> = ({
   isShow,
   onClose,
   data,
+  onEditSubmit,
 }) => {
-  const [item, setItem] = useState(data);
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date(item?.updatedAt)
-  );
-    console.log(item);
-  const editTodoItem = async () => {
-    try {
-      const res = await updateTodoItem(item);
-      onClose();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      window.location.reload();
-    }
-  };
+  const [item, setItem] = useState<IEditTodoReq>({
+    id: data._id,
+    description: data?.description,
+    title: data.title,
+    deadline: data?.deadline,
+    status: data.status,
+  });
 
   return (
     <Modal
@@ -41,12 +34,12 @@ export const EditItemModal: FunctionComponent<IProps> = ({
       closeBtn="close"
       onClose={onClose}
       submitBtn="Edit"
-      onSubmit={() => editTodoItem()}
+      onSubmit={() => onEditSubmit(item)}
     >
       <EditModalWrapper>
         <div>
           <InputNormal
-            value={item?.title}
+            value={item.title || ''}
             className="input"
             title="Title todo"
             onChange={(e) =>
@@ -56,8 +49,8 @@ export const EditItemModal: FunctionComponent<IProps> = ({
               })
             }
           />
-          <TextAreaNomal
-            value={item?.description}
+          <TextAreaNormal
+            value={item.description || ''}
             title="description todo"
             className="input"
             onChange={(e) =>
@@ -79,15 +72,15 @@ export const EditItemModal: FunctionComponent<IProps> = ({
               }
               height={20}
               width={40}
-              checked={item?.status}
+              checked={item?.status || false}
             />
           </div>
           <div className="datePicker">
             <span>Thời hạn</span>
             <div className="inputPicker">
               <DatePicker
-                selected={startDate}
-                onChange={(date: Date) => setStartDate(date)}
+                selected={item.deadline}
+                onChange={(date: Date) => setItem({ ...item, deadline: date })}
               />
             </div>
           </div>
