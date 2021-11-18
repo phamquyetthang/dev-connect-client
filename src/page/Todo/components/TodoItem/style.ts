@@ -30,23 +30,6 @@ export const TodoItemWrapper = styled.div`
     .editView {
       display: flex;
       justify-content: space-between;
-      div {
-        svg {
-          fill: ${color('text1')};
-          width: 18px;
-          height: 18px;
-        }
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        &:hover {
-          fill: white;
-          background-color: ${color('background1')};
-        }
-      }
     }
   }
 `;

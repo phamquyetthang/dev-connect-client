@@ -27,11 +27,6 @@ export const APIBoxWrapper = styled.div`
       column-gap: 12px;
     }
   }
-  .icon_link {
-    width: 22px;
-    height: 22px;
-    fill: ${color('text1')};
-  }
 
   &.GET {
     border-left-color: ${color('info')};

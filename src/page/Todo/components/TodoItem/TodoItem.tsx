@@ -9,6 +9,7 @@ import { ReactComponent as TrashIcon } from 'src/assets/icons/trash.svg';
 import { formatTimeMess } from './../../../../lib/helpers/index';
 import { updateStatusItem } from './../../../../services/todo/api';
 import { ITodoItem } from 'src/services/todo/types';
+import IconHover from 'src/components/Base/IconHover';
 
 interface IProps {
   item: ITodoItem;
@@ -46,12 +47,12 @@ export const TodoItem: FunctionComponent<IProps> = ({ item, onEdit }) => {
           {!!todoItem?.deadline && formatTimeMess(todoItem?.deadline)}
         </span>
         <div className="editView">
-          <div>
+          <IconHover>
             <EditIcon onClick={() => onEdit(item)} />
-          </div>
-          <div>
+          </IconHover>
+          <IconHover>
             <TrashIcon />
-          </div>
+          </IconHover>
         </div>
       </Box>
     </TodoItemWrapper>

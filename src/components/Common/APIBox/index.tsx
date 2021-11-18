@@ -8,6 +8,7 @@ import CopyField from 'src/components/Base/CopyField';
 import IDoc from 'src/services/doc/types';
 import ProgressBar from 'src/components/Base/Progress';
 import ListAvt from 'src/components/Base/ListAvt';
+import IconHover from 'src/components/Base/IconHover';
 interface IProps {
   docData: IDoc;
   onClickBox?: () => void;
@@ -36,9 +37,15 @@ const APIBox: FunctionComponent<IProps> = memo(({ docData, onClickBox }) => {
           id: item.id_member,
         }))}
       />
-      <ListIcon className="icon_link" />
-      <ChatIcon className="icon_link" />
-      <BellIcon className="icon_link" />
+      <IconHover>
+        <ListIcon/>
+      </IconHover>
+      <IconHover>
+        <ChatIcon/>
+      </IconHover>
+      <IconHover>
+        <BellIcon/>
+      </IconHover>
     </APIBoxWrapper>
   );
 });
