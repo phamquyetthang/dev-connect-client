@@ -19,7 +19,7 @@ const Pagination: FunctionComponent<IProps> = ({
   const to = current <= 5 ? 5 : current + 3;
   return (
     <PaginationWrapper>
-      <BackIcon onClick={() => onChangePage(current - 1)} />
+      {current !== 1 && <BackIcon onClick={() => onChangePage(current - 1)} />}
       {from !== 1 && (
         <>
           <span onClick={() => onChangePage(1)}>1</span>
@@ -51,7 +51,9 @@ const Pagination: FunctionComponent<IProps> = ({
         </>
       )}
 
-      <NextIcon onClick={() => onChangePage(current + 1)} />
+      {current !== totalPage && (
+        <NextIcon onClick={() => onChangePage(current + 1)} />
+      )}
     </PaginationWrapper>
   );
 };

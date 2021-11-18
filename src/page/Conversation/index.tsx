@@ -35,6 +35,14 @@ const Conversation = () => {
     }
   }, [getMyListChat, projectId]);
 
+  useEffect(() => {
+    const objDiv = document.getElementById('chat-box-contain');
+    if (objDiv) {
+      debugger;
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }
+  }, []);
+  
   return (
     <ConversationsWrapper id="cs-chatroom">
       <UsersList

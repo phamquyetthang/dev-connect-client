@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
 import { addSnackBar, createAppErr, spinLoading } from 'src/services/app';
 import {
@@ -9,24 +9,18 @@ import {
 import { TodoItem } from './components/TodoItem/TodoItem';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import HeaderTool from 'src/components/Common/HeaderTool';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import useAppTheme from 'src/hooks/useAppTheme';
 import { IEditTodoReq, ITodoItem } from 'src/services/todo/types';
 import { TodoListWrapper } from './style';
 import { EditItemModal } from './components/Modal/EditItemModal';
 import { CreateItemModal } from './components/Modal/CreateItemModal';
-import { useAppSelector } from 'src/hooks/useAppSelector';
 
 const TodoScreen = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(state => state.app.spinLoading);
   const [listData, setListData] = useState<Array<ITodoItem>>([]);
-  const theme = useAppTheme();
   const [editModalData, setEditModalData] = useState<false | ITodoItem>(false);
   const [createModalData, setCreateModalData] = useState<boolean>(false);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
       const data = await getListTodoApi();
       setListData(data);
@@ -37,7 +31,7 @@ const TodoScreen = () => {
         })
       );
     }
-  };
+  }, [dispatch]);
 
   const changeItemNumber = async (id: string, newNumber: number) => {
     try {
@@ -68,7 +62,7 @@ const TodoScreen = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   const editTodoItem = async (item: IEditTodoReq) => {
     try {
@@ -95,54 +89,45 @@ const TodoScreen = () => {
   return (
     <TodoListWrapper>
       <HeaderTool handleAddNew={() => setCreateModalData(true)} />
-      {loading ? (
-        <SkeletonTheme
-          baseColor={theme['background2']}
-          highlightColor={theme['background1']}
-        >
-          <Skeleton count={listData.length} height={60} className="mt1" />
-        </SkeletonTheme>
-      ) : (
-        <DragDropContext
-          onDragEnd={(result, provided) => {
-            if (result?.destination?.index !== result.source.index) {
-              changeItemNumber(
-                result?.draggableId,
-                listData[Number(result?.destination?.index)]?.number
-              );
-            }
-          }}
-        >
-          <Droppable droppableId="droppable">
-            {(provided, _) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="todoList"
-              >
-                {listData.map((item: ITodoItem, index) => (
-                  <Draggable
-                    key={index}
-                    draggableId={String(item._id)}
-                    index={index}
-                  >
-                    {(provided, _) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <TodoItem item={item} onEdit={handleEditItem} />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      )}
+      <DragDropContext
+        onDragEnd={(result, provided) => {
+          if (result?.destination?.index !== result.source.index) {
+            changeItemNumber(
+              result?.draggableId,
+              listData[Number(result?.destination?.index)]?.number
+            );
+          }
+        }}
+      >
+        <Droppable droppableId="droppable">
+          {(provided, _) => (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className="todoList"
+            >
+              {listData.map((item: ITodoItem, index) => (
+                <Draggable
+                  key={item._id}
+                  draggableId={String(item._id)}
+                  index={index}
+                >
+                  {(provided, _) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <TodoItem item={item} onEdit={handleEditItem} />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
       {editModalData && (
         <EditItemModal
           isShow={!!editModalData}

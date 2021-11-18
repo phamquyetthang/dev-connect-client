@@ -4,6 +4,7 @@ export interface IConversationInfo {
   lastMess: string;
 }
 export interface IMessage {
+  _id: string;
   from: {
     _id: string;
     first_name: string;

@@ -1,4 +1,3 @@
-import { color } from 'src/lib/theme/mixin';
 import styled from 'styled-components';
 
 export const TodoItemWrapper = styled.div`

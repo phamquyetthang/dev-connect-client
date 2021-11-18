@@ -1,4 +1,3 @@
-import { uniqueId } from 'lodash';
 import {
   ChangeEvent,
   FunctionComponent,
@@ -128,27 +127,26 @@ const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
         </div>
       </div>
       <div className="cs-chat-box-contain " id="chat-box-contain">
-        {!!listMess.length &&
-          listMess.map((i: IMess) => (
-            <div
-              className={`cs-message
+        {listMess.map((i: IMess) => (
+          <div
+            className={`cs-message
                ${i.from._id === useId ? ' cs-m-end' : ''}`}
-              key={uniqueId('message_')}
-            >
-              <div className={`cs-avt ${i.isShowAvt ? '' : ' cs-hidden-avt'}`}>
-                <span>\ww</span>
-              </div>
-              <div>
-                <p style={{ whiteSpace: 'pre-line' }}>{i.text}</p>
-                {!!i.isShowAvt && (
-                  <i>
-                    {i.from.first_name} {i.from.last_name}{' '}
-                    {formatTimeMess(i?.date)}
-                  </i>
-                )}
-              </div>
+            key={`message_content__${i._id}`}
+          >
+            <div className={`cs-avt ${i.isShowAvt ? '' : ' cs-hidden-avt'}`}>
+              <span>\ww</span>
             </div>
-          ))}
+            <div>
+              <p style={{ whiteSpace: 'pre-line' }}>{i.text}</p>
+              {!!i.isShowAvt && (
+                <i>
+                  {i.from.first_name} {i.from.last_name}{' '}
+                  {formatTimeMess(i?.date)}
+                </i>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
       <div className="cs-chat-box-type cs-chat-box-head">
         <div>

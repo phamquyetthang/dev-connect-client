@@ -1,15 +1,14 @@
-import React, { FunctionComponent, useState } from "react";
-import ReactSwitch from "react-switch";
-import { InputNormal } from "src/components/Base/Input";
-import Modal from "src/components/Base/Modal";
-import { TextAreaNormal } from "src/components/Base/TextArea";
-import { ITodoItem } from "src/services/todo/types";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { createTodoItem } from "src/services/todo/api";
-import { CreateModalWrapper } from "./style";
-import { addSnackBar } from "src/services/app";
-import { useAppDispatch } from "src/hooks/useAppDispatch";
+import { FunctionComponent, useState } from 'react';
+import ReactSwitch from 'react-switch';
+import { InputNormal } from 'src/components/Base/Input';
+import Modal from 'src/components/Base/Modal';
+import { TextAreaNormal } from 'src/components/Base/TextArea';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { createTodoItem } from 'src/services/todo/api';
+import { CreateModalWrapper } from './style';
+import { addSnackBar } from 'src/services/app';
+import { useAppDispatch } from 'src/hooks/useAppDispatch';
 interface IProps {
   isShow: boolean;
   onClose: () => void;
@@ -20,11 +19,11 @@ export const CreateItemModal: FunctionComponent<IProps> = ({
 }) => {
   const [item, setItem] = useState({
     status: false,
-    _id: "",
-    user_id: "",
+    _id: '',
+    user_id: '',
     number: 0,
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     createdAt: new Date(),
     updatedAt: new Date(),
   });
@@ -32,11 +31,11 @@ export const CreateItemModal: FunctionComponent<IProps> = ({
   const dispatch = useAppDispatch();
   const addTodoItem = async () => {
     try {
-      const res = await createTodoItem(item);
+      await createTodoItem(item);
       dispatch(
         addSnackBar({
-          type: "success",
-          message: "success",
+          type: 'success',
+          message: 'success',
         })
       );
     } catch (error) {
