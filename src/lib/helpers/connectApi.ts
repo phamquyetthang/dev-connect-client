@@ -104,7 +104,7 @@ export const putService = async (url: string, body: any) => {
   }
 };
 
-export const deleteService = async (url: string, body: any) => {
+export const deleteService = async (url: string, body?: any) => {
   try {
     const token = store.getState().auth.token;
 

@@ -1,17 +1,21 @@
-import { useEffect, useState } from 'react';
-import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import { addSnackBar, createAppErr, spinLoading } from 'src/services/app';
-import { getListTodoApi, switchTodoItem } from 'src/services/todo/api';
-import { TodoItem } from './components/TodoItem/TodoItem';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import HeaderTool from 'src/components/Common/HeaderTool';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import useAppTheme from 'src/hooks/useAppTheme';
-import { ITodoItem } from 'src/services/todo/types';
-import { TodoListWrapper } from './style';
-import { EditItemModal } from './components/Modal/EditItemModal';
-import { CreateItemModal } from './components/Modal/CreateItemModal';
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "src/hooks/useAppDispatch";
+import { addSnackBar, createAppErr, spinLoading } from "src/services/app";
+import {
+  deleteItem,
+  getListTodoApi,
+  switchTodoItem,
+} from "src/services/todo/api";
+import { TodoItem } from "./components/TodoItem/TodoItem";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import HeaderTool from "src/components/Common/HeaderTool";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import useAppTheme from "src/hooks/useAppTheme";
+import { ITodoItem } from "src/services/todo/types";
+import { TodoListWrapper } from "./style";
+import { EditItemModal } from "./components/Modal/EditItemModal";
+import { CreateItemModal } from "./components/Modal/CreateItemModal";
 
 const TodoScreen = () => {
   const dispatch = useAppDispatch();
@@ -21,9 +25,10 @@ const TodoScreen = () => {
   const [editModalData, setEditModalData] = useState<false | ITodoItem>(false);
   const [createModalData, setCreateModalData] = useState<boolean>(false);
 
-  const getData = async () => {
+  const getData = async (searchKey?: string) => {
     try {
-      const data = await getListTodoApi();
+      setLoading(true);
+      const data = await getListTodoApi(searchKey);
       setListData(data);
     } catch (error) {
       dispatch(
@@ -31,6 +36,8 @@ const TodoScreen = () => {
           title: error as string,
         })
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,15 +49,15 @@ const TodoScreen = () => {
       setListData(res);
       dispatch(
         addSnackBar({
-          type: 'success',
-          message: 'success',
+          type: "success",
+          message: "success",
         })
       );
     } catch (error) {
       dispatch(
         addSnackBar({
-          type: 'error',
-          message: 'error',
+          type: "error",
+          message: "error",
         })
       );
     } finally {
@@ -66,13 +73,30 @@ const TodoScreen = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  const deleteTodoItem = async (id: string) => {
+    try {
+      await deleteItem(id);
+      getData();
+      dispatch(
+        addSnackBar({
+          type: "success",
+          message: "delete success",
+        })
+      );
+    } catch (error) {}
+  };
+
   return (
     <TodoListWrapper>
-      <HeaderTool handleAddNew={() => setCreateModalData(true)} />
+      <HeaderTool
+        handleAddNew={() => setCreateModalData(true)}
+        onSearch={getData}
+      />
       {loading ? (
         <SkeletonTheme
-          baseColor={theme['background2']}
-          highlightColor={theme['background1']}
+          baseColor={theme["background2"]}
+          highlightColor={theme["background1"]}
         >
           <Skeleton count={listData.length} height={60} className="mt1" />
         </SkeletonTheme>
@@ -106,7 +130,11 @@ const TodoScreen = () => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <TodoItem item={item} onEdit={handleEditItem} />
+                        <TodoItem
+                          item={item}
+                          onEdit={handleEditItem}
+                          deleteTodoItem={deleteTodoItem}
+                        />
                       </div>
                     )}
                   </Draggable>

@@ -24,7 +24,7 @@ const DocsScreen = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [searchKey, setSearchKey] = useState('');
-
+  console.log("list docs" , listDocs);
   const { t } = useTranslation();
   const words = useCallback(
     (title: DocTranslateKeyType) => t(`docTranslate.${title}`),
@@ -66,7 +66,7 @@ const DocsScreen = () => {
         onSearch={(searchKey) => setSearchKey(searchKey)}
       />
       <div className="docScreen__list_doc">
-        {listDocs.map((item) => (
+        {listDocs.length && listDocs.map((item) => (
           <APIBox
             docData={item}
             key={item._id}

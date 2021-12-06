@@ -13,9 +13,14 @@ import { ITodoItem } from "src/services/todo/types";
 interface IProps {
   item: ITodoItem;
   onEdit: (item: ITodoItem) => void;
+  deleteTodoItem: (id: string) => void;
 }
 
-export const TodoItem: FunctionComponent<IProps> = ({ item, onEdit }) => {
+export const TodoItem: FunctionComponent<IProps> = ({
+  item,
+  onEdit,
+  deleteTodoItem,
+}) => {
   const [todoItem, setTodoItem] = useState(item);
   const changeStatus = (status: boolean) => {
     setTodoItem({
@@ -43,7 +48,7 @@ export const TodoItem: FunctionComponent<IProps> = ({ item, onEdit }) => {
         <span>{formatTimeMess(todoItem.updatedAt)}</span>
         <div className="editView">
           <EditIcon className="editStyle" onClick={() => onEdit(item)} />
-          <TrashIcon />
+          <TrashIcon onClick={() => deleteTodoItem(item._id)} />
         </div>
       </Box>
     </TodoItemWrapper>

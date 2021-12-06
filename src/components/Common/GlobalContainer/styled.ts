@@ -24,10 +24,7 @@ export const GlobalContainerWrapper = styled.div`
     overflow-y: auto;
   }
 
-  svg {
-    height: 14px;
-    width: 14px;
-  }
+ 
 `;
 
 export const MainLoading = styled.div`
