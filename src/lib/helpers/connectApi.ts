@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { store } from 'src/rootStore';
 
-export const HOST_API = process.env.REACT_APP_API_HOST;
+export const HOST_API = 'https://dev-connect-server.herokuapp.com';
 
 export const postService = async (
   url: string,
