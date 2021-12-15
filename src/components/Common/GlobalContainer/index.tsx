@@ -15,11 +15,7 @@ import HeaderBar from '../HeaderBar';
 import { useHistory, useLocation } from 'react-router';
 import ROUTER_NAME from 'src/lib/constants/router';
 import { useAppDispatch } from 'src/hooks/useAppDispatch';
-import {
-  getInfoService,
-  getStatusListService,
-  getTagsService,
-} from 'src/services/project';
+import { getInfoService } from 'src/services/project';
 import { clearAppErr } from 'src/services/app';
 import { getUserInfoService } from 'src/services/user';
 import Modal from 'src/components/Base/Modal';
@@ -36,10 +32,8 @@ const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const withSidebar = useMemo(
-    () =>
-      location.pathname !== ROUTER_NAME.welcome.path &&
-      location.pathname !== ROUTER_NAME.preferences.path,
-    [location.pathname]
+    () => location.pathname !== ROUTER_NAME.welcome.path && !!projectId,
+    [location.pathname, projectId]
   );
 
   useEffect(() => {
@@ -63,15 +57,8 @@ const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
     dispatch(clearAppErr());
   };
 
-  useEffect(() => {
-    if (projectId) {
-      dispatch(getStatusListService({ projectId }));
-      dispatch(getTagsService({ projectId }));
-    }
-  }, [dispatch, projectId]);
-
   return (
-    <GlobalContainerWrapper className={clsx({ 'flex-body': !withSidebar })}>
+    <GlobalContainerWrapper className={clsx({"flex-body": !withSidebar})}>
       <HeaderBar />
 
       {withSidebar && <Sidebar />}

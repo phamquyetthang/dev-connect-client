@@ -40,11 +40,6 @@ export const ButtonWrapper = styled.button`
     color: ${color('textBtn2')};
   }
 
-  &.info{
-    background-color: #B5FDD9;
-    color: #000;
-  }
-
   &.btn-loading {
     position: relative;
     span {

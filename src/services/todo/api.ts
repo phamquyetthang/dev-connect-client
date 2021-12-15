@@ -1,5 +1,4 @@
 import {
-  deleteService,
   getService,
   postService,
   putService,
@@ -7,10 +6,8 @@ import {
 import { IEditTodoReq, ITodoItem } from './types';
 const endpoint = '/todo';
 
-export const getListTodoApi = (searchKey?: string) => {
-  return getService(endpoint,{
-    searchKey
-  });
+export const getListTodoApi = () => {
+  return getService(endpoint);
 };
 
 export const switchTodoItem = (id: string, newNumber: number) => {
@@ -36,8 +33,4 @@ export const createTodoItem = (item: ITodoItem) => {
     title: item?.title,
     description: item?.description,
   });
-};
-
-export const deleteItem = (id: string) => {
-  return deleteService(`${endpoint}/${id}`);
 };

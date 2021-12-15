@@ -53,39 +53,3 @@ const SelectField: FunctionComponent<IProps> = ({
 };
 
 export default SelectField;
-
-interface ISelectFieldNormalProps {
-  value: OptionTypeBase;
-  onChange(value: OptionTypeBase): void;
-}
-export const SelectFieldNormal: FunctionComponent<
-  IProps & ISelectFieldNormalProps
-> = ({
-  value,
-  name,
-  onChange,
-  placeholder,
-  options,
-  error,
-  className,
-  title,
-  isMulti = false,
-  closeMenuOnSelect = true,
-}) => {
-  return (
-    <SelectFieldWrapper className={className}>
-      {!!title && <label>{title}</label>}
-      <Select
-      name={name}
-        value={value}
-        onChange={onChange}
-        options={options}
-        placeholder={placeholder}
-        isMulti={isMulti}
-        closeMenuOnSelect={closeMenuOnSelect}
-        styles={{ option: (styles) => ({ ...styles, color: '#000' }) }}
-      />
-      {error && <i>{error}</i>}
-    </SelectFieldWrapper>
-  );
-};

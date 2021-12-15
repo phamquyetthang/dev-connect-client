@@ -2,37 +2,28 @@ import styled from 'styled-components';
 import { color } from '../../lib/theme/mixin';
 
 export const PreferencesWrapper = styled.div`
+  width: 100%;
   background-color: ${color('background1')};
-  display: grid;
-  gap: 16px;
-  padding: 16px;
-  text-align: start;
-  .goBack_btn{
-    width: 100px;
-  }
-  .preferences__item {
+  .itemThemes {
+    width: auto;
+    height: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 2fr;
+    margin-top: 40px;
   }
-  .change_password {
-    width: 24vw;
+  .itemItem {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px;
+    grid-gap: 10px;
   }
-  .listTheme {
+  .listSmall {
+    cursor: pointer;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
     display: flex;
-    justify-content: space-between;
-    .themeBox {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 200px;
-      height: 80px;
-      border-radius: 8px;
-      color: #957878;
-
-      &.active{
-        border: 1px solid pink;
-      }
+    &.active {
+      border: 2px blue solid;
     }
   }
 `;

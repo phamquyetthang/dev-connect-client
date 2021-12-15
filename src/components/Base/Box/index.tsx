@@ -1,5 +1,4 @@
 import { FunctionComponent, memo, ReactNode } from 'react';
-import Button from '../Button';
 import { BoxWrapper } from './style';
 interface IProps {
   children: ReactNode;
@@ -21,33 +20,3 @@ const Box: FunctionComponent<IProps> = memo(
 );
 
 export default Box;
-
-interface IBoxWithHeaderProps {
-  title: string;
-  btnTitle?: string;
-  handleClickBtn?: () => void;
-}
-export const BoxWithHeader: FunctionComponent<IProps & IBoxWithHeaderProps> =
-  memo(
-    ({
-      children,
-      onClickBox,
-      disable = false,
-      className,
-      title,
-      btnTitle,
-      handleClickBtn,
-    }) => {
-      return (
-        <BoxWrapper {...(!disable && { onClick: onClickBox })}>
-          <div className="box__header">
-            <h4>{title}</h4>
-            {!!btnTitle && !!handleClickBtn && (
-              <Button title={btnTitle} onClick={handleClickBtn} className='info' />
-            )}
-          </div>
-          <div className={className}>{children}</div>
-        </BoxWrapper>
-      );
-    }
-  );

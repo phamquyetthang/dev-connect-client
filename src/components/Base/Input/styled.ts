@@ -1,17 +1,17 @@
-import { color } from "src/lib/theme/mixin";
-import styled from "styled-components";
+import { color } from 'src/lib/theme/mixin';
+import styled from 'styled-components';
 
 export const InputContain = styled.div`
   text-align: start;
 
-  label {
-    color: ${color("text1")};
+  label{
+    color: ${color('text1')};
     margin-left: 4px;
     font-size: 14px;
   }
 
   i {
-    color: ${color("error")};
+    color: ${color('error')};
     padding-left: 4px;
     font-size: 80%;
   }
@@ -28,13 +28,9 @@ export const InputWrapper = styled.input`
   margin-bottom: 4px;
   font-size: 14px;
   outline: none;
-  border: ${color("borderInput")} 1px solid;
+  border: ${color('borderInput')} 1px solid;
   border-radius: 4px;
   padding: 12px;
-  background-color: ${color("background2")};
-  color: ${color("text1")};
-
-  &:disabled {
-    opacity: 0.5;
-  }
+  background-color: ${color('background2')};
+  color: ${color('text1')};
 `;

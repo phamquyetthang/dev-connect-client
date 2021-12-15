@@ -1,4 +1,4 @@
-import  { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import CopyField from 'src/components/Base/CopyField';
 import Modal from 'src/components/Base/Modal';
 import VerticalTab from 'src/components/Base/VerticalTab';
@@ -14,7 +14,6 @@ import { ReactComponent as TimeIcon } from 'src/assets/icons/time-past.svg';
 import { DetailApiModalWrapper } from './style';
 import { DocTranslateKeyType } from 'src/lib/translations/vn/doc';
 import CodeSnippet from './CodeSnippet';
-import HistoryTab from './HistoryTab';
 interface IProps {
   isShow: boolean;
   onClose: () => void;
@@ -35,10 +34,9 @@ const DetailApiModal: FunctionComponent<IProps> = ({
         key: 2,
         tab: <CodeSnippet {...data} />,
       },
-      {key: 8, tab: <HistoryTab docId={data._id} />}
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data]
+    []
   );
 
   const MENU = useMemo(

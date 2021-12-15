@@ -42,7 +42,7 @@ export const darkTheme: ThemeType = {
 
 export const draculaTheme: ThemeType = {
   ...commonColor,
-  header: '#12152a',
+  header: '#191D3A',
   background1: '#081229',
   background2: '#191D3A',
   button1: '#ec5990',
@@ -116,11 +116,11 @@ export const blueBeeTheme: ThemeType = {
 };
 
 export const AllTheme: Array<{name: ThemesName, color: string}> = [
-  {name: 'light', color: lightTheme.background1},
-  {name: 'dark', color: darkTheme.background1},
-  {name: 'dracula', color: draculaTheme.background1},
-  {name: 'capuchino', color: capuchinoTheme.background1},
-  {name: 'matcha', color: matchaTheme.background1},
-  {name: 'gray', color: grayTheme.background1},
-  {name: 'blueBee', color: blueBeeTheme.background1},
+  {name: 'light', color: lightTheme.header},
+  {name: 'dark', color: darkTheme.header},
+  {name: 'dracula', color: draculaTheme.header},
+  {name: 'capuchino', color: capuchinoTheme.header},
+  {name: 'matcha', color: matchaTheme.header},
+  {name: 'gray', color: grayTheme.header},
+  {name: 'blueBee', color: blueBeeTheme.header},
 ]

@@ -39,22 +39,3 @@ export const CodeSnippetWrapper = styled.div`
     }
   }
 `;
-
-export const HistoryTabWrapper = styled.div`
-  padding: 8px;
-  font-size: 14px;
-  .history{
-    padding: 8px;
-    margin: 8px;
-
-    b:hover{
-      text-decoration: underline;
-    }
-    p{
-      margin: 4px 0;
-    }
-    .form{
-      text-decoration: line-through;
-    }
-  }
-`;

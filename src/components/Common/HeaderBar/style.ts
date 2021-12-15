@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { color } from "src/lib/theme/mixin";
+import styled from 'styled-components';
+import { color } from 'src/lib/theme/mixin';
 
 export const HeaderBarWrapper = styled.header`
   grid-area: header;
@@ -9,18 +9,10 @@ export const HeaderBarWrapper = styled.header`
   align-items: center;
   padding: 0 1em;
   height: 56px;
-  border-bottom: 1px solid ${color("borderInput")};
-  background-color: ${color("header")};
+  border-bottom: 1px solid ${color('borderInput')};
+  background-color: ${color('header')};
 
   .header__logo {
-    display: flex;
-    align-items: center;
-    svg{
-      fill:  ${color("text1")};
-      margin-right: 16px;
-      height: 24px;
-      width: 24px;
-    }
     .header_project_name {
       border: hidden;
       padding: 8px;
@@ -34,7 +26,7 @@ export const HeaderBarWrapper = styled.header`
         border: hidden;
         text-align: start;
         margin-left: 2px;
-        color: ${color("text1")};
+        color: ${color('text1')};
       }
       button:hover {
         margin-left: 0px;
@@ -64,9 +56,9 @@ export const HeaderBarWrapper = styled.header`
     top: 60px;
     width: 280px;
     border-radius: 8px;
-    background-color: ${color("background2")};
-    border: 1px solid ${color("border")};
-    box-shadow: 0px 2px 6px 2px ${color("hoverShadow")};
+    background-color: ${color('background2')};
+    border: 1px solid ${color('border')};
+    box-shadow: 0px 2px 6px 2px ${color('hoverShadow')};
     z-index: 150;
 
     &.show {
@@ -76,12 +68,12 @@ export const HeaderBarWrapper = styled.header`
     .header_status {
       display: grid;
       grid-template-areas:
-        "avt name"
-        "avt status";
+        'avt name'
+        'avt status';
       grid-template-columns: 40px 1fr;
       column-gap: 12px;
       text-align: start;
-      color: ${color("text1")};
+      color: ${color('text1')};
       margin: 1em;
       img {
         grid-area: avt;
@@ -103,8 +95,8 @@ export const HeaderBarWrapper = styled.header`
     .header_set {
       display: flex;
       flex-direction: column;
-      border-top: 1px solid ${color("border")};
-      border-bottom: 1px solid ${color("border")};
+      border-top: 1px solid ${color('border')};
+      border-bottom: 1px solid ${color('border')};
     }
 
     button {
@@ -114,7 +106,7 @@ export const HeaderBarWrapper = styled.header`
       padding: 0;
       align-self: flex-start;
       cursor: pointer;
-      color: ${color("text1")};
+      color: ${color('text1')};
     }
   }
 
@@ -122,8 +114,5 @@ export const HeaderBarWrapper = styled.header`
     .user_snippet_template {
       white-space: pre;
     }
-  }
-  .viewInputNormal {
-    margin-top: 20px;
   }
 `;

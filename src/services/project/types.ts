@@ -15,21 +15,8 @@ export interface IProjectState {
   loading: boolean;
   error: string;
   info?: IProjectInfoRes;
-  statusList: ITaskStatus[];
-  tags: ITagTask[]
 }
-export interface ITaskStatus {
-  _id: string;
-  projectId: string;
-  name: string;
-  description?: string;
-  color?: string;
-}
-export interface ITagTask{
-  _id: string;
-  projectId: string;
-  title: string;
-}
+
 export interface IProjectInfoRes {
   _id: string;
   name: string;

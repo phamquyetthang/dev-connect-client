@@ -14,14 +14,9 @@ import IconHover from 'src/components/Base/IconHover';
 interface IProps {
   item: ITodoItem;
   onEdit: (item: ITodoItem) => void;
-  deleteTodoItem: (id: string) => void;
 }
 
-export const TodoItem: FunctionComponent<IProps> = ({
-  item,
-  onEdit,
-  deleteTodoItem,
-}) => {
+export const TodoItem: FunctionComponent<IProps> = ({ item, onEdit }) => {
   const [todoItem, setTodoItem] = useState(item);
   const changeStatus = (status: boolean) => {
     setTodoItem({
@@ -56,7 +51,7 @@ export const TodoItem: FunctionComponent<IProps> = ({
             <EditIcon onClick={() => onEdit(item)} />
           </IconHover>
           <IconHover>
-            <TrashIcon onClick={() => deleteTodoItem(item._id)} />
+            <TrashIcon />
           </IconHover>
         </div>
       </Box>

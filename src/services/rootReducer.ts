@@ -4,7 +4,6 @@ import useReducer from './user';
 import appReducer from './app';
 import authReducer from './auth';
 import projectReducer from './project';
-import docReducer from './doc';
 import persistReducer from 'redux-persist/es/persistReducer';
 const appPersistConfig = {
   key: 'app',
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   user: useReducer,
   project: projectReducer,
-  doc: docReducer,
 });
 
 export default rootReducer;

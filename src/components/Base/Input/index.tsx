@@ -1,7 +1,7 @@
-import { ChangeEvent, FunctionComponent, KeyboardEvent, memo } from "react";
-import { Controller } from "react-hook-form";
-import { InputContain, InputWrapper } from "./styled";
-import { IFromProps } from "../@types/formTypes";
+import { ChangeEvent, FunctionComponent, KeyboardEvent, memo } from 'react';
+import { Controller } from 'react-hook-form';
+import { InputContain, InputWrapper } from './styled';
+import { IFromProps } from '../@types/formTypes';
 
 interface IComponentProps {
   error?: string;
@@ -17,7 +17,7 @@ const InputField: FunctionComponent<IProps> = memo(
     name,
     control,
     rules,
-    defaultValue = "",
+    defaultValue = '',
     error,
     placeholder,
     className,
@@ -55,7 +55,6 @@ type IInputNormalProps = IComponentProps & {
   name?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
-  disable?: boolean;
 };
 export const InputNormal: FunctionComponent<IInputNormalProps> = ({
   value,
@@ -65,7 +64,6 @@ export const InputNormal: FunctionComponent<IInputNormalProps> = ({
   placeholder,
   error,
   name,
-  disable,
   onChange,
 }) => {
   return (
@@ -77,7 +75,6 @@ export const InputNormal: FunctionComponent<IInputNormalProps> = ({
         type={type}
         name={name}
         onChange={onChange}
-        disabled={disable}
       />
       {error && <i>{error}</i>}
     </div>
