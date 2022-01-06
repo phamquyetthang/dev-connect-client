@@ -35,23 +35,36 @@ const GlobalContainer: FunctionComponent<IProps> = ({ children }) => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useAppDispatch();
+
+  const preScreens = useMemo(
+    () => [ROUTER_NAME.preferences.path, ROUTER_NAME.snippets.path],
+    []
+  );
+
   const withSidebar = useMemo(
     () =>
       location.pathname !== ROUTER_NAME.welcome.path &&
-      location.pathname !== ROUTER_NAME.preferences.path,
-    [location.pathname]
+      !preScreens.includes(location.pathname),
+    [location.pathname, preScreens]
   );
 
   useEffect(() => {
     if (!projectId && withSidebar) {
-      if (location.pathname !== ROUTER_NAME.preferences.path) {
+      if (!preScreens.includes(location.pathname)) {
         history.push(ROUTER_NAME.welcome.path);
       }
     } else {
       dispatch(getInfoService({ id: projectId }));
     }
     dispatch(getUserInfoService());
-  }, [dispatch, history, location.pathname, projectId, withSidebar]);
+  }, [
+    dispatch,
+    history,
+    location.pathname,
+    preScreens,
+    projectId,
+    withSidebar,
+  ]);
 
   const closeErrorModal = (back?: boolean) => {
     if (error.isBack && back) {

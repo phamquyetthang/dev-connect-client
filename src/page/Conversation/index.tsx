@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
+import { useAppDispatch } from 'src/hooks/useAppDispatch';
 
 import { useAppSelector } from 'src/hooks/useAppSelector';
+import { addSnackBar } from 'src/services/app';
 import {
   createChatApi,
   getChatFromDocApi,
@@ -16,6 +18,8 @@ type LocationState = {
   docId: string;
 };
 const Conversation = () => {
+  const dispatch = useAppDispatch();
+
   const [listChat, setListChat] = useState<IConversationInfo[]>();
   const [conversation, setConversation] = useState<IConversationInfo>({
     id: '',
@@ -76,8 +80,15 @@ const Conversation = () => {
         name: data.name,
         member: listMemId,
       });
+      getMyListChat();
+      setIsShowAddChat(false);
+      dispatch(
+        addSnackBar({ type: 'success', message: 'Tạo nhóm chat thành công' })
+      );
     } catch (error) {
-      
+      dispatch(
+        addSnackBar({ type: 'error', message: 'Tạo nhóm chat thất bại' })
+      );
     }
   };
 
@@ -89,7 +100,10 @@ const Conversation = () => {
         conversationId={conversation.id}
         openAddChat={() => setIsShowAddChat(true)}
       />
-      <Conversations conversation={conversation} />
+      <Conversations
+        conversation={conversation}
+        refreshListGroup={getMyListChat}
+      />
 
       <AddNewChat
         isShow={isShowAddChat}

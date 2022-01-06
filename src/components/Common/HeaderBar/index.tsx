@@ -102,7 +102,9 @@ const HeaderBar = memo(() => {
           <button onClick={nextToPreference}>
             {commonWord('preferences')}
           </button>
-          <button>{commonWord('snippet')}</button>
+          <button onClick={() => history.push(ROUTER_NAME.snippets.path)}>
+            {commonWord('snippet')}
+          </button>
           <button onClick={() => history.push(ROUTER_NAME.welcome.path)}>
             {commonWord('project')}
           </button>

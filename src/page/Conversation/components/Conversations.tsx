@@ -25,10 +25,11 @@ import { ReactComponent as SendIcon } from 'src/assets/icons/paper-plane.svg';
 import { ChatContainerWrapper } from '../style';
 interface IProps {
   conversation: IConversationInfo;
+  refreshListGroup(): void;
 }
 type IMess = IMessage & { isShowAvt: boolean };
 
-const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
+const Conversations: FunctionComponent<IProps> = ({ conversation , refreshListGroup}) => {
   const [listMess, setListMess] = useState<IMess[]>([]);
   const [showEmoji, setShowEmoji] = useState(false);
   const [message, setMessage] = useState('');
@@ -92,6 +93,7 @@ const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
     sendMessApi(conversation.id, message.trim()).then((res) => {
       setListMess(checkShowAvtMessage(res.messages) || []);
       setMessage('');
+      refreshListGroup()
     });
   };
   const handleType = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -111,8 +113,9 @@ const Conversations: FunctionComponent<IProps> = ({ conversation }) => {
     socket.emit('connect_room', conversation.id);
     socket.on('new_message', (res) => {
       setListMess(checkShowAvtMessage(res.messages));
+      !!refreshListGroup && refreshListGroup()
     });
-  }, [conversation.id]);
+  }, [conversation.id, refreshListGroup]);
 
   return (
     <ChatContainerWrapper>

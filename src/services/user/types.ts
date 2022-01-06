@@ -20,3 +20,15 @@ export default interface IUserPreferences {
     isDefault: boolean;
   }>;
 }
+
+export interface ISnippet {
+  _id: string;
+  name: string;
+  template: string;
+  isDefault: boolean;
+}
+export interface ISnippetEdit {
+  name: string;
+  template: string;
+  isDefault: boolean;
+}
